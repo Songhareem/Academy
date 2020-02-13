@@ -2,13 +2,13 @@ package lecture_200212.car;
 
 public class GreenCar extends SuperCar{
 
-	// »ı¼ºÀÚ
-	GreenCar() {
+	// ìƒì„±ì
+	public GreenCar() {
 		color = "Green";
 		door = 6;
 	}
 	
-	// ±â´É
+	// ë©”ì„œë“œ
 	/*
 	 * public void start() { System.out.println("Green car start"); }
 	 * 

@@ -2,12 +2,10 @@ package lecture_200212.table;
 
 public class Variable {
 
-	// ¸â¹öº¯¼ö
-	
-	//ÀÎ½ºÅÏ½º(°´Ã¼/ÂüÁ¶) º¯¼ö
+	// ë©¤ë²„(ì¸ìŠ¤í„´ìŠ¤)ë³€ìˆ˜
 	String memStr;
 	
-	// Å¬·¡½º(static/Àü¿ª) º¯¼ö
+	// í´ë˜ìŠ¤(static/ê³µìœ )ë³€ìˆ˜
 	static String classStr;
 	
 	// print all variable

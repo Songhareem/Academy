@@ -6,7 +6,7 @@ public class CarMain {
 		// TODO Auto-generated method stub
 
 		// SuperCar[] cars = new SuperCar[3]
-		// Àº ¾Æ·¡¿Í °°Àº ÄÚµå n°³ ¸Ş¸ğ¸® Àâ°í null ³Ö¾îµÒ
+		// ìœ„ì˜ ìë°” ì½”ë“œëŠ” ì•„ë˜ì˜ ì½”ë“œ(C++)ì™€ ë™ì¼í•œ ë“¯
 		// SuperCar *cars = new SuperCar[3]
 		// for(int i=0; i<3; i++)
 		// 		SuperCar cars[i] = null;

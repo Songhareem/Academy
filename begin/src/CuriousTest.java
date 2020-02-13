@@ -4,6 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class CuriousTest {
@@ -18,14 +22,17 @@ public class CuriousTest {
 		// System.out.println(this.getTodayInfo());
 		//this.parserTest();
 		//this.exceptionError();
-		this.basic();
+		//this.basic();
+		//this.newTimeEx();
 	}
 	
+	// 절대값
 	public int abs(int x) {
 		
 		return x>0? x:-x;
 	}
 	
+	//if 논리 연산에 대한 고찰
 	public void basic( ) {
 		
 		int a=10, b=10;
@@ -42,11 +49,13 @@ public class CuriousTest {
 		System.out.println(f);
 	}
 	
+	// 부호 바꾸기
 	public byte reverseByteSign(byte x) {
 		
 		return (byte)(~x + 1);
 	}
 	
+	// 재귀 활용 팩토리얼
 	public int recursionFactorial(int n) {
 		
 		// f(n) = n * f(n-1), 단 f(1) = 1
@@ -58,6 +67,7 @@ public class CuriousTest {
 		return n * recursionFactorial(n-1);
 	}
 	
+	// 반복문 활용 팩토리얼
 	public int loopFactorial(int n) {
 		
 		// f(n) = n * f(n-1), 단 f(1) = 1
@@ -70,6 +80,7 @@ public class CuriousTest {
 		return result;
 	}
 	
+	// 가변인자 테스트
 	public String concatenate(String delim, String... args) {
         String result = "";
 
@@ -80,6 +91,7 @@ public class CuriousTest {
         return result;
     }
 	
+	// 날짜 함수 테스트
 	public String getTodayInfo() {
 		
 		Date today = new Date();
@@ -90,7 +102,7 @@ public class CuriousTest {
 		return "오늘 날짜는" + date.format(today) + "\n" + "현재 시간은" + time.format(today) + "\n"; 
 	}
 	
-	//instanceOf test
+	//instanceOf 테스트
 	public class Car {}
 	public class Bus extends Car {}
 	public class Dump extends Car {}
@@ -115,6 +127,7 @@ public class CuriousTest {
 		this.instanceofTest(new Dump());
 	}
 	
+	// 파서 테스트
 	public void parserTest() {
 		
 		Parseable parser = ParserManager.getParser("XML");
@@ -124,6 +137,7 @@ public class CuriousTest {
 		parser.parse("docsHtml.html");
 	}
 	
+	// 예외처리 테스트
 	public void exceptionError() {
 		
 		try{
@@ -141,17 +155,42 @@ public class CuriousTest {
 		}
 	}
 	
+	// 예외 발생시 stack trace 테스트
 	public void tryWithResourcesTest() throws FileNotFoundException, IOException {
 		
 		try(FileInputStream fis = new FileInputStream("log.txt");
 			DataInputStream dis = new DataInputStream(fis)) {
 			
-			int i = 10/0;
-			
 		} catch (Exception e) {
 			//if(e instanceof FileNotFoundException)
 			e.printStackTrace();
 		} 
+	}
+	
+	// 날짜 및 시간 관련  테스트
+	public void newTimeEx() {
+		
+		LocalDate today = LocalDate.now();		// 오늘의 날짜
+		LocalTime now	= LocalTime.now();		// 현재 시간
+		
+		LocalDate birthDay = LocalDate.of(1992, 2, 8);	// 1992년 2월 8일
+		LocalTime birthTime = LocalTime.of(23, 59, 59);	// 23시 59분 59초
+		
+		System.out.printf("today = %s\n",today);
+		System.out.printf("now = %s\n",now);
+		System.out.printf("birthDay = %s\n",birthDay);
+		System.out.printf("birthTime = %s\n",birthTime);
+		
+		System.out.println(birthDay.withYear(2000));			// 2000-02-08
+		System.out.println(birthDay.plusDays(1));				// 1992-02-09
+		System.out.println(birthDay.plus(1, ChronoUnit.DAYS));	// 1992-02-09
+		
+		System.out.println(birthTime.truncatedTo(ChronoUnit.HOURS));	// 23:00
+		
+		// 특정 ChronoField 범위를 알아내는 법
+		System.out.println(ChronoField.CLOCK_HOUR_OF_DAY.range());	// 1 - 24
+		System.out.println(ChronoField.HOUR_OF_DAY.range());		// 0 - 23
+		
 	}
 }
 

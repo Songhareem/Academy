@@ -1,8 +1,16 @@
 
 public class MySort {
 
-public void bubble(int[] src) {
+	int[] src = { 0, 4, 2, 1, 3 };
+	
+	public void run() {
 		
+		this.bubble(src);
+	}
+	
+	// 버블 정렬
+	public void bubble(int[] src) {
+
 		System.out.println("do bubble sort");
 
 		for (int i = 0; i < src.length - 1; i++) {

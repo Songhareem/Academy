@@ -10,7 +10,7 @@ public class MethodMain {
 		method.print();
 		method.print("hello");
 		System.out.println(method.print(9));
-		System.out.println("¿À´ÃÀÇ ÀÌÀ² : " + (int)(method.todayRate()*100) + "%");
+		System.out.println("ì´ìœ¨ì€  : " + (int)(method.todayRate()*100) + "%");
 	}
 
 }
@@ -19,26 +19,26 @@ class Method {
 	
 	public void print() {
 		System.out.println("====================");
-		System.out.println("¹İÈ¯ X ¸Å°³º¯¼ö X");
+		System.out.println("ë°˜í™˜ X ë§¤ê°œë³€ìˆ˜ X");
 	}
 	
 	public void print(String str) {
 		System.out.println("====================");
-		System.out.println("¹İÈ¯ X ¸Å°³º¯¼ö O");
-		System.out.println("¸Å°³º¯¼öÀÇ °ª : " + str);
+		System.out.println("ë°˜í™˜ X ë§¤ê°œë³€ìˆ˜ O");
+		System.out.println("ë§¤ê°œë³€ìˆ˜ëŠ” : " + str);
 	}
 	
 	public int print(int i) {
 		System.out.println("====================");
-		System.out.println("¹İÈ¯ X ¸Å°³º¯¼ö O");
-		System.out.println("¸Å°³º¯¼öÀÇ °ª : " + i);
+		System.out.println("ë°˜í™˜ X ë§¤ê°œë³€ìˆ˜ O");
+		System.out.println("ë§¤ê°œë³€ìˆ˜ëŠ” : " + i);
 			
 		return i<<1;
 	}
 	
 	public double todayRate() {
 		System.out.println("====================");
-		System.out.println("¹İÈ¯ O ¸Å°³º¯¼ö X");
+		System.out.println("ë°˜í™˜ O ë§¤ê°œë³€ìˆ˜ X");
 			
 		return 0.05;
 	}

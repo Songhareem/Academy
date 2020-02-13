@@ -2,11 +2,11 @@ package lecture_200212.car;
 
 public class SuperCar {
 
-	//¼Ó¼º
+	//ë©¤ë²„ë³€ìˆ˜
 	public String 	color;
 	public int		door;
 	
-	// ±â´É
+	// ë©”ì„œë“œ
 	public void start() {
 		System.out.println(color+" car start");
 	}
