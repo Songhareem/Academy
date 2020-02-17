@@ -1,13 +1,13 @@
-package lecture_200210;
+package lecture_200217.subject;
 
 import java.util.Scanner;
 
-public class GawiBawiBo {
+public class GawiBawiBoGame extends Game{
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		Scanner sc = new Scanner(System.in);
+	@Override
+	public void gameLogic() {
+		
+		Scanner sc = ScannerSingleton.getInctance();
 
 		while (true) {
 			byte isWin = 0; // 0 : win, 1: lose, 2: draw
@@ -29,7 +29,7 @@ public class GawiBawiBo {
 				return;
 			case 3:
 				System.out.println("게임을 종료합니다");
-				System.exit(0);
+				return;
 			default:
 				exceptionChoice = true;
 				break;

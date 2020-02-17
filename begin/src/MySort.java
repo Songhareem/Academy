@@ -5,7 +5,8 @@ public class MySort {
 	
 	public void run() {
 		
-		this.bubble(src);
+		//this.bubble(src);
+		this.quickSort(src);
 	}
 	
 	// 버블 정렬
@@ -29,6 +30,31 @@ public class MySort {
 			}
 		}
 
+		this.printSort(src);
+	}
+	
+	// 퀵 정렬
+	public void quickSort(int[] src) {
+		
+		int pivot;
+		int low;
+		int high;
+		
+		if(src.length <= 1)
+			return;
+		
+		pivot = src[0];
+		low = src[src.length-1];
+		high = src[1];
+		
+		System.out.printf("pivot : %d\n", pivot);
+		System.out.printf("low : %d\n", low);
+		System.out.printf("high : %d\n", high);
+	}
+	
+	// 정렬된 src Print
+	private void printSort(int[] src) {
+		
 		for (int item : src) {
 			System.out.print(item);
 		}
