@@ -1,9 +1,9 @@
 package com.song.Product;
 
-public class Computer extends Product{
+public class Computer extends Product {
 
 	String cpu = null;
-	
+
 	Computer() {
 		this.cpu = "옥타코어";
 		this.brand = "삼성";

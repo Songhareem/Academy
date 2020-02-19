@@ -1,4 +1,4 @@
-package com.song.APITest;
+package com.song.StringAPI;
 
 import java.util.Scanner;
 
@@ -37,5 +37,4 @@ public class StringTest {
 		
 		System.out.println(isImage);
 	}
-
 }

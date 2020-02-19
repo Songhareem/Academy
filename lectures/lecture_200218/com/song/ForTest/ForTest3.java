@@ -1,4 +1,4 @@
-package com.song.t1.ForTest1;
+package com.song.ForTest;
 
 import java.util.Scanner;
 
@@ -37,4 +37,5 @@ public class ForTest3 {
 		//	System.out.println("로그인에 실패했습니다 가까운 은행 방문을 방문해주세요");
 		System.out.println(msg);
 	}
+
 }
