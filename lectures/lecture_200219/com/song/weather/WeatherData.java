@@ -8,8 +8,8 @@ public class WeatherData {
 	public WeatherData() {
 	
 		factor = 4;	// 데이터 한 덩어리에 들어가있는 각 갯수
-		data="seoul,28도,눈,60%,"
-				+ "jeju,35도,비,90%,"
+		data="seoul    ,28도,눈,60%,"
+				+ "   jeju,35도,비,90%,"
 				+ "busan,-52도,흐림,30%,"
 				+ "incheon,40도,맑음,10%,";
 	}
@@ -21,6 +21,10 @@ public class WeatherData {
 		
 		// 데이터 쪼개기
 		String[] tmp = data.split(",");
+		
+		// 각 단어 앞뒤 공백제거
+		for(int i=0; i<tmp.length; i++)
+			tmp[i] = tmp[i].trim();
 		
 		// weather 메모리 세팅
 		int localNum = tmp.length/factor;

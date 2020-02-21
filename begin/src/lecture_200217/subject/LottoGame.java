@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class LottoGame extends Game{
 
-	@Override
 	public void gameLogic() {
 		
 		int lottoNum[] = new int[] {0, 0, 0, 0, 0, 0, 0};
