@@ -48,5 +48,6 @@
 - set(index, data) : 해당 자리에 데이터 수정
 - get() : 해당 인덱스 번호의 요소를 리턴
 - size() : 요소의 갯수를 반환
+- clear() : 모든 요소 삭제
 - remove(index) : 해당 자리 삭제 후, 자리 당김
 - isEmpty() : 비어있는지 return

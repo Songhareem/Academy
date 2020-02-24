@@ -15,5 +15,6 @@ public class RandomTest {
 		num = rand.nextInt(5);
 		System.out.println(num);
 	}
+	
 
 }
