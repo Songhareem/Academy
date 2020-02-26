@@ -7,10 +7,9 @@ import java.util.Scanner;
 
 public class StudentController {
 
-	StudentDAO sdao = new StudentDAO();
-	ArrayList<StudentVO> svoList = new ArrayList<StudentVO>();
-	StudentView sv = new StudentView();
-	Scanner sc = null;
+	private StudentDAO sdao = new StudentDAO();
+	private ArrayList<StudentVO> svoList = new ArrayList<StudentVO>();
+	private StudentView sv = new StudentView();
 	
 	public void start() {
 			
@@ -19,7 +18,8 @@ public class StudentController {
 		// 3. 학생 정보 검색(이름으로)
 		// 4. 학생 정보 삭제(번호로) - 덮어쓰기
 		// 5. 프로그램 종료
-		
+		Scanner sc = null;
+			
 		while(true) {
 			
 			sc = new Scanner(System.in);
@@ -60,22 +60,4 @@ public class StudentController {
 		}
 		
 	}
-	
-	/*
-	 * private void printStudents() {
-	 * 
-	 * svoList = sdao.init(); sv.view(svoList); }
-	 * 
-	 * private void addStudent() {
-	 * 
-	 * StudentVO svo = sdao.addStudent("C:\\test\\student.txt"); svoList.add(svo); }
-	 * 
-	 * private void searchStudent() {
-	 * 
-	 * sdao.searchStudent(svoList); }
-	 * 
-	 * private void deleteStudent() {
-	 * 
-	 * sdao.deleteStudent(svoList); }
-	 */
 }
