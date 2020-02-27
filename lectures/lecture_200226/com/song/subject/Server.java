@@ -32,11 +32,15 @@ public class Server {
 		try {
 			serverSocket = new ServerSocket(PORT);
 			System.out.println("Server listening | port : 8282 ");
-			socket = serverSocket.accept();
-			System.out.println("클라이언트 접속 완료");
 			
 			boolean runFlag = true;
 			while(runFlag) {
+				
+				// 클라 받기
+				if(socket == null) {
+					socket = serverSocket.accept();
+					System.out.println("클라이언트 접속");
+				}
 				
 				// 데이터 받기
 				String msg = recvData(socket);
@@ -49,9 +53,9 @@ public class Server {
 						msg = logic(msg);
 						break;
 					case "3":
-						socket.close();
+						socket = null;
 						System.out.println("클라이언트 접속 종료");
-						runFlag = false;
+						//runFlag = false;
 						continue;
 					default:
 						System.out.println("Err Data!!!");
@@ -64,6 +68,7 @@ public class Server {
 				sendData(msg, socket);
 			}
 			
+			socket.close();
 			System.out.println("서버를 종료합니다");
 			
 		} catch (Exception e) {
@@ -82,7 +87,7 @@ public class Server {
 	public static String logic(String msg) {
 		
 		String result = null;
-		String[] lunch = {"Buger-5000", "sandwich-4000", "bread-3000"};
+		String[] lunch = {"Buger-5000", "cake-4000", "bread-3000"};
 		String[] dinner = {"stake-10000", "pasta-9000", "soup-7000" };
 		int index = new Random().nextInt(3);
 		
