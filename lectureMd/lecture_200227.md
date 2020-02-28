@@ -77,7 +77,6 @@
         - 일반유저 로그인 sqlplus sys/oracle
 
 - SQL DEVELOPER 툴로 접속
-    - 
 
 - Web으로 접속
     - 잘 안씀
@@ -120,6 +119,8 @@
         - commit : DB에 적용
         - select * from tab : 테이블s 보기
         - exit : db 연결 끊기
+        - grant connect, resource to scott : 커넥트, 디비 리소스 접근에 대한 권한 scott에게 주기(관리자로 해야함)
+        - clear screen : 화면 정리
         
 # docker
 
