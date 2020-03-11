@@ -1,12 +1,26 @@
 package com.song.dept;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class DeptInput {
 
 	private Scanner sc = null;
+
+	public int selectOne() {
+		
+		sc = new Scanner(System.in);
+		
+		int deptno;
+		
+		System.out.printf("데이터 볼 부서번호 입력 : ");
+		deptno = sc.nextInt();
+		
+		return deptno;
+	}
 	
-	public void delete() {
+	public int delete() {
 		
 		sc = new Scanner(System.in);
 		
@@ -15,11 +29,10 @@ public class DeptInput {
 		System.out.printf("데이터 삭제할 부서번호 입력 : ");
 		deptno = sc.nextInt();
 		
-		DeptDAO ddao = new DeptDAO();
-		ddao.delete(deptno);
+		return deptno;
 	}
 	
-	public void insert() {
+	public DeptDTO insert() {
 		
 		// 부서번호, 부서명, 지역명을 입력받기
 		sc = new Scanner(System.in);
@@ -40,8 +53,6 @@ public class DeptInput {
 		ddto.setDname(dname);
 		ddto.setLoc(loc);
 		
-		DeptDAO ddao = new DeptDAO();
-		ddao.insert(ddto);
-		
+		return ddto;
 	}
 }

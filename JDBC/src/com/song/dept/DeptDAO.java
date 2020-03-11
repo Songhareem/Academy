@@ -3,12 +3,111 @@ package com.song.dept;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DeptDAO {
 
 	// 매서드
-	public void delete(int deptno) {
+	public DeptDTO selectOne(int deptno) {
+		
+		String url = "jdbc:oracle:thin:@192.168.56.101:1521:xe";
+		String user = "scott";
+		String pw = "tiger";
+		
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		DeptDTO ddto = null;
+		
+		try {
+			Class.forName(driver);
+			
+			con = DriverManager.getConnection(url, user, pw);
+			
+			String query = "SELECT * FROM DEPT WHERE DEPTNO = ?";
+
+			pst = con.prepareStatement(query);
+			
+			pst.setInt(1, deptno);
+			
+			rs = pst.executeQuery();
+			
+			if(rs.next()) {
+				ddto = new DeptDTO();
+				ddto.setDeptno(rs.getInt("DEPTNO"));
+				ddto.setDname(rs.getString("DNAME"));
+				ddto.setLoc(rs.getString("LOC"));
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ddto;
+	}
+	
+	public ArrayList<DeptDTO> select() {
+		
+		String url = "jdbc:oracle:thin:@192.168.56.101:1521:xe";
+		String user = "scott";
+		String pw = "tiger";
+		
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+		ArrayList<DeptDTO> ddtoList = new ArrayList<DeptDTO>();
+		
+		try {
+			Class.forName(driver);
+		
+			con = DriverManager.getConnection(url, user, pw);
+			
+			String query = "SELECT * FROM DEPT ORDER BY DEPTNO ASC";
+			
+			pst = con.prepareStatement(query);
+			
+			rs = pst.executeQuery();
+			
+			// rs.next -> 한 row씩 읽어옴 
+			// 데이터 있으면 true, 없으면 false return
+			// 데이터 있으면 rs에 저장
+			while(rs.next()) {
+				
+				DeptDTO ddto = new DeptDTO();
+				ddto.setDeptno(rs.getInt("DEPTNO")); 
+				ddto.setDname(rs.getString("DNAME"));
+				ddto.setLoc(rs.getString("LOC"));
+				
+				ddtoList.add(ddto);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pst.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return ddtoList;
+	}
+	
+	public int delete(int deptno) {
 		// 1. 접속시 필요한 정보
 		String url = "jdbc:oracle:thin:@192.168.56.101:1521:xe";
 		String user = "scott";
@@ -18,6 +117,8 @@ public class DeptDAO {
 		
 		Connection con = null;
 		PreparedStatement st = null;
+		
+		int result = 0;
 		
 		try {
 			// 2. driver를 객체를 생성해서 메모리에 로드
@@ -39,12 +140,7 @@ public class DeptDAO {
 			st.setInt(1, deptno);
 			
 			// 7. 필드값 전송 후 결과 처리
-			int result = st.executeUpdate();
-			if(result > 0) {
-				System.out.printf("%d 개의 컬럼 삭제\n", result);
-			} else {
-				System.out.println("삭제 실패");
-			}
+			result = st.executeUpdate();
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -59,9 +155,11 @@ public class DeptDAO {
 				e.printStackTrace();
 			}
 		}
+		
+		return result;
 	}
 	
-	public void insert(DeptDTO ddto) {
+	public int insert(DeptDTO ddto) {
 		// 1. 접속시 필요한 정보
 		// ip, port, id, pw, sid
 		
@@ -81,6 +179,8 @@ public class DeptDAO {
 		
 		Connection con = null;
 		PreparedStatement st = null;
+		
+		int result = 0;
 		
 		try {
 			// 2. driver를 객체를 생성해서 메모리에 로드
@@ -108,13 +208,7 @@ public class DeptDAO {
 			st.setString(3, loc);
 			
 			// 7. 필드값 전송 후 결과 처리
-			int result = st.executeUpdate();
-			
-			if(result > 0) {
-				System.out.printf("%d 개의 컬럼 업데이트\n", result);
-			} else {
-				System.out.println("업데이트 실패");
-			}
+			result = st.executeUpdate();
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -128,6 +222,7 @@ public class DeptDAO {
 				e.printStackTrace();
 			}
 		}
-		
+	
+		return result;
 	}
 }
