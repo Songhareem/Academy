@@ -10,7 +10,7 @@ import com.song.jdbc.DBConnect;
 public class TradeDAO {
 
 	// 입금
-	public int insertInput(TradeDTO tradeDTO) throws Exception {
+	public int insert(TradeDTO tradeDTO) throws Exception {
 		
 		Connection conn = null;
 		PreparedStatement pst = null;
@@ -19,15 +19,14 @@ public class TradeDAO {
 		
 		conn = DBConnect.getConnection();
 		
-		String sql = "INSERT INTO TRADE VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO TRADE VALUES (?, SYSDATE,?,?,?)";
 		
 		pst = conn.prepareStatement(sql);
 		
 		pst.setLong(1, tradeDTO.getAccountNum());
-		pst.setDate(2, tradeDTO.getAccountDate());
-		pst.setLong(3, tradeDTO.getTradeAmount());
-		pst.setLong(4, tradeDTO.getAccountBalance());
-		pst.setBoolean(5, tradeDTO.getTradeIO());
+		pst.setLong(2, Math.abs(tradeDTO.getTradeAmount()));	// 보이는건 항상 양수
+		pst.setLong(3, tradeDTO.getAccountBalance());
+		pst.setBoolean(4, tradeDTO.getTradeIO());
 		
 		result = pst.executeUpdate();
 		
