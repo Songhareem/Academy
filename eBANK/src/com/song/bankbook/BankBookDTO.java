@@ -12,6 +12,9 @@ public class BankBookDTO {
 		return bookNumber;
 	}
 	public void setBookNumber(String bookNumber) {
+		while(bookNumber.length()<=10) {
+			bookNumber = "0" + bookNumber;
+		}
 		this.bookNumber = bookNumber;
 	}
 	public String getBookName() {

@@ -26,9 +26,6 @@ public class BankBookInput {
 		BankBookDTO bankBookDTO = new BankBookDTO();
 		System.out.print("계좌일련번호 : ");
 		String serial = String.valueOf(sc.nextInt());
-		while(serial.length()<10) {
-			serial = "0" + serial; 
-		}
 		bankBookDTO.setBookNumber(serial);
 		System.out.print("계좌 판매 여부 : ");
 		bankBookDTO.setBookSale(sc.nextInt());
