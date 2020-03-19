@@ -38,6 +38,12 @@
 - 테스트용 예제 프로젝트
     - dynamic web project 생성
 
+# 배포
+
+- 프로젝트 우클릭 - Export war파일
+
+- Tomcat의 기본 폴더 (Webapps)에 war파일 넣고, tomcat의 startup.bat 실행
+
 # 웹 브라우저
 
 - HTML, CSS, JS 코드 컴파일 및 실행
@@ -47,8 +53,9 @@
     - CSS : 디자인 역할
     - JS : 동적 요소 추가
 
-- HTML
-    - 기본문법
+# HTML
+
+- 기본문법
         - Tag, Element, 요소
         - ```
           <tag명> content </tat명>
@@ -70,9 +77,93 @@
           <태그명 속성명1 = "속성값" 속성명2 .../>
           ```
 
-- 텍스트 관련
+- 경로 지정
+    - 절대 경로 방식
+        - 루트 디렉토리로부터의 경로 지정
+    - 상대 경로 방식
+        - 현 디렉토리 기준으로 경로 지정
+    - ```
+        <h3>절대 경로 방식</h3>
+	        <a href="https://www.naver.com">Go Naver</a>
+	        <a href="/TestProject/hyper/result_1.html">Go Result_1</a>
+	        <a href="/TestProject/test.html">Go Test</a>
+	        <a href="/TestProject/text/text1.html">Go Text1</a>
+	
+	    <h3>상대 경로 방식</h3>
+	        <a href="./result_1.html">Go Result_1</a>
+	        <a href="../test.html">Go Test</a>
+	        <a href="../text/text1.html" target="_self">Go Text1</a>	<!-- target _self : 현재창에서 이동 -->
+	        <a href="../text/text1.html" target="_blank">Go Text1</a>	<!-- target _blank : 새창으로 이동(외부링크시 사용) -->
+      ```
 
-# HTML
+- 웹 접근성
+    - 몸이 불편한 사람도 접근이 가능토록 만드는 것
+
+- 이미지 긁어올때, 막힌거 뚫기 : f12 - f1 - disable javascript
+
+- 미디어    
+    - 이미지
+        - ```
+          <img src ="이미지 (절대/상대)경로">
+          -- 속성
+          width, heigth => css에서 지정
+        ```
+    - 오디오
+        - ```
+          <audio src="오디오 (절대/상대)경로>
+          -- 속성
+          autoplay  : 자동실행여부
+          loop      : 반복 여부
+          controls  : 빨리감기 뒤로감기
+          ```
+    - 비디오    
+        - ```
+          <video src="동영상 파일 경로">
+          -- 속성
+          autoplay  : 자동실행여부
+          loop      : 반복 여부
+          controls  : 빨리감기 뒤로감기
+          poster    : 동영상 준비중에 보여줄 이미지
+          width
+          height
+          ```
+- 목록 태그
+    - 순서가 있는 List
+        - ```
+          <ol>
+            <li></li>
+          </ol>
+          ```
+    - 순서가 없는 List
+        - ```
+          <ul>
+            <li></li>
+          </ul>
+    - 속성
+        - type: 순서를 나타내는 문자 변경
+            - "A" : 대문자 순서
+            - "a" : 소문자 순서
+            - "I" : 대문자 로마숫자 순서
+            - "i" : 소문자 로마숫자 순서
+        - start: 시작값 지정
+
+- 테이블
+    - ```
+      <table>
+          <tr><td>(0,0)</td><td>(0,1)</td><tr>
+          <tr><td>(1,0)</td><td>(1,1)</td><tr>
+          <tr><td>(2,0)</td><td>(2,1)</td><tr>
+      </table>
+      ```
+- 입력 태그
+    - ```
+      
+      ```
+    - 속성
+        - action    : URL 데이터 전송될 URL
+        - method    : 데이터 전달 방식(GET/POST)
+        - enctype   : 전송될 데이터 파일존재
+        - 
 
 # CSS
 
