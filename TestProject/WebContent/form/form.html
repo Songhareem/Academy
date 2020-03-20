@@ -7,10 +7,13 @@
 <body>
 	<h1>Form tag</h1>
 	<form action="" method="get" enctype="application/x-www-form-urlencoded">
-		<p>짧은 문자열 입력 	: <input type="text"></p>
-		<p>패스워드 입력		: <input type="password"></p>
-		<p>이메일			: <input type="email"></p>
+		<p>짧은 문자열 입력 	: <input type="text" name="id" value="test"></p>
+		<p>패스워드 입력		: <input type="password" name="pw" placeholder="password"></p>
+		<p>이메일			: <input type="email" disabled></p>
 		<p>날짜			: <input type="date"></p>
+		<p>첨부파일		: <input type="file"></p>
+		<p>컬러 선택		: <input type="color"></p>
+		<p>숨겨진 데이터		: <input type="hidden" value=""></p>
 	</form>
 </body>
 </html>

@@ -55,6 +55,8 @@
 
 # HTML
 
+- w3school
+
 - 기본문법
         - Tag, Element, 요소
         - ```
@@ -156,16 +158,73 @@
       </table>
       ```
 - 입력 태그
+    - form
     - ```
       
       ```
     - 속성
-        - action    : URL 데이터 전송될 URL
-        - method    : 데이터 전달 방식(GET/POST)
-        - enctype   : 전송될 데이터 파일존재
-        - 
+        - type
+            - text
+            - password
+            - email
+            - date
+            - file
+            - color
+        - action      : URL 데이터 전송될 URL
+        - method      : 데이터 전달 방식(GET/POST)
+        - enctype     : 전송될 데이터 파일존재
+        - name        : 데이터 입력받는 key 및 서버로 갈때의 key 값
+        - value       : 표기되는 default 값 및 서버로 갈때의 value 값
+        - readonly    : 읽기 전용 - 입력 불가 - 값은 서버로 넘어감
+        - placeholder : 입력 필드 설명을 위한 주석 표기
+        - disabled    : 읽기 전용 - 입력 불가 - 값도 전송되지 않음
+
+- 공간 분할 태그
+    - div(block), span(inline) 
+    - semantec
+        - ```
+          1) header     : <header>      - header 역할
+          2) footer     : <footer>      - footer 역할
+          3) nav        : <nav>         - 네비게이션 역할
+          4) section    : <section>     - Contents의 묶음
+          5) article    : <article>     - 각 Content
+          6) aside      : <aside>       - side에 위치한 content
+          ```
+    - 공간을 분할하거나 태그들을 그룹으로 지정
+
+- Global Attribute
+    - id    : css, js 식별자, 한 페이지내에 중복은 불가능
+    - class : css, js 식별자로 사용, 중복 지정이 가능
+    - title : 제목을 지정, 중복가능
+    - style : css 직접 입력시 사용    
 
 # CSS
+
+- 크기 단위
+    - px        : 고정크기
+    - em        : 상대크기(1.1em = 1.1배)
+    - rem       : r(root) 최상위 요소(html)의 사이즈 기준
+    - %         : 상대크기
+
+- 선택자
+    - *                : 모든 선택
+    - 태그명            : 태그 선택자
+    - #아이디명         : id 선택자
+    - .아이디명         : class 선택자
+    - 선택자1, 선택자2  : 동시선택
+
+- 각 브라우저는 고유의 css 적용되어 있으므로, 초기화 필요
+    - 초기화 전용 css : reset.css
+
+- boxModel
+    - border
+        - 테두리
+        - Top, Right, Botton, Left
+        - 선의 색깔, 선의 종류, 선의 두께
+		- border-spacing: 테두리 간격
+		- border-collapse: 선분할 여부
+    - margin
+        - element와 element간의 간격
 
 # javascript
 
