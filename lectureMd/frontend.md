@@ -217,6 +217,8 @@
     - 초기화 전용 css : reset.css
 
 - boxModel
+    - width
+        - min/max-width
     - border
         - 테두리
         - Top, Right, Botton, Left
@@ -225,6 +227,62 @@
 		- border-collapse: 선분할 여부
     - margin
         - element와 element간의 간격
+
+- Margin
+    - Element와 Elemenet  간격
+        - Top, Right, bottom, Left'
+        - margin 40px;
+        - margin 10px, 20px, 30p, 40px;
+        - margin 10px, 20px; 
+        - margin 10px;
+    - 적용하고 싶은 컨텐츠에 사용
+    - 오버플로우 allowFlow
+
+- padding
+    - 적용하고 싶은 컨텐츠의 부모에 사용
+    - 부모 태그와 컨텐츠 간의 간격
+    - 패딩을 사용하면 수치만큼 박스가 확장
+    - box-sizing(css opt)
+        - content-box : 패딩 추가시 확장(기본값)
+        - border-box : 패딩 추가해도 확장 없음
+
+- 정렬
+    - 수평정령
+        - Block 태그 정렬
+            - margin : 0px auto;
+        - Inline 태그 정렬
+            - padding: 좌우 패딩값을 동일
+
+    - 수직정렬
+        - Block 태그 정렬
+            - 
+        - Inline 태그 정렬
+            - padding: 상하 패딩값을 동일
+
+- display
+    - display : 태그의 속성 변경
+        - inline? block? inline-block?, none?
+        - inline : contents의 넓이만큼 자리를 차지, mirgin 안먹음
+        - block :  contents의 넓이만큼 자리를 차지, 수정 지정가능
+        - inline-block : inline 속성과 block태그의 속성을 가짐
+        - none : 화면에 출럭 X, 공간X(없는 태그처럼 취급)
+
+- visibility
+    - visible : 해당요소를 화면에 출력(기본값)
+    - hidden : 해당요소를 화면에서 숨감
+
+- opacity
+    - 반투명에 만들기(0.0 ~ 1.0)
+    - 부모의 opacity 값을 자식이 상속
+
+- Float
+    - display : inline and 위치조정
+    - none : 기본값
+    - left : 왼쪽 정렬
+    - right : 오른쪽 정렬
+
+- List
+    - 
 
 # javascript
 

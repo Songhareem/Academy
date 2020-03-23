@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+	<style type="text/css">
+	
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+	/*=======================================*/
+	/* header영역 
+	/*=======================================*/
+	.header {
+		background-color: black;
+		width : 100%;
+		height: 65px;
+	}
+	.header_nav {
+		/* background-color: yellow; */
+		width: 910px;
+		height: 65px;
+		margin: auto;
+	}
+	/* logo 영역 */
+	.header_logo {
+		/* background-color: red; */
+		/* display : inline-block; */
+		width:227px;
+		height: 65px;
+		float: left;
+	}
+	.header_logo_img {
+		width: 150px;
+		height: 55px;
+		margin-top: 5px;
+	}
+	/* main_nav 영역 */
+	.header_main_nav {
+		/* background-color: white; */
+		width: 50%;
+		height: 65px;
+		display : inline-block;
+	}
+	.header_main_nav_ul {
+		list-style: none;
+		padding-top: 5px;
+		padding-left: 70px;
+		box-sizing: border-box;
+	}
+	.header_main_nav_li {
+		border: 1px solid white;
+		width: 20%;
+		height: 55px;
+		float:left;
+		text-align: center;
+		padding-top: 20px;
+		box-sizing: border-box;
+		font-size: 13px;
+		font-family: "NanumGothic";
+		font-weight: bold;
+		color: white;
+	}
+	/* sub_nav 영역 */
+	.header_sub_nav {
+		background-color: gray;
+		width:227px;
+		height: 65px;
+		float:right;
+		display : inline-block;
+	}
+	/* contents 영역 */
+	.contents {
+		width : 910px;
+		min-heigth: 500px;
+		height: 830px;
+		margin: 50px auto;
+		border: 2px solid black;
+	}
+	.main_contents_layout {
+		border: 1px solid red;
+		width: 100%;
+		height: 490px;
+	}
+	.sub_contents_layout {
+		border: 1px solid red;
+		width: 100%;
+		height: 340px;
+	}
+	.sub_contents_notice {
+		border: 1px solid black;
+		width: 31%;
+		height: 310px;
+		display: inline-block;
+		margin-top: 25px;
+		float: left;
+	}
+	.sub_contents_news {
+		border: 1px solid black;
+		width: 31%;
+		height: 310px;
+		display: inline-block;
+		margin-top: 25px;
+		margin-left: 30px;
+	}
+	.sub_contents_etc {
+		border: 1px solid black;
+		width: 31%;
+		height: 310px;
+		display: inline-block;
+		margin-top: 25px;
+		float: right;
+	}
+	.sub_contents_video {
+		border: 1px solid green;
+		width: 100%;
+		height: 200px;
+	}
+	.sub_contents_adver {
+		border: 1px solid green;
+		width: 100%;
+		height: 95px;
+		margin-top: 15px;	
+	}
+	/* footer 영역 */
+	.footer {
+		background-color: #2E2E2E;
+		width : 100%;
+		height: 130px;
+	}
+	</style>
+<body>
+	<!-- header 영역 -->
+	<header class="header">
+		<div class="header_nav">
+			<div class="header_logo">
+				<img class="header_logo_img" alt="FNC_logo" src="./imgs/logo.png">
+			</div>
+			<nav class="header_main_nav">
+				<ul class="header_main_nav_ul">
+					<li class="header_main_nav_li">COMPANY</li>
+					<li class="header_main_nav_li">ARTISTS</li>
+					<li class="header_main_nav_li">PR CENTER</li>
+					<li class="header_main_nav_li">AUDITION</li>
+				</ul>
+			</nav>
+			<nav class="header_sub_nav">
+				<ul class="header_sub_nav_ul">
+					<li class="header_sub_nav_li">LOGIN</li>
+					<li class="header_sub_nav_li">JOIN</li>
+					<li class="header_sub_nav_li">| KO</li>
+					<li class="header_sub_nav_li">EN</li>
+					<li class="header_sub_nav_li">JP</li>
+					<li class="header_sub_nav_li">CN</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	
+	<!-- section 영역 -->
+	<section class="contents">
+		<div class="main_contents_layout">
+		</div>
+		<div class="sub_contents_layout">
+			<div class="sub_contents_notice">
+			</div>
+			<div class="sub_contents_news">
+			</div>
+			<div class="sub_contents_etc">
+				<div class="sub_contents_video">
+				</div>
+				<div class="sub_contents_adver">
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- footer 영역 -->
+	<footer class="footer">
+	</footer>
+</body>
+</html>
