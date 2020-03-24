@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.footer {
+	/* border: 1px solid black; */
+	width: 100%; /* 1903px; */
+	height: 229px;
+	background-color: #FD7622;
+}
+
+.footer_wraper {
+	width: 960px;
+	height: 229px;
+	margin: 0px 25%;
+	
+}

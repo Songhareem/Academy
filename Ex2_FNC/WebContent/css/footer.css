@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+/* footer 영역 */
+.footer {
+	background-image: url("./imgs/footer_bg.gif");
+	width: 100%;
+	height: 132px;
+}
+
+.footer_div {
+	
+}

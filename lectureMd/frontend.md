@@ -256,9 +256,10 @@
     - 수직정렬
         - Block 태그 정렬
             - 
-        - Inline 태그 정렬
+        - Inline 태그 정렬 
             - padding: 상하 패딩값을 동일
-
+        - 위 아래 정렬
+            -line-height : 수치를 태그의 높이와 일치
 - display
     - display : 태그의 속성 변경
         - inline? block? inline-block?, none?
@@ -269,7 +270,7 @@
 
 - visibility
     - visible : 해당요소를 화면에 출력(기본값)
-    - hidden : 해당요소를 화면에서 숨감
+    - hidden : 해당요소를 화면에서 숨김
 
 - opacity
     - 반투명에 만들기(0.0 ~ 1.0)
@@ -280,12 +281,52 @@
     - none : 기본값
     - left : 왼쪽 정렬
     - right : 오른쪽 정렬
+    - float 영향받기를 원치않는다면, clear: both 사용
 
 - List
-    - 
+    - list-style : none 으로 사용
+
+- font
+    - font 위치 -> C:\windows\Fonts
+    - font-size : font 크기
+    - font-family : font 서체
+    - font-style : 기울기
+    - font-weight : 폰트 굵기
+
+- text
+    - text-decoration : 선 꾸미기, 윗줄, 아랫줄
+    - text-indent : 들여쓰기
+    - text-align : 텍스트 정렬
+    - word-spacing : 단어와 단어의 간격
+    - letter-spacing : 글자와 글자간 간격
+    - line-height : 상하줄 간격
+
+- background
+    - background-image : url("상대/절대 경로")
+    - background-repeat : repeat-x | repeat-y | repeat(defalut) | no-repeat
+    - background-position : top, center, bottom, left, right, (30px, 60px)
+    - background-size : 100px, 200px, 
+        - cover : 이미지의 비율 유지, 부모의 width, height 중 큰값에 배경이미지를 맞추고 나머지는 자동으로 비율계산
+        - contain : 이미지의 비율을 유지하고 이미지 다 보일 수 있게 스케일 조정
+    - background-attachment : 스크롤시 배경이미지 고정여부
+        - scroll - 스크롤시 같이 움직임
+        - fixed - 스크롤시 고정
+
+- position
+    - static(default)   : 기본, 부모 Block 내부에서의 절대위치
+    - absolute          : 절대위치
+        - 부모의 position이 static이면, body 기분으로 절대위치
+        - 부모의 position이 relative이면, 부모 기준으로 절대위치
+    - fixed             : 절대위치, 보이는 화면 내부에서의 절대위치
+    - relative          : 상대위치
+    - z-index           : static에서는 사용불가, z-index를 이용하여 3차원 표현 가능(0~999)
 
 # javascript
 
 # Jquery
 
 # Ajax
+
+# ref
+
+- 배경화면 이미지 down : https://grafolio.naver.com/works/list.grfl
