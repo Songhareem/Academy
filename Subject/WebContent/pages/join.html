@@ -6,11 +6,10 @@
 	<title>데브시스터즈</title>
 	<link rel="stylesheet" type="text/css" href="/Subject/css/reset.css"/>
 	<link rel="stylesheet" type="text/css" href="/Subject/css/header.css"/>
-	<link rel="stylesheet" type="text/css" href="/Subject/css/indexSection.css"/>
+	<link rel="stylesheet" type="text/css" href="/Subject/css/joinSection.css"/>
 	<link rel="stylesheet" type="text/css" href="/Subject/css/footer.css"/>
 </head>
 <body>
-	
 	<!-- header -->
 	<header class="header">
 		<nav class="nav">
@@ -66,25 +65,52 @@
 		</nav>
 	</header>
 	
-	<!-- index section -->
-	<section class="indexSection">
+	<!-- joinSection -->	
+	<section class="joinSection">
 		<div class="sectionMain">
-			<div class="main_intro">
-				<h1 class="main_intro_h1">
-					탁월한 기술, 서비스, 콘텐츠로<br>
-					전 세계 고객에게 최고의 경험을 선사합니다.
-				</h1>
-				<a class="main_intro_a">자세히 보기</a>
+			<div class="div_title">
+				<h2><img class="div_title_logo" src="../images/icon.png"/>회원가입</h2>
+				<h5>Devsisters에 가입하고 다양한 서비스를 이용하세요.</h5>
 			</div>
-			<div class="main_clickButtons_div">
-				<span id="main_clickButton_div_prev" role="button" aria-label="go prev slide"></span>
-				<span id="main_clickButton_div_selected" role="button" aria-label="selected slide"></span>
-				<span id="main_clickButton_div_next" role="button" aria-label="go next slide"></span>
-				<span></span>
-			</div>
-			<div class="main_dirButtons_div">
-				<button type="button" id="main_dirButtons_prev" aria-label="Prev slide"></button>
-				<button type="button" id="main_dirButtons_next" aria-label="Next slide"></button>
+			<div class="div_join_detail">
+				<form action="" method="post">
+					<input class="div_join_detail_input" style="margin-top: 15px;"type="email" name="email" placeholder="이메일"><br> 
+					<input class="div_join_detail_input" type="text" name="name" placeholder="이름"><br> 
+					<input class="div_join_detail_input" type="password" name="password" placeholder="비밀번호"><br> 
+					<input class="div_join_detail_input" type="password" name="passwordConfirm" placeholder="비밀번호 확인"><br>
+					<input class="div_join_detail_checkbox" type="checkbox" name="joinCheck" value="emailService">
+						<span class="div_join_detail_checkbox_span">Devsisters에 대한 소식을 이메일로 받아봅니다.<br></span>
+					<input class="div_join_detail_checkbox" type="checkbox" name="joinCheck" value="agreeTerms">
+						 <span class="div_join_detail_checkbox_span">Devsisters의 서비스 약관에 동의합니다.
+						 	<a href="./index.html">약관 보기</a>
+						 </span>
+					<input class="div_join_detail_submit" type="submit" name="joinSubmit" value="가입하기">
+				</form>
+				<div class="div_join_another">
+					<div class="div_join_another_title"> 
+						<!-- <span>다른 서비스 계정으로 가입</span> -->
+						다른 서비스 계정으로 가입
+					</div>
+					<div>
+						<button class="div_join_another_naver">
+							<div class="div_join_another_naverImg"></div>
+						 	네이버로 회원가입
+						</button>
+						<button class="div_join_another_kakao">
+							<div class="div_join_another_kakaoImg"></div>
+						 	카카오로 회원가입
+						</button>
+						<button class="div_join_another_google">
+							<div class="div_join_another_googleImg"></div>
+							 구글로 회원가입
+						</button>
+					</div>
+				</div>
+				<div class="div_join_login">
+					<span>이미 가입하셨다면?
+						<a href="./login.html">로그인</a>
+					</span>
+				</div>
 			</div>
 		</div>
 	</section>

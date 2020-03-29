@@ -1,15 +1,76 @@
-@charset "UTF-8";
-
 .footer {
 	/* border: 1px solid black; */
-	width: 100%; /* 1903px; */
+	width: 1903px;
 	height: 229px;
 	background-color: #FD7622;
+	/* min-width: 100%;
+	overflow-y: auto; */
 }
 
 .footer_wraper {
+	/* background-color: red; */
 	width: 960px;
 	height: 229px;
 	margin: 0px 25%;
-	
+	display: flex;
+	flex-direction: row;
+	justify-content : space-between;
+	align-items: center;
+}
+
+.footer_info {
+	/* background-color: purple; */
+	width: 35%;
+	height: 229px;
+	color : #FFFFFF;
+	float: left;
+}
+
+.footer_info_company {
+	font-size: 17px;
+	font-weight: 900;
+	margin-top: 24px;
+	margin-bottom : 10px;
+}
+
+.footer_info_address {
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 28px;
+}
+
+.footer_info_copyright {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.footer_sns {
+	/* background-color: green; */
+	width: 250px;
+	height: 229px;
+	color: #FFFFFF;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.footer_sns_box {
+	border-top: 1px solid white;
+	width: 250px;
+	margin-top: 60px;
+	line-height: 1.7;
+	display: flex;
+	flex-direction: row;
+	justify-content : space-between;
+}
+
+.footer_sns_box_ul {
+	list-style: none;
+}
+
+.footer_sns_ul_li_a {
+	text-decoration: none;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: -1px;
 }

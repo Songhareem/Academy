@@ -1,8 +1,141 @@
 @charset "UTF-8";
 
 .indexSection {
-	/* border: 1px solid red; */
-	width: 100%; /* 1903px; */
-	height: 1038px;
-	margin-top: 56px;
+	background-color: black;
+	width: 1903px;
+	height: 966px; /* 1038px; */
+	min-width: 1903px;
+}
+
+.sectionMain {
+	background-image: url("../images/devsisters_main_1.png");
+	width: 1903px;
+	height: inherit;
+}
+
+.main_intro {
+	/* background-color: black; */
+	width: 920px;
+	height: 276px;
+ 	position: absolute;
+	left: 238px;
+	bottom: 129px;
+	z-index: 99;
+}
+
+.main_intro_h1{
+	line-height: 78px;
+	font-size: 47px;
+	font-weight: 400;
+	letter-spacing: -1px;
+	word-spacing: -3px;
+	margin-bottom: 70px;
+}
+
+.main_intro_a {
+	background: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    border: 1px solid #fff;
+    width: 220px;
+    height: 50px;
+    line-height: 1;
+    outline: none;
+    cursor: pointer;
+    text-align: left;
+    text-decoration: none;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    background-image: url("../images/dirIcon2.png");
+    background-size: 26px 15px;
+    background-position: right 20px center;
+    background-repeat: no-repeat;
+    white-space: nowrap;
+    position: relative;
+}
+
+.main_intro_a:hover {
+	background-color: #FD7622;
+	border: 1px solid #FD7622;
+}
+
+.main_clickButtons_div {
+	/* background-color: black; */
+	width: 1903px;
+	height: 20px;
+	position: absolute;
+	top: 900px;
+	display: flex;
+	justify-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+#main_clickButton_div_prev {
+	border-radius: 50%;
+	border: 1px solid #FFFFFF;
+	width: 11px;
+	height: 11px;
+	margin: 0px 11.5px;
+}
+
+#main_clickButton_div_selected {
+	background-color: #FFFFFF;
+	border-radius: 50%;
+	border: 1px solid #FFFFFF;
+	width: 11px;
+	height: 11px;
+	margin: 0px 11.5px;
+}
+
+#main_clickButton_div_next {
+	border-radius: 50%;
+	border: 1px solid #FFFFFF;
+	width: 11px;
+	height: 11px;
+	margin: 0px 11.5px;
+}
+
+.main_dirButtons_div {
+	/* background-color: black; */
+	width: 1903px;
+	height: 77px;
+	position: absolute;
+	top: 500px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 0px 60px;
+	box-sizing: border-box;
+}
+
+#main_dirButtons_next {
+	background-color: red;
+	width: 30px;
+	height: 77px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: none;
+    background-image: url("../images/dirButton.png");
+    background-size: 100%;
+	background-repeat: no-repeat;
+	transform: rotate(180deg);
+}
+
+#main_dirButtons_prev {
+	/* background-color: red; */
+	width: 30px;
+	height: 77px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: none;
+    background-image: url("../images/dirButton.png");
+    background-size: 100%;
+	background-repeat: no-repeat;
+    /* z-index: 9; */
 }

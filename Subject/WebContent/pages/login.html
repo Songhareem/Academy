@@ -6,11 +6,11 @@
 	<title>데브시스터즈</title>
 	<link rel="stylesheet" type="text/css" href="/Subject/css/reset.css"/>
 	<link rel="stylesheet" type="text/css" href="/Subject/css/header.css"/>
-	<link rel="stylesheet" type="text/css" href="/Subject/css/indexSection.css"/>
+	<link rel="stylesheet" type="text/css" href="/Subject/css/loginSection.css"/>
 	<link rel="stylesheet" type="text/css" href="/Subject/css/footer.css"/>
 </head>
 <body>
-	
+
 	<!-- header -->
 	<header class="header">
 		<nav class="nav">
@@ -66,25 +66,46 @@
 		</nav>
 	</header>
 	
-	<!-- index section -->
-	<section class="indexSection">
+	<!-- joinSection -->	
+	<section class="loginSection">
 		<div class="sectionMain">
-			<div class="main_intro">
-				<h1 class="main_intro_h1">
-					탁월한 기술, 서비스, 콘텐츠로<br>
-					전 세계 고객에게 최고의 경험을 선사합니다.
-				</h1>
-				<a class="main_intro_a">자세히 보기</a>
+			<div class="div_title">
+				<h2><img class="div_title_logo" src="../images/icon.png"/>로그인</h2>
 			</div>
-			<div class="main_clickButtons_div">
-				<span id="main_clickButton_div_prev" role="button" aria-label="go prev slide"></span>
-				<span id="main_clickButton_div_selected" role="button" aria-label="selected slide"></span>
-				<span id="main_clickButton_div_next" role="button" aria-label="go next slide"></span>
-				<span></span>
-			</div>
-			<div class="main_dirButtons_div">
-				<button type="button" id="main_dirButtons_prev" aria-label="Prev slide"></button>
-				<button type="button" id="main_dirButtons_next" aria-label="Next slide"></button>
+			<div class="div_login_detail">
+				<form action="" method="post">
+					<input class="div_login_detail_input" style="margin-top: 15px;"type="email" name="email" placeholder="이메일"><br>  
+					<input class="div_login_detail_input" type="password" name="password" placeholder="비밀번호"><br> 
+					<input class="div_login_detail_submit" type="submit" name="loginSubmit" value="로그인">
+					<div class="div_login_detail_etc">
+						<div class="div_login_detail_div">
+							<input class="div_login_detail_checkbox" type="checkbox" name="saveCheck" value="idSave">
+							<span class="div_login_detail_checkbox_span">아이디 저장<br></span>
+						</div>
+						<a href="./index.html">아이디 / 비밀번호 찾기 ></a>
+					</div>
+				</form>
+				<div class="div_login_another">
+					<div>
+						<button class="div_login_another_naver">
+							<div class="div_login_another_naverImg"></div>
+						 	네이버로 로그인
+						</button>
+						<button class="div_login_another_kakao">
+							<div class="div_login_another_kakaoImg"></div>
+						 	카카오로 로그인
+						</button>
+						<button class="div_login_another_google">
+							<div class="div_login_another_googleImg"></div>
+							 구글로 로그인
+						</button>
+					</div>
+				</div>
+				<div class="div_login_join">
+					<span>아직 가입하지 않으셨다면?
+						<a href="./join.html">회원가입</a>
+					</span>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -139,5 +160,6 @@
 			</div>
 		</div>
 	</footer>
+	
 </body>
 </html>
