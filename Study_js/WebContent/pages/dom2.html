@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#d1 {
+		color: red;
+	}
+</style>
+
+</head>
+<body>
+	<div id="result">
+	</div>
+
+	<script type="text/javascript">
+		var age = window.prompt("나이를 입력하세요");
+		var r;
+		if(age <= 19) {
+			r = "미성년";
+		} else {
+			r = "성년"	
+		}
+		
+		var result = document.getElementById("result");
+		result.innerHTML = `<h1 id=${"d1"}>${r}</h1>`;
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table {
+		width: 70%;
+		margin: 0 auto;
+	}
+	
+	table, td {
+		border: 1px solid red;
+		border-collapse: collapse;
+		border-spacing: 0px;
+		text-align: center;
+	}
+	
+</style>
+</head>
+<body>
+	<div>
+		<table id="t1">
+		</table>
+	</div>
+	
+	<script type="text/javascript">
+		var row = prompt("row 갯수");
+		var col = prompt("col 갯수");
+		
+		var appendHTML = "";
+		for(i=0; i<row; i++) {
+			
+			appendHTML += `<tr>`;
+			
+			for(j=0; j<col; j++) {
+				
+				appendHTML += `<td>(${i},${j})</td>`;
+			}
+			
+			appendHTML += `</tr>`;
+		}
+		
+		var t1 = document.getElementById("t1");
+		t1.innerHTML = appendHTML;
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		출생년도
+		<select id="s1">
+			<option value="">직업선택</option>
+		</select>
+	</div>
+	<div>
+		출생월
+		<select id="s2">
+		</select>
+	</div>
+	
+	<script type="text/javascript">
+		
+		var s1 = document.getElementById("s1");
+		var s2 = document.getElementById("s2");
+		var yearHTML = ""; /* `<option value=${""}>출생년도</option>`; */
+		var monthHTML = ""; /* `<option value=${""}>출생 월</option>`; */
+		
+		for(i=2020; i>=1900; i--){
+			yearHTML += `<option value=${i}>${i}년</option>`;
+		}
+		
+		for(i=1; i<=12; i++) {
+			monthHTML += `<option value=${i}>${i}월</option>`;
+		}
+		
+		s1.innerHTML = yearHTML;
+		s2.innerHTML = monthHTML;
+		
+	</script>
+</body>
+</html>

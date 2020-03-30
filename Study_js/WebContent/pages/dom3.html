@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.c1 {
+		display: block;
+		margin: 0 auto;
+	}
+	
+	.c2 {
+		border: 1px solid red;
+	}
+</style>
+
+</head>
+<body>
+	<div>
+		<img id="img1" alt="" src="../images/rick.PNG">
+	</div>
+	
+	<script type="text/javascript">
+
+		var check = window.confirm("이미지를 변경할까요");
+		if(check) {
+			var img1 = document.getElementById("img1");
+			img1.src="../images/hica.PNG";
+		
+			img1.setAttribute("class", "c1 c2");
+		}
+	</script>
+</body>
+</html>

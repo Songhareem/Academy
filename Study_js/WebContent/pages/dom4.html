@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<ul id="u1">
+	</ul>
+	<script type="text/javascript">
+		var count = window.prompt("1~10 사이의 숫자를 입력하세요");
+		
+		var u1 = document.getElementById("u1");
+		
+		var appendHtml = "";
+		for(i=0; i<count; i++) {
+			appendHtml += `<li>${i}</li>`;
+		}
+		
+		u1.innerHTML = appendHtml;
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="d1">
+		<p id="p1">Contents</p>
+		<h1 id="h1">Hello</h1>
+	</div>
+	
+	<div id="c1">
+		<input id=i1 type="text" name="n1" value="text">
+	</div>
+	
+	<script type="text/javascript">
+		
+		var i1 = document.getElementById("i1");
+		alert(i1.type); 
+		alert(i1.name); 
+		alert(i1.value);
+		i1.type="button";
+	
+		var p1 = window.document.getElementById("p1");
+		console.log(p1);
+		window.alert(p1);
+		
+		var t1 = p1.innerText;
+		console.log(t1);
+		
+		var h1 = window.document.getElementById("h1");
+		console.log(h1.innerHTML);
+		alert(h1.innerHTML);
+		
+		h1.innerHTML = '<a href="https://www.naver.com">네이버로 이동</a>';
+		
+	</script>
+</body>
+</html>
