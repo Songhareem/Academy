@@ -115,10 +115,15 @@
 }
 
 .div_join_detail_submit:hover {
+	outline: none;
 	background-color: #FD7622;
 	color: #FFFFFF;
 }
 
+.div_join_detail_submit:focus {
+	outline: none;
+}
+	
 .div_join_another {
 	/* background-color: purple; */
 	border-bottom: 1px solid #FD7622; 

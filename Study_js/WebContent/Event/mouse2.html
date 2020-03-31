@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="text">*
+	<input type="text">
+	<button onclick="multiply()">CLICK</button>
+	
+	<script type="text/javascript">
+		
+		function multiply () {
+			
+			var param = document.getElementsByTagName("input");
+			var result = 1;
+			for(i=0; i<param.length; i++) {
+				result *= param[i].value; 
+			}
+			alert(`두 값의 곱 결과는 ${result}`);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript">
+	
+	// 미리 컴파일
+	function sum(a, b) {
+		console.log(a+b);
+		return a+b;
+	}
+	
+	sum(3,2);
+	
+	// 런타임 컴파일
+	var f1 = function (a,b) {
+		return a+b;
+	}
+	
+	console.log(f1(10,20));
+	
+	function mul(a) {
+		console.log(a*2);
+	}
+	
+	mul(sum(2,2));
+	
+	mul(f1(10,20));
+	
+	</script>
+</body>
+</html>

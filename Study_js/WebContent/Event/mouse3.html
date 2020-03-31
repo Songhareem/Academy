@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<select>
+		<option class="opt">KT</option>
+		<option class="opt">SKT</option>
+		<option class="opt">LGT</option>
+	</select>
+	<button id="btn">CLICK</button>
+	<script type="text/javascript">
+		var btn = document.getElementById("btn");
+		btn.onclick = function() {
+			
+			var option = document.getElementsByClassName("opt");
+			for(i=0; i<option.length; i++) {
+				if(option[i].selected) {
+					alert(`${option[i].innerHTML}`);
+					break;
+				}
+			}
+		};
+	</script>
+</body>
+</html>

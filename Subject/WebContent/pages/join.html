@@ -74,17 +74,17 @@
 			</div>
 			<div class="div_join_detail">
 				<form action="" method="post">
-					<input class="div_join_detail_input" style="margin-top: 15px;"type="email" name="email" placeholder="이메일"><br> 
-					<input class="div_join_detail_input" type="text" name="name" placeholder="이름"><br> 
-					<input class="div_join_detail_input" type="password" name="password" placeholder="비밀번호"><br> 
-					<input class="div_join_detail_input" type="password" name="passwordConfirm" placeholder="비밀번호 확인"><br>
+					<input id="email" class="div_join_detail_input" style="margin-top: 15px;"type="email" name="email" placeholder="이메일"><br> 
+					<input id="name" class="div_join_detail_input" type="text" name="name" placeholder="이름"><br> 
+					<input id="pw" class="div_join_detail_input" type="password" name="password" placeholder="비밀번호"><br> 
+					<input id="pwConfirm" class="div_join_detail_input" type="password" name="passwordConfirm" placeholder="비밀번호 확인"><br>
 					<input class="div_join_detail_checkbox" type="checkbox" name="joinCheck" value="emailService">
-						<span class="div_join_detail_checkbox_span">Devsisters에 대한 소식을 이메일로 받아봅니다.<br></span>
-					<input class="div_join_detail_checkbox" type="checkbox" name="joinCheck" value="agreeTerms">
+						<span class="div_join_detail_checkbox_span">Devsisters에 대한 소식을 이메일로 받아봅니다.(선택)<br></span>
+					<input id="term" class="div_join_detail_checkbox" type="checkbox" name="joinCheck" value="agreeTerms">
 						 <span class="div_join_detail_checkbox_span">Devsisters의 서비스 약관에 동의합니다.
 						 	<a href="./index.html">약관 보기</a>
 						 </span>
-					<input class="div_join_detail_submit" type="submit" name="joinSubmit" value="가입하기">
+					<input id="joinBtn" class="div_join_detail_submit" type="button" name="joinButton" value="가입하기">
 				</form>
 				<div class="div_join_another">
 					<div class="div_join_another_title"> 
@@ -165,5 +165,6 @@
 			</div>
 		</div>
 	</footer>
+	<script type="text/javascript" src="../js/join.js"></script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button class="btn">CLICK1</button>
+	<button class="btn">CLICK2</button>
+	<button class="btn">CLICK3</button>
+	<button class="btn">CLICK4</button>
+	
+	<script type="text/javascript">
+		var btn = document.getElementsByClassName("btn");
+		
+		for(i=0; i<btn.length; i++) {
+			var index = 1;
+			btn[i].addEventListener("click", function() {
+				alert(`click${index}`);
+				index++;
+				//alert(this.innerHTML);
+			});
+		}
+	</script>
+</body>
+</html>

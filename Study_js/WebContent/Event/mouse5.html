@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="radio" class="c1" value="f1">
+	<input type="radio" class="c1" value="f2">
+	<input type="radio" class="c1" value="f3">
+	
+	<select>
+		<option class="opt1">1</option>
+		<option class="opt1">2</option>
+		<option class="opt1">3</option>
+	</select>
+	
+	<button id="btn">CLICK</button>
+	
+	<script type="text/javascript">
+		
+		var btn = document.getElementById("btn");
+		var c1 = document.getElementsByClassName("c1");
+		
+		btn.addEventListener("click", function() {			
+			
+			var opt1 = document.getElementsByClassName("opt1");
+			for(i=0; i<opt1.length; i++) {
+				if(opt1[i].selected) {
+					c1[i].checked = true;
+					break;
+				}
+			}
+		});
+		
+	</script>
+</body>
+</html>

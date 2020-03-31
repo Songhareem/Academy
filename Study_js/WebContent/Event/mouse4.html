@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input class="radios" type="radio" name="ch" value="f1">
+	<input class="radios" type="radio" name="ch" value="f2">
+	<input class="radios" type="radio" name="ch" value="f3">
+	<input class="radios" type="radio" name="ch" value="f4">
+	<button id="btn">CLICK</button>
+	<script type="text/javascript">
+		var btn = document.getElementById("btn");
+		btn.onclick = function() {
+			
+			var radios = document.getElementsByClassName("radios");
+			
+			for(i=0; i<radios.length; i++) {
+				
+				if(radios[i].checked) {
+					alert(`${radios[i].value}`);
+				}
+			}
+			
+		}
+	</script>
+</body>
+</html>

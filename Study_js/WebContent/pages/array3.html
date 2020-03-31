@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>다중선택</h1>
+	
+	<input class="test" type="checkbox" value="1" name="n">
+	<input class="test" type="checkbox" value="2" name="n">
+	<input class="test" type="checkbox" value="3" name="n">
+	<input class="test" type="checkbox" value="4" name="n">
+	
+	<script type="text/javascript">
+
+		var testClass = document.getElementsByClassName('test');
+	
+		console.log(testClass);
+
+		for(i=0; i<testClass.length; i++) {
+			
+			console.log(testClass[i].value);
+		}
+	</script>
+	
+</body>
+</html>

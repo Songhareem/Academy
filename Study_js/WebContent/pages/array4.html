@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>성적 입력</h1>
+	
+	<p><input type="text" class="point"></p>
+	<p><input type="text" class="point"></p>
+	<p><input type="text" class="point"></p>
+	
+	<script type="text/javascript">
+		var sub = [];
+		var subName = ["국어 점수", "영어 점수", "수학 점수"];
+		
+		for(i=0; i<subName.length; i++) {
+			
+			sub[i] = prompt(subName[i]);
+		}
+
+		var point = document.getElementsByClassName("point");
+		
+		for(i=0; i<point.length; i++) {
+			
+			point[i].value = sub.shift();
+		}
+		
+	</script>
+</body>
+</html>

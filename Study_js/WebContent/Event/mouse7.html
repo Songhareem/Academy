@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h3>All</h3>
+	<input id="checkAll" type="checkbox">
+	<h3>First</h3>
+	<input class="term" type="checkbox">
+	<h3>Second</h3>
+	<input class="term" type="checkbox">
+	<h3>Third</h3>
+	<input class="term" type="checkbox">
+	
+	<button id="join">Join</button>
+	
+	<script type="text/javascript">
+		
+		var checkAll = document.getElementById("checkAll");
+		var terms = document.getElementsByClassName("term");
+		var join = document.getElementById("join");
+		
+		// checkAll on/off
+		checkAll.addEventListener("click", function() {
+			
+			for(i=0; i<terms.length; i++) {
+				terms[i].checked = this.checked;
+			}
+		});
+		
+		// 3개 전부 체크시 CheckAll on
+		for(i=0; i<terms.length; i++) {
+			terms[i].addEventListener("click", function() {
+				
+				console.log("clicked");
+				
+				var isCheckedAll = true;
+				
+				for(i=0; i<terms.length; i++) {
+					
+					if(!terms[i].checked) {
+						isCheckedAll = false;
+						break;
+					}
+				}
+	
+				checkAll.checked = isCheckedAll;
+			});
+		};
+		
+		// join 시, 체크 확인해서 ok또는 fail
+		join.addEventListener("click", function() {
+			
+			if(checkAll.checked == true) {
+				alert("다음페이지");
+				location.href="./mouse7_login.html";
+				return;
+			}
+			
+			alert("약관에 동의해주세요");
+		});
+		
+	</script>
+</body>
+</html>
