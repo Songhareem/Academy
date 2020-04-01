@@ -5,7 +5,7 @@
 	width: 1903px;
 	height: 910px; /* 1038px; */
 	margin-top: 56px;
-	padding-top: 50px;
+	padding-top: 20px;
 	box-sizing: border-box;
 }
 
@@ -60,15 +60,53 @@
 	display: block;
 }
 
-.div_join_detail_input {
+.div_join_form_part {
+	
+	width: 100%;
+	height: 60px; /* 변형전 : 60px;  변형 후 : 85px; */
+}
+
+.div_join_form_div {
+	/* background-color: red; */
 	border: 1px solid #FD7622;
 	box-sizing: border-box;
 	border-radius: 0.4em;
 	width: 400px;
 	height: 45px;
-	margin-bottom: 15px;
+	/* margin-bottom: 15px; */
 	margin-left: 42px;
 	padding-left: 12px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.div_join_form_btn {
+	outline: none;
+	background-color: #FFFFFF;
+	border: 1px solid #FD7622;
+	border-radius: 0.4em;
+	width: 90px;
+	height: 30px;
+	color: #FD7622;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
+.div_join_form_confirmedBtn {
+	background-color: #FD7622;
+	color: #FFFFFF;
+}
+
+.div_join_form_btn:hover {
+	outline: none;
+	background-color: #FD7622;
+	color: #FFFFFF;
+}
+
+.div_join_detail_input {
+	background-color: white;
+	width:290px;
 	font-size: 15px;
 	color: black;
 }
@@ -96,6 +134,10 @@
 	font-size: 15px;
 	letter-spacing: 1px;
 	color: black;
+}
+
+.div_join_detail_checkbox_span>a:hover {
+	text-decoration: underline;
 }
 
 .div_join_detail_submit {
@@ -231,3 +273,13 @@
 	text-decoration: none;
 	color: #FD7622;
 }
+
+.resultComment {
+	display: flex;
+	height: 30px;
+	margin-left : 55px;
+	font-size: 12px;
+	color: black;
+	align-items: center;
+}
+

@@ -151,8 +151,26 @@
                   ```
         - Event
             - 종류
-                - mouse
-                    - onclick
+                - mouse Event
+                    - click     : 마우스 클릭
+                    - dbclick   : 마우스 더블클릭
+                    - mousedown : 마우스 버튼을 누르고 있을 때
+                    - mouseup   : 마우스 버튼을 누르다가 떼었을 때
+                    - mousemove : 마우스를 움직일 때
+                    - mouseover : 어떤 요소 위로 마우스가 위치할 때
+                    - mouseout  : 어떤 요소 밖으로 나갔을 때
+                
+                - keyboard Event
+                    - keydown   : 키를 누르고 있을때,
+                    - keyup     : 누르고 있던 키를 해제할 때
+                    - keypress  : 어떤 요소 밖으로 나갔을 때
+                
+                - Form Event
+                    - focus/focusin     : 요소가 포커스를 얻었을 때
+                    - blur/ focusout    : 요소가 포커스를 잃었을 때
+                    - change            : value값 변경시
+                    - submit            : form태그를 action의 주소로 전송
+
             - 이벤트 등록 방식
                 - inline 방식
                     - 해당 태그에 on이벤트명 = "함수명()"
@@ -164,6 +182,22 @@
                 - addEventListener
                     - var id = document.getElementById("아이디명");
                     - id.addEventListener("이벤트명", 함수명);
+        
+        - Event 강제 실행
+            - 
+
+        - Event 전파
+            - 영역이 중첩된 요소들(div 등)은 부모와 자식 관계
+                - 부모와 자식간에 같은 Event가 등록 되어있다면, 자식 Event발생시 부모쪽도 해당 Event 발생 (이벤트 전파)
+            - Event.preventDefault()
+                - a 태그나 submit 클릭이 페이지 이동으로 이어질 시, 클릭으로 발생하는 해당 태크의 속성 동작을 중단 (href 등)
+            - Event.stopPropagation()
+                - 자식의 Event가 부모 요소로 전파되는 것을 중단시키기 위해 사용
+        
+        - Event 위임
+            - ref: https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
+
+        
 
 - Jquery
 

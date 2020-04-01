@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="text" id="d1"> * 100 =
+	<input type="text" id="d2">
+
+<script type="text/javascript">
+	var d1 = document.getElementById("d1");
+	var d2 = document.getElementById("d2");
+	
+	d1.addEventListener("keyup", function(){
+		
+		var num = d1.value.length*100;
+		d2.value=num;
+	});
+
+	d1.addEventListener("focus", function() {
+		d1.style.backgroundColor = "yellow";
+		d1.style.outline = "none";
+	});
+	
+	d1.addEventListener("blur", function() {
+		d1.style.backgroundColor = "white";
+	})
+</script>
+</body>
+</html>

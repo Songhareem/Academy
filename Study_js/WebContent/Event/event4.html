@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#d1 {
+		width: 400px;
+		height: 400px;
+		border: 1px solid red;
+	}
+	
+	#d2 {
+		width: 200px;
+		height: 200px;
+		background-color: red;
+	}
+</style>
+</head>
+<body>
+	<div id="d1">
+		<img id="i1" src="../images/orisa.png">
+	</div>
+	<div id="d2">
+	</div>
+	<script type="text/javascript">
+		var d1 = document.getElementById("d1");
+		var d2 = document.getElementById("d2");
+		var i1 = document.getElementById("i1");
+		var filename = ['orisa.png', 'para.png', 'winston.png', 'widowmaker.png'];
+		var srcPath = '../images/';
+		var flag = true;
+		d1.addEventListener("mouseover", function(e) {
+			
+			if(flag === false) {
+				return;
+			}
+			flag = false;
+			
+			var index = (Math.floor(Math.random() * 4));
+			console.log(index);
+			d1.innerHTML = `<img src="${srcPath}${filename[index]}">`;
+			d2.style.display = "none";
+		});
+		
+		d1.addEventListener("mouseout", function() {
+			flag = true;
+			d2.style.display = "block";
+		});
+		
+		i1.addEventListener("mouseover", function() {
+			
+			e.stopPropagation();
+		});
+		
+	</script>
+</body>
+</html>

@@ -6,7 +6,7 @@
 	<title>데브시스터즈</title>
 	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/header.css"/>
-	<link rel="stylesheet" type="text/css" href="../css/joinSection.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/join.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/footer.css"/>
 </head>
 <body>
@@ -74,17 +74,46 @@
 			</div>
 			<div class="div_join_detail">
 				<form action="" method="post">
-					<input id="email" class="div_join_detail_input" style="margin-top: 15px;"type="email" name="email" placeholder="이메일"><br> 
-					<input id="name" class="div_join_detail_input" type="text" name="name" placeholder="이름"><br> 
-					<input id="pw" class="div_join_detail_input" type="password" name="password" placeholder="비밀번호"><br> 
-					<input id="pwConfirm" class="div_join_detail_input" type="password" name="passwordConfirm" placeholder="비밀번호 확인"><br>
+					<div id="emailPart" class="div_join_form_part">
+						<div class="div_join_form_div">
+							<input id="email" class="div_join_detail_input" "type="email" name="email" placeholder="이메일">
+							<input id="authBtn" class="div_join_form_btn" type="button" value="인증하기">
+						</div>
+						<div id="emailComment" class="resultComment"></div>
+					</div>
+					<div id="authCodeDiv" class="div_join_form_part">
+						<div class="div_join_form_div">
+							<input id="code" class="div_join_detail_input" "type="text" name="code" placeholder="코드입력">
+							<input id="codeBtn" class="div_join_form_btn" type="button" value="코드입력">
+						</div>
+						<div id="codeComment" class="resultComment"></div>
+					</div>
+					<div id="namePart" class="div_join_form_part">
+						<div class="div_join_form_div">
+							<input id="name" class="div_join_detail_input" type="text" name="name" placeholder="이름"><br> 
+						</div>
+						<div id="nameComment" class="resultComment"></div>
+					</div>
+					<div id="pwPart" class="div_join_form_part">
+						<div class="div_join_form_div">
+							<input id="pw" class="div_join_detail_input" type="password" name="password" placeholder="비밀번호"><br> 
+						</div>
+						<div id="pwComment" class="resultComment"></div>
+					</div>
+					<div id="pwConfirmPart" class="div_join_form_part">
+						<div class="div_join_form_div">
+							<input id="pwConfirm" class="div_join_detail_input" type="password" name="passwordConfirm" placeholder="비밀번호 확인"><br>
+						</div>
+						<div id="pw2Comment" class="resultComment"></div>
+					</div>
 					<input class="div_join_detail_checkbox" type="checkbox" name="joinCheck" value="emailService">
 						<span class="div_join_detail_checkbox_span">Devsisters에 대한 소식을 이메일로 받아봅니다.(선택)<br></span>
 					<input id="term" class="div_join_detail_checkbox" type="checkbox" name="joinCheck" value="agreeTerms">
 						 <span class="div_join_detail_checkbox_span">Devsisters의 서비스 약관에 동의합니다.
-						 	<a href="./index.html">약관 보기</a>
+						 	<a href="./index.html">약관보기</a>
 						 </span>
 					<input id="joinBtn" class="div_join_detail_submit" type="button" name="joinButton" value="가입하기">
+
 				</form>
 				<div class="div_join_another">
 					<div class="div_join_another_title"> 

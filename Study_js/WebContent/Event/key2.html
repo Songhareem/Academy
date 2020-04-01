@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+	.error {
+		color: red;
+		font-weight: bold;
+	}
+	
+	.pass {
+		color: green;
+		font-weight: bold;
+	}
+	
+</style>
+</head>
+<body>
+	<form action="./key2_join.html">
+		<p>
+			<!-- 최소 6자 이상 / 입력시마다 검증 -->
+			<!-- "최소 6자 이상 아이디를 입력해주세요" -->
+			<!-- "사용할 수 있는 아이디 입니다" -->
+			ID <input id="id" type="text">
+			<br><span id="idResult"></span>
+		</p>
+		<p>
+			<!-- 최소 6자 이상 / 입력이 끝난 후 검증 -->
+			<!-- "최소 6자 이상 비밀번호를 입력해주세요" -->
+			<!-- "사용 가능한 비밀번호 입니다 -->
+			PW <input id="pw" type="password">
+			<br><span id="pwResult"></span>
+		</p>
+		<p>
+			<!-- 최소 6자 이상, PW와 같은지/ 입력이 끝난 후 검증 -->
+			<!-- "비밀번호가 일치하지 않습니다" / PW2 공란으로 -->
+			<!-- "비밀번호와 일치합니다" -->
+			PW2 <input id="pw2" type="password">
+			<br><span id="pw2Result"></span>
+		</p>
+		<p>
+			Name <input id="name" type="text">
+		</p>
+		<p>
+			Phone <input id="phone" type="text">
+		</p>
+		<p>
+			Email <input id="email" type="email">
+		</p>
+		
+		<!-- 버튼 클릭시 / -->
+		<!-- ID 최소 6자 이상 ? / PW 최소 6자 이상? / PW2 PW 같은지? / 나머지 NULL 아닌지  -->
+		<input id="btn" type="submit" value="Join">
+	</form>
+	
+	<script type="text/javascript">
+		// 범용 펑션
+		var checkMinLength = function(minLength, tagId) {
+			var nowId = document.getElementById(tagId);
+			
+			if(nowId.value.length === 0) {
+				return 0;
+			} else if(nowId.value.length >= minLength) {
+				return 1;
+			} else {
+				return 2;
+			}
+		}
+		
+		var isSameContent = function(tagId, compTagId) {
+			
+			var tagIdContent = document.getElementById(tagId);
+			var compTagIdContent = document.getElementById(compTagId);
+			
+			if(tagIdContent.value === compTagIdContent.value) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+		// ID 관련 펑션
+		var id = document.getElementById("id");
+		id.addEventListener("keyup", function() {
+			
+			var minLength = 6;
+			var idResult = document.getElementById("idResult");
+			var msg = "최소 6자 이상 아이디를 입력해주세요";
+			
+			switch(checkMinLength(minLength,"id")) {
+			
+			case 0:
+				idResult.innerHTML = "";
+				break;
+			case 1:
+				msg = "사용 가능한 아이디 입니다";
+				idResult.innerHTML = `${msg}`;
+				idResult.setAttribute('class','pass');
+				break;
+			case 2:
+				idResult.innerHTML = `${msg}`;
+				idResult.setAttribute('class','error');
+				break;
+			default :
+				alert("idEventError");
+				break;
+			}			
+		});
+		
+		// PW 관련 펑션
+		var pw = document.getElementById("pw");
+		
+		/* pw.addEventListener("change", function(){
+			var pw2 = document.getElementById("pw2");
+			pw2.value="";
+		} */
+		
+		pw.addEventListener("blur", function(){
+			
+			var minLength = 6;
+			var pwResult = document.getElementById("pwResult");
+			var msg = "최소 6자 이상 비밀번호를 입력해주세요";
+			
+			switch(checkMinLength(minLength,"pw")) {
+			
+			case 0:
+				break;
+			case 1:
+				msg = "사용 가능한 비밀번호 입니다";
+				pwResult.innerHTML = `${msg}`;
+				pwResult.setAttribute('class','pass');
+				break;
+			case 2:
+				pwResult.innerHTML = `${msg}`;
+				pwResult.setAttribute('class','error');
+				break;
+			}
+		});
+		
+		// PW2 관련 펑션
+		var pw2 = document.getElementById("pw2");
+		pw2.addEventListener("blur", function(){
+			
+			var pw = document.getElementById("pw");
+			var pw2Result = document.getElementById("pw2Result");
+			var msg = "비밀번호가 일치하지 않습니다";
+			
+			if(pw.value !== pw2.value) {
+				pw2Result.innerHTML = `${msg}`;
+				pw2Result.setAttribute('class','error');
+				pw2.value="";
+				pw2.focus();
+				return ;
+			}
+			
+			msg = "비밀번호와 일치합니다";
+			pw2Result.innerHTML = `${msg}`;
+			pw2Result.setAttribute('class','pass');
+		});
+		
+		// btn 관련 펑션
+		var btn = document.getElementById("btn");
+		btn.addEventListener("click", function(e){
+			
+			var idMinLength = 6;
+			var pwMinLength = 6;
+			var id = document.getElementById("id");
+			var pw = document.getElementById("pw");
+			var pw2 = document.getElementById("pw2"); 
+			var name = document.getElementById("name");
+			var phone = document.getElementById("phone");
+			var email = document.getElementById("email");
+			
+			if(checkMinLength(idMinLength,"id") !== 1) {
+				alert("최소 6자 이상 아이디를 입력해주세요");
+				e.preventDefault();
+				id.focus();
+				return false;
+			}
+			
+			if(checkMinLength(pwMinLength,"pw") !== 1) {
+				alert("최소 6자 이상 비밀번호를 입력해주세요");
+				e.preventDefault();
+				//e.stopPropagation();
+				pw.focus();
+				return false;
+			}
+			
+			if(isSameContent("pw","pw2") === false) {
+				alert("비밀번호가 일치하지 않습니다");
+				e.preventDefault();
+				pw2.focus();
+				return false;
+			}
+			
+			if(name.value === "") {
+				alert("이름을 입력해주세요");
+				e.preventDefault();
+				name.focus();
+				return false;
+			}
+			
+			if(phone.value === "") {
+				alert("핸드폰 번호를 입력해주세요");
+				e.preventDefault();
+				phone.focus();
+				return false;
+			}
+			
+			if(email.value === "") {
+				alert("이메일을 입력해주세요");
+				e.preventDefault();
+				email.focus();
+				return false;
+			}
+			
+			return true;
+		});
+	</script>
+</body>
+</html>
