@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	
+	<ul id="id1">
+		<li>1</li>
+	</ul>
+	
+	<button id="add">ADD</button>
+	
+	<script type="text/javascript">
+	var index = 1;
+	$("#add").click(function() {
+		index++;
+		console.log($("#id1").html);
+		$("#id1").append(`<li>${index}</li>`);
+	});
+	
+	</script>
+</body>
+</html>

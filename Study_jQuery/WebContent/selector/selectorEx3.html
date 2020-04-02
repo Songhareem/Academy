@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+</head>
+<body>
+	
+	<input id="selector" type="text">
+	<button id="delBtn">DEL</button>
+	
+	<div id="d1">
+		<h1>SELECT 1</h1>
+	</div>
+	
+	<div id="d2">
+		<h1>SELECT 2</h1>
+	</div>
+	
+	<div id="d3">
+		<h1>SELECT 3</h1>
+	</div>
+	
+	<div id="d4">
+		<h1>SELECT 4</h1>
+	</div>
+	
+	<script type="text/javascript">
+		$("#delBtn").click(function(){
+			
+			// selector
+			var index = $("#selector").val();
+			//console.log(index);
+			
+			var divId = "d" + index;
+			$(`#${divId}`).remove();
+		});
+	</script>
+</body>
+</html>

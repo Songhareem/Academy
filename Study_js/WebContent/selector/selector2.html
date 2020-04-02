@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	p {
+		width: 100px;
+		height: 100px;
+		border: 1px solid red;
+	}
+	p.c2 {
+		background-color: red;
+	}
+</style>
+</head>
+<body>
+	<button id="btn1">BTN1</button>
+	<button class=c2 id="btn2">BTN2</button>
+	
+	<input type="button" class="c1" value="BTN3">
+	<input type="button" class="c1" value="BTN4">
+	<p></p>
+	<p class="c2"></p>
+	
+	
+	<script type="text/javascript">
+		var pc2 = document.querySelector("p.c2");
+		pc2.style.width = "300px";
+	
+		var p = document.querySelector("p");
+		p.innerHTML="test";
+	
+		var c1 = document.querySelector(".c1");
+		c1.addEventListener("click", function(){
+			alert("btn3");
+		});
+	
+		var btn2 = document.querySelector("#btn2");
+		btn2.addEventListener("click", function(){
+			alert("btn2");
+		});
+	
+		var btn1 = document.getElementById("btn1");
+		btn1.addEventListener("click", function(){
+			alert("btn1");
+		});
+	</script>
+</body>
+</html>

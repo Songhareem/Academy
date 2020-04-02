@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+</head>
+<body>
+	
+	<input type="radio" class="radios" name="radios" title="first">
+	<input type="radio" class="radios" name="radios" title="second">
+	<input type="radio" class="radios" name="radios" title="third">
+	<input type="radio" class="radios" name="radios" title="forth">
+	
+	<div id="first">
+		<h1>First</h1>
+	</div>
+	
+	<div id="second">
+		<h1>Second</h1>
+	</div>
+	
+	<div id="third">
+		<h1>Third</h1>
+	</div>
+	
+	<div id="forth">
+		<h1>Forth</h1>
+	</div>
+	
+	<button id="delBtn">DEL</button>
+	
+	<script type="text/javascript">
+
+		$("#delBtn").click(function() {
+			
+			console.log("=====================");
+	
+			$(".radios").each(function() {
+				var checked = $(this).prop("checked");
+			
+				if(checked === true) {
+					
+					var id = "#" + $(this).attr("title");
+					$(`${id}`).remove();
+				}
+			});
+		});
+
+	</script>
+</body>
+</html>

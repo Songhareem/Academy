@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 id="t"></h1>
+	<button id="btn">stopTime</button>
+	<script type="text/javascript">
+		var t = document.querySelector("#t");
+		var btn = document.querySelector("#btn");
+		
+		var threadStart = window.setInterval(function() {
+			var c = new Date();
+			t.innerHTML=c;
+		},1000);
+		
+		btn.addEventListener("click", function() {
+			window.clearInterval(threadStart);
+		});
+	</script>
+</body>
+</html>

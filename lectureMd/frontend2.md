@@ -49,6 +49,22 @@
                     - 배열을 return
                 - document.getElementsByTagName("태그명");
                     - 배열 return
+            - form 관련 Element 선택 (name 사용)
+                - ```
+                    <form action="" name="form">
+                        <input type="text" name="yId">
+                    </form>
+                    
+                    <script type="text/javascript">
+                        document.form.yId.value = "sample";             
+                    </script>
+                  ```
+            - CSS Selector
+                - css Selector : css 문법을 사용
+                - querySelector("css selector");
+                - document.querySelector();
+                - document.querySelectorAll();
+
         - innerText
             - 변수
             - 선택한 Element내의 모든 Text node들의 내용을 담는 변수
@@ -184,9 +200,10 @@
                     - id.addEventListener("이벤트명", 함수명);
         
         - Event 강제 실행
-            - 
+            - 다른 요소의 설정된 이벤트를 강제로 실행하고 싶을때
+            - 선택자.이벤트명();
 
-        - Event 전파
+()        - Event 전파
             - 영역이 중첩된 요소들(div 등)은 부모와 자식 관계
                 - 부모와 자식간에 같은 Event가 등록 되어있다면, 자식 Event발생시 부모쪽도 해당 Event 발생 (이벤트 전파)
             - Event.preventDefault()
@@ -197,8 +214,26 @@
         - Event 위임
             - ref: https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
 
-        
+        - 내장객체
+            - window
+                - open()    : 새창만들기
+                - opener    : 새창을 만들 부모의 handle
+                - close()   : 윈도우 닫기 clase
 
-- Jquery
-
-- Ajax
+                - setTimeout(function, millsec)        : 일정한 시간뒤에 한번만 실행
+                - clearTimeout(setTimeout 실행 함수명)  : 실행전에 timeout 종료
+                - setInterval(function, millsec)       : 일정한 간격으로 function 실행
+                - clearInterver(setInterval 실행 함수명): interval 종료
+            - document
+                - w3c 참조
+            - location
+                - href  : url 주소를 입력하면 a 태그처럼 실행 
+            - history
+                - length    : 이동 가능한 페이지의 총 갯수
+                - back()    : 페이지 앞으로가기
+                - foword()  : 페이지 뒤로가기
+                - go(n)     : n만큼 페이지 이동(- : back / + : foword); 
+            - screen
+                - w3c 참조
+            - navigator
+                - w3c 참조

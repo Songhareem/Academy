@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="">
+		<input type="text" id="id">
+		<button>중복확인</button>
+		<input type="button" id="use" value="사용하기">
+	</form>
+	
+	<script type="text/javascript">
+		var use = document.getElementById("use");
+		use.addEventListener("click", function() {
+			// opener 해당 창을 연 html
+			var openerId = opener.document.getElementById("id");
+			var id = document.getElementById("id");
+			openerId.value = id.value;
+			window.close();
+		});
+	</script>
+</body>
+</html>

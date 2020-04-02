@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<style type="text/css">
+		#d1 {
+			width: 200px;
+			height: 200px;
+			background-color: red;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="d1">
+	
+	</div>
+	
+	<script type="text/javascript">
+	
+	$("#d1").mouseenter(function() {
+		console.log("mouseIn");
+	});
+	
+	$("#d1").mouseleave(function() {
+		console.log("mouseOut");
+	});
+	
+	$("#d1").click(function() {
+		console.log("mouseClick");
+	});
+	
+	$("#d1").dblclick(function() {
+		console.log("mouseDoubleClick");
+	});
+	
+	
+	</script>
+</body>
+</html>

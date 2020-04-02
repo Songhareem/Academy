@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style type="text/css">
+	.c1 {
+		width: 200px;
+		height: 200px;
+	}
+	#d1 {
+		background-color: red;
+	}
+	#d2 {
+		background-color: blue;
+	}
+</style>
+</head>
+<body>
+
+	<div class="c1" id="d1">
+		<h1>D1</h1>
+	</div>
+	
+	<div class="c1" id="d2">
+		<h1>D2</h1>
+	</div>
+	
+	<button id="b1">Del1</button>
+	<button id="b2">Del2</button>
+
+	<script type="text/javascript">
+	$("#b1").on("click", function() {
+		$("#d1").remove();
+	});
+	
+	$("#b2").on("click", function() {
+		$("#d2").empty();
+	});
+
+	</script>
+</body>
+</html>

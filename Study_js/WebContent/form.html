@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="./key2_join.html">
+		<p>
+			<!-- 최소 6자 이상 / 입력시마다 검증 -->
+			<!-- "최소 6자 이상 아이디를 입력해주세요" -->
+			<!-- "사용할 수 있는 아이디 입니다" -->
+			ID <input id="id" type="text" required="required">
+			<br><span id="idResult"></span>
+		</p>
+		<p>
+			<!-- 최소 6자 이상 / 입력이 끝난 후 검증 -->
+			<!-- "최소 6자 이상 비밀번호를 입력해주세요" -->
+			<!-- "사용 가능한 비밀번호 입니다 -->
+			PW <input id="pw" type="password">
+			<br><span id="pwResult"></span>
+		</p>
+		<p>
+			<!-- 최소 6자 이상, PW와 같은지/ 입력이 끝난 후 검증 -->
+			<!-- "비밀번호가 일치하지 않습니다" / PW2 공란으로 -->
+			<!-- "비밀번호와 일치합니다" -->
+			PW2 <input id="pw2" type="password">
+			<br><span id="pw2Result"></span>
+		</p>
+		<p>
+			Name <input id="name" type="text" required="required">
+		</p>
+		<p>
+			Phone <input id="phone" type="text" required="required">
+		</p>
+		<p>
+			Email <input id="email" type="email" required="required">
+		</p>
+		
+		<!-- 버튼 클릭시 / -->
+		<!-- ID 최소 6자 이상 ? / PW 최소 6자 이상? / PW2 PW 같은지? / 나머지 NULL 아닌지  -->
+		<input id="btn" type="submit" value="Join">
+	</form>
+</body>
+</html>
