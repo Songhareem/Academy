@@ -4,6 +4,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#delBtn").click(function() {
+			
+			console.log("=====================");
+	
+			$(".radios").each(function() {
+				var checked = $(this).prop("checked");
+			
+				if(checked === true) {
+					
+					var id = "#" + $(this).attr("title");
+					$(`${id}`).remove();
+				}
+			});
+		});
+	});
+</script>
 </head>
 <body>
 	
@@ -29,24 +47,6 @@
 	</div>
 	
 	<button id="delBtn">DEL</button>
-	
-	<script type="text/javascript">
 
-		$("#delBtn").click(function() {
-			
-			console.log("=====================");
-	
-			$(".radios").each(function() {
-				var checked = $(this).prop("checked");
-			
-				if(checked === true) {
-					
-					var id = "#" + $(this).attr("title");
-					$(`${id}`).remove();
-				}
-			});
-		});
-
-	</script>
 </body>
 </html>
