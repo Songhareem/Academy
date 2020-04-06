@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h2>rand 이동</h2>
-	<a href="./getRandom.do">GET RANDOM</a>
-	<a href="./result.jsp">GET JSP</a>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<a href="./getRandom.do?name=iu&age=22">GET RANDOM</a>
+		<form action="./useForm.do" method="post">
+			<input type="text" name="id">
+			<input type="password" name="pw">
+			<button>CLICK</button>
+		</form>
+		
+		<button id="btn">USE_JS</button>
+		
+		
+		<a href="./result.jsp">Get JSP</a>
+		
+		<script type="text/javascript">
+			var btn = document.getElementById("btn");
+			btn.addEventListener("click", function() {
+				location.href="useJs.do?col=30";
+			});
+		
+		</script>
+		
+	</body>
 </html>

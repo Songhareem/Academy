@@ -10,7 +10,7 @@
 	<!-- 서블릿 맵핑 -->
 	<servlet-mapping>
 		<servlet-name>test</servlet-name>
-		<url-pattern>/getRandom.do</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>

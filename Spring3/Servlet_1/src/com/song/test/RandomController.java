@@ -27,40 +27,27 @@ public class RandomController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		Test test = new Test();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Method 형식은 GET 방식");
+	
+		String method = request.getMethod();			// Get / Post ...
+		StringBuffer sb = request.getRequestURL();		// URL
+		String uri = request.getRequestURI();			// URL에서 IP PORT부분 제외
+		String ctxPath = request.getContextPath();		// 프로젝트명
+		String servletPath = request.getServletPath();	// 서블릿명
 		
-		int result = test.getRandom(100);
-		System.out.println("done");
-		
-		PrintWriter pw = response.getWriter();
-		pw.println("<!DOCTYPE html>");
-		pw.println("<html>");
-		pw.println("<head>");
-		pw.println("<meta charset=\"UTF-8\">");
-		pw.println("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>");
-		pw.println("<title>Insert title here</title>");
-		pw.println("</head>");
-		pw.println("<body>");
-		pw.println("<h1 id=\"h1\" style=\"color : red\">");
-		pw.println(result);
-		pw.println("</h1>");
-		pw.println("<script type=\"text/javascript\">");
-		pw.println("$(\"#h1\").click(function () {alert(\"click\");});");
-		pw.println("</script>");
-		pw.println("</body>");
-		pw.println("</html>");
-
-	}
+		System.out.println("Method : "+method);
+		System.out.println("URL : "+ sb.toString());
+		System.out.println("URI : "+ uri);
+		System.out.println("Path : "+ ctxPath);
+		System.out.println("pathInfo" + servletPath);
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("Method 형식은 POST 방식");
 	}
 
 }
