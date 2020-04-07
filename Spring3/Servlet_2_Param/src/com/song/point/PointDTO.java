@@ -3,7 +3,7 @@ package com.song.point;
 public class PointDTO {
 
 	private String name;
-	private String num;
+	private int num;
 	private int kor;
 	private int eng;
 	private int math;
@@ -20,10 +20,10 @@ public class PointDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getNum() {
+	public int getNum() {
 		return num;
 	}
-	public void setNum(String num) {
+	public void setNum(int num) {
 		this.num = num;
 	}
 	public int getKor() {

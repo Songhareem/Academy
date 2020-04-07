@@ -22,6 +22,9 @@
     - 다양한 라이브러리들 있음
         - w3c tutorials ref : https://www.w3schools.com/bootstrap3/default.asp
 
+- API 등록
+    - WEB-INF/lib 폴더에 복붙
+
 # 백 프론트 연결
 
 - servlet
@@ -84,22 +87,31 @@
     - http://ip:port?파라미터 이름 = 값 & 파라미터 이름 = 값
     - ? 이전 까지는 url
     - ? 이후 부터는 파라미터
+    - String url = request.getRequestURL();
 
 - URI
     - 서버 내부에서 쓰는 개념
     - URL에서 ip 및 포트부분을 제외한 개념
+    - String uri = request.getRequestURI();
+
+- Context Name
+    - 하나의 프로젝트 내에서 최상위 프로젝트(Root 의미)
+    - String ctx = request.getContextPath();
 
 - 배포 서술자?
     - WAS 가 최초 구동될 때,  /WEB-INF 하위에 존재하는 web.xml 을 읽고 웹 어플리케이션을 설정
 
+- Apatch VS Tomcat  
+    - 아파치
+        - 정적인 페이지만 가능
+    - 톰캣
+        - 동적인 페이지도 가능
 
 - Servlet
-    - WA (SNS ... )
-        - front 등등 
     -WAS
         - Web.Xml을 읽고
-        - Servle 객체를 샐성(싱글톤)
-        - 해당 servliet의 init메서도 사용
+        - Servlet 객체를 생성(싱글톤)
+        - 해당 servliet의 init메서드 사용
         - 요청이 오기를 기다림
         - URL 패턴에 맞는 요청이 오면
         - WAS가 Requset(요청에 대한 모든 정보)와 Response(응답에 대한 모든 정보) 객체 생성
@@ -113,10 +125,29 @@
     - 개발자가 만드는 객체가 아니라 WAS가 생성하는 객체
     - Reqeust
         - 요청이 발생하면 생성, 응답이 나갈때 삭제
-        - 요총에 대한 모든 정보를 담고있나
+        - 요청에 대한 모든 정보를 담고있음
     - Response
-        - 생명주시는 Request 왜 동일
+        - 생명주기는 Request 와 동일
         - 응답으로 보낼 Data 담고 있다
+
+- Attribute
+    - 내장객체의 어떤값을 저장하거나 꺼내올때 사용
+    - 형식: key(String):value(Object)값으로 되어있음
+    - 참조변수명.setAttrubute("만들 키값", Oject2)
+    - 참조변수명.getAttribute;;
+    - 서버 내부에서 데이터 전달시 많이 사용
+
+- jsp
+    - 스크립틀릿을 사용
+        - <% 자바 코드 %>       : 자바 코드를 기술
+        - <%=변수명 또는 값 %>  : 자바 값 출력
+    - EL(Express Language)
+        - ${스코프영역.속성명}
+            - 스코프영역 : 내장 객체의 생명주기와 같음
+                - configScope       : 현재 페이지가 실행하면 생성, 페이지가 끝나면 소멸
+                - requestScope      : 요청 발생시 생성, 응답 발생시 소멸
+                - sessionScope      : 웹브라우저가 처음 웹서버에 요청했을때 생성, 일정 시간이 흐르거나 웹브라우저 종료시 소멸
+                - applicationScope  : 서버(WSA) 실행시 생성, 서버(WSA) 종료시 소멸
 
 - MVC2 모델 
     - Web Browser - JSP - servlet(controller) - service - DAO - DB
@@ -127,9 +158,11 @@
     - META-INF, WEB-INF 폴더 내부는 클라이언트에서 URL로 직접 접근 불가능(서버는 가능)
 
 - forward / redirect 방식 (중요)
+    - URL 기준
+        - 현재 웹 브라우저의 URL 기준
     - forword (요청 1번)
         - 서버 내부에서 다른 파일을 요청하는 방식
-        - RequestDispatcher 변수명 = request.getRequestDispatcher("요청하는 파일의 경로명과 파일명");
+        - RequestDispatcher 변수명 = request.getRequestDispatcher("서버 내부 파일 파일의 경로명과 파일명");
         - 변수명.forward(request, reponse)
         - 요청하면서 날렸던 데이터를 그대로 다른곳으로 이동시켜서 사용시킬 때 사용
     - redirect (요청 2번)
