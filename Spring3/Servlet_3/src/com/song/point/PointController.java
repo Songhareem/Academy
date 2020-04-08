@@ -66,10 +66,28 @@ public class PointController extends HttpServlet {
 				break;
 	
 			case "/pointAdd":
-				System.out.println("pointAdd");
 				if(method.equals("POST")) {
 					
+					System.out.println("pointAdd Post");
+					
+					pointDTO.setName(request.getParameter("name"));
+					pointDTO.setNum(Integer.parseInt(request.getParameter("num")));
+					pointDTO.setKor(Integer.parseInt(request.getParameter("kor")));
+					pointDTO.setEng(Integer.parseInt(request.getParameter("eng")));
+					pointDTO.setMath(Integer.parseInt(request.getParameter("math")));
+					
+					int result = pointService.pointAdd(pointDTO);
+					responseMode = "redirect";
+					if(result > 0) {
+						System.out.println("pointAdd success");
+						url = "./pointList";
+					} else {
+						System.out.println("pointAdd fail");
+						url = "./pointAdd";
+					}
+					
 				} else {
+					System.out.println("pointAdd Get");
 					url = "../WEB-INF/views/point/pointAdd.jsp";
 				}
 				break;
