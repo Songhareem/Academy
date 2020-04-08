@@ -46,6 +46,8 @@
 		</div>
 		<p>This is some text.</p>
 		<p>This is another text.</p>
+		
+		<h2>Add point</h2>
 	</div>
 </body>
 </html>
