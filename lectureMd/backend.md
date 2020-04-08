@@ -148,6 +148,17 @@
                 - requestScope      : 요청 발생시 생성, 응답 발생시 소멸
                 - sessionScope      : 웹브라우저가 처음 웹서버에 요청했을때 생성, 일정 시간이 흐르거나 웹브라우저 종료시 소멸
                 - applicationScope  : 서버(WSA) 실행시 생성, 서버(WSA) 종료시 소멸
+    - JSTL (Java Server Pages Standard Tag Library)
+        - 라이브러리 다운 필요
+            - ref : https://mvnrepository.com/
+            - ref : https://mvnrepository.com/artifact/javax.servlet/jstl/1.2
+        - 받은 라이브러리 WEB-INF/lib/ 에 넣기(복붙)
+        - JSTL을 사용할 jsp 에 incluse
+            - <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        - 문법
+            - <c:forEach> : for문, step에 음수는 넣을수 없다
+                - <c:forEach begin="시작번호" end="끝번호" var="변수명" varStatus="변수명" step="증가값">
+                -  <c:forEach items="컬렉션명" var="변수명" varStatus="변수명">
 
 - MVC2 모델 
     - Web Browser - JSP - servlet(controller) - service - DAO - DB
