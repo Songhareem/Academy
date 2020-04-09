@@ -77,14 +77,19 @@ public class PointController extends HttpServlet {
 					pointDTO.setMath(Integer.parseInt(request.getParameter("math")));
 					
 					int result = pointService.pointAdd(pointDTO);
-					responseMode = "redirect";
+					String msg = "점수 등록 실패";
+					//responseMode="redirect";
 					if(result > 0) {
 						System.out.println("pointAdd success");
-						url = "./pointList";
-					} else {
-						System.out.println("pointAdd fail");
-						url = "./pointAdd";
-					}
+						//url = "./pointList";
+						msg = "점수 등록 성공";
+					} /*
+						 * else { System.out.println("pointAdd fail"); //url = "./pointAdd"; }
+						 */
+					
+					request.setAttribute("result", msg);
+					request.setAttribute("url", "./pointList");
+					url = "../WEB-INF/views/common/result.jsp";
 					
 				} else {
 					System.out.println("pointAdd Get");
@@ -95,8 +100,36 @@ public class PointController extends HttpServlet {
 			case "/pointMod":
 				System.out.println("pointMod");
 				if(method.equals("POST")) {
+					// 값을 재세팅 (NULL CHECK? => front에서 하는게 맞음)
+					pointDTO.setName(request.getParameter("name"));
+					pointDTO.setNum(Integer.parseInt(request.getParameter("num")));
+					pointDTO.setKor(Integer.parseInt(request.getParameter("kor")));
+					pointDTO.setEng(Integer.parseInt(request.getParameter("eng")));
+					pointDTO.setMath(Integer.parseInt(request.getParameter("math")));
+					
+					int result = pointService.pointMod(pointDTO);
+					/*
+					 * responseMode = "redirect"; if(result > 0) { url = "./pointList"; } else { url
+					 * = "./pointMod?num="+pointDTO.getNum(); }
+					 */
+					
+					String msg = "점수 수정 실패";
+					if(result > 0) {
+						msg = "점수 수정 성공";
+						request.setAttribute("url", "./pointSelect?num="+pointDTO.getNum());
+					} else {
+						request.setAttribute("url", "./pointList");
+					}
+					
+					request.setAttribute("result", msg);
+					url = "../WEB-INF/views/common/result.jsp";
 					
 				} else {
+					// 값을 읽어서 줘야함
+					pointDTO.setNum(Integer.parseInt(request.getParameter("num")));
+					pointDTO = pointService.pointSelect(pointDTO);
+					request.setAttribute("pdto", pointDTO);
+					
 					url = "../WEB-INF/views/point/pointMod.jsp";
 				}
 				break;
@@ -104,8 +137,7 @@ public class PointController extends HttpServlet {
 			case "/pointDel":
 				System.out.println("pointDel");
 				pointDTO.setNum(Integer.parseInt(request.getParameter("num")));
-				//int result = pointService.pointDel(pointDTO);
-				int result = 1;
+				int result = pointService.pointDel(pointDTO);
 				if(result > 0) {
 					System.out.println("pointDel success");
 					url = "./pointList";

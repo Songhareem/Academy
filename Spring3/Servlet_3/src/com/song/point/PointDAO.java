@@ -106,6 +106,33 @@ public class PointDAO {
 	}
 	
 	// 4. Update
+	public int pointMod(PointDTO pointDTO) throws Exception {
+		
+		Connection conn = DBConnect.getConnect();
+		
+		String sql = "UPDATE point SET "
+				+ "name=?, kor=?, eng=?, math=?, total=?, average=?"
+				+ "WHERE num=?";
+		
+		PreparedStatement pst = conn.prepareStatement(sql);
+		
+		pst.setString(1, pointDTO.getName());
+		pst.setInt(2, pointDTO.getKor());
+		pst.setInt(3, pointDTO.getEng());
+		pst.setInt(4, pointDTO.getMath());
+		pst.setInt(5, pointDTO.getTotal());
+		pst.setDouble(6, pointDTO.getAvg());
+		pst.setInt(7, pointDTO.getNum());
+		
+		System.out.println("save");
+		int result = pst.executeUpdate();
+		System.out.println("Mod save");
+		
+		pst.close();
+		conn.close();
+		
+		return result;
+	}
 	
 	// 5. Delete
 	public int pointDel(PointDTO pointDTO) throws Exception {

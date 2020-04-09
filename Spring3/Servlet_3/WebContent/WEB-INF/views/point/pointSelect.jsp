@@ -37,7 +37,8 @@
 				</tr>
 				
 			</table>
-			<a href="./pointDel?num=${pdto.num}" class="btn btn-info" >Delete</a>
+			<a href="./pointMod?num=${pdto.num}" class="btn btn-primary" >Update</a>
+			<a href="./pointDel?num=${pdto.num}" class="btn btn-danger" >Delete</a>
 			
 		</div>
 	</div>

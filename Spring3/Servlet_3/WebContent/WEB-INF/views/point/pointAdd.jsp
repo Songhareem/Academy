@@ -53,12 +53,12 @@
 		<form action="./pointAdd" method="post">
 			<h1>pointAdd</h1>
 			<div class="form-group">
-				<label for="name">이름 : </label> 
-				<input type="text" class="form-control" id="name" name="name">
-			</div>
-			<div class="form-group">
 				<label for="num">번호:</label> 
 				<input type="text" class="form-control" id="num" name="num">
+			</div>
+			<div class="form-group">
+				<label for="name">이름 : </label> 
+				<input type="text" class="form-control" id="name" name="name">
 			</div>
 			<div class="form-group">
 				<label for="kor">국어:</label> 
