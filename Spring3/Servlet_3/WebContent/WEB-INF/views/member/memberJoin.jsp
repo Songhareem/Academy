@@ -11,7 +11,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	
 	<!-- Navbar -->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -48,34 +47,38 @@
 		</div>
 		<p>This is some text.</p>
 		<p>This is another text.</p>
-
+		
+		
 		<!-- ${pageContext.request.contextPath} -->
-		<form action="./pointMod" method="post">
-			<h1>pointMod</h1>
+		<form action="./memberJoin" method="post">
+			<h2>memberJoin</h2>
 			<div class="form-group">
-				<label for="num">번호:</label> 
-				<input type="text" class="form-control" id="num" name="num" value="${pdto.num}" readonly>
+				<label for="id">ID:</label> 
+				<input type="text" class="form-control" id="id" name="id">
 			</div>
 			<div class="form-group">
-				<label for="name">이름 : </label> 
-				<input type="text" class="form-control" id="name" name="name" value="${pdto.name}">
+				<label for="pw">PW : </label> 
+				<input type="password" class="form-control" id="pw" name="pw">
 			</div>
 			<div class="form-group">
-				<label for="kor">국어:</label> 
-				<input type="text" class="form-control" id="kor" name="kor" value="${pdto.kor}">
+				<label for="name">Name:</label> 
+				<input type="text" class="form-control" id="name" name="name">
 			</div>
 			<div class="form-group">
-				<label for="eng">영어:</label> 
-				<input type="text" class="form-control" id="eng" name="eng" value="${pdto.eng}">
+				<label for="age">Age:</label> 
+				<input type="text" class="form-control" id="age" name="age">
 			</div>
 			<div class="form-group">
-				<label for="math">수학:</label> 
-				<input type="text" class="form-control" id="math" name="math" value="${pdto.math}">
+				<label for="email">Email:</label> 
+				<input type="email" class="form-control" id="email" name="email">
 			</div>
-
-			<button type="submit" class="btn btn-default">Submit</button>
+			<div class="form-group">
+				<label for="phone">Phone:</label> 
+				<input type="text" class="form-control" id="phone" name="phone">
+			</div>
+			
+			<button type="submit" class="btn btn-info">Join</button>
 		</form>
-
 	</div>
 	
 </body>

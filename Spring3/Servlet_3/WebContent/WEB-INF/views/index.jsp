@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,10 +31,18 @@
 				<li><a href="${pageContext.request.contextPath}/point/pointList">pointList</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+				<c:if test="${empty sessionScope.member}">
+				<li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
+				<li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span>
 						Login</a></li>
+				</c:if>
+				<c:if test="${not empty sessionScope.member}">
+				<li><a href="${pageContext.request.contextPath}/member/memberPage"><span class="glyphicon glyphicon-user"></span>
+						My Page</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span>
+						Logout</a></li>
+				</c:if>
 			</ul>
 		</div>
 	</nav>
@@ -48,8 +57,8 @@
 		<p>This is some text.</p>
 		<p>This is another text.</p>
 		
+		<h2>Index</h2>
 	</div>
 
-	<h2>Index</h2>
 </body>
 </html>

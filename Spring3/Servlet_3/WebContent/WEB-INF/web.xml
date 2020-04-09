@@ -23,5 +23,14 @@
 		<url-pattern>/point/*</url-pattern>
 	</servlet-mapping>
 	
-	<!--  -->
+	<!-- member servlet -->
+	<servlet>
+		<servlet-name>member</servlet-name>
+		<servlet-class>com.song.member.MemberController</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>member</servlet-name>
+		<url-pattern>/member/*</url-pattern>
+	</servlet-mapping>
 </web-app>

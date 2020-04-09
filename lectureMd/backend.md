@@ -123,12 +123,19 @@
 
 - 내장 객체?
     - 개발자가 만드는 객체가 아니라 WAS가 생성하는 객체
+    - 생명주기가 짧은 객체에서 보다 긴 객체를 반환 받을 수 있음(반대 불가)
     - Reqeust
         - 요청이 발생하면 생성, 응답이 나갈때 삭제
         - 요청에 대한 모든 정보를 담고있음
+        - HttpServletRequest request;
     - Response
         - 생명주기는 Request 와 동일
         - 응답으로 보낼 Data 담고 있다
+        - HttpServletResponse response;
+    - Session
+        - Server에 존재
+        - Web Browser별로 하나씩 생성
+        - HttpSession session;
 
 - Attribute
     - 내장객체의 어떤값을 저장하거나 꺼내올때 사용
@@ -144,10 +151,35 @@
     - EL(Express Language)
         - ${스코프영역.속성명}
             - 스코프영역 : 내장 객체의 생명주기와 같음
-                - configScope       : 현재 페이지가 실행하면 생성, 페이지가 끝나면 소멸
-                - requestScope      : 요청 발생시 생성, 응답 발생시 소멸
-                - sessionScope      : 웹브라우저가 처음 웹서버에 요청했을때 생성, 일정 시간이 흐르거나 웹브라우저 종료시 소멸
-                - applicationScope  : 서버(WSA) 실행시 생성, 서버(WSA) 종료시 소멸
+                - pageScope : 현재 페이지가 실행하면 생성, 페이지가 끝나면 소멸
+                - requestScope : 요청 발생시 생성, 응답 발생시 소멸
+                - sessionScope : 웹브라우저가 처음 웹서버에 요청했을때 생성, 일정 시간이 흐르거나 웹브라우저 종료시 소멸
+                - applicationScope : 서버(WSA) 실행시 생성, 서버(WSA) 종료시 소멸
+    
+        - 연산자
+            - 산술 연산자
+                - +, -, *, /, %
+                - ${가져온 값 div 2}
+                - ${가져온 값 mod 3}
+            - 비교 연산자
+                - ==, !=, >, <, >=, <= 
+                - == : ${가져온 값 eq 비교값}
+                - != : ${가져온 값 ne 비교값}
+                - >  : ${가져온 값 gt 비교값}
+                - <  : ${가져온 값 lt 비교값}
+                - >= : ${가져온 값 ge 비교값}
+                - <= : ${가져온 값 le 비교값}
+            - 논리 연산자
+                - &&, ||, !
+                - && : ${논리값1 AND 논리값2}
+                - !  : ${not 논리값1}
+            - empty
+                - 값이 null, 값이 빈문자열"", 길이가 0인 배열, 컬렉션 크기가 0?
+                - ${empty 값}
+                - ${not empty 값}
+            - 삼항연산자
+                - ${조건식?a:b}
+                
     - JSTL (Java Server Pages Standard Tag Library)
         - 라이브러리 다운 필요
             - ref : https://mvnrepository.com/
