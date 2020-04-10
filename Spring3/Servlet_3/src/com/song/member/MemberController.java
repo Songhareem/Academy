@@ -58,8 +58,7 @@ public class MemberController extends HttpServlet {
 					memberDTO.setEmail(request.getParameter("email"));
 					memberDTO.setPhone(request.getParameter("phone"));
 					
-					//int result = memberService.memberJoin(memberDTO);
-					int result = 0;
+					int result = memberService.memberJoin(memberDTO);
 					if(result > 0) {
 						msg = "회원가입 성공";
 						request.setAttribute("url", "../");
