@@ -27,9 +27,7 @@ public class MemberController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		System.out.println("come in");
-		
+			
 		// 한글 깨짐 방지 -> 클래스화 시키자 util에
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -81,11 +79,16 @@ public class MemberController extends HttpServlet {
 			case "/memberLogin":
 				System.out.println("memberLogin");
 				if(method.equals("POST")) {
+					System.out.println("save");
+					System.out.println(request.getParameter("id"));
+					System.out.println(request.getParameter("pw"));
 					memberDTO.setId(request.getParameter("id"));
 					memberDTO.setPw(request.getParameter("pw"));
+					System.out.println("save done");
 					
 					memberDTO = memberService.memberLogin(memberDTO);
 					if(memberDTO != null) {
+						System.out.println("로그인 성공");
 						HttpSession session = request.getSession();
 						session.setAttribute("member", memberDTO);
 						responseMode = "redirect";
@@ -102,6 +105,28 @@ public class MemberController extends HttpServlet {
 				
 			case "/memberUpdate":
 				System.out.println("memberUpdate");
+				if(method.equals("POST")) {
+					memberDTO.setId(request.getParameter("id"));
+					memberDTO.setPw(request.getParameter("pw"));
+					memberDTO.setName(request.getParameter("name"));
+					memberDTO.setAge(Integer.parseInt(request.getParameter("age")));
+					memberDTO.setEmail(request.getParameter("email"));
+					memberDTO.setPhone(request.getParameter("phone"));
+					
+					int result = memberService.memberUpdate(memberDTO);
+					if(result > 0) {
+						// redirect mypage
+						responseMode = "redirect";
+						session = request.getSession();
+						session.setAttribute("member", memberDTO);
+						url = "./memberPage";
+						System.out.println("Update Success");
+					} else {
+						System.out.println("Update Fail");
+					}
+				} else {
+					url = "../WEB-INF/views/member/memberUpdate.jsp";
+				}
 				break;
 			
 			case "/memberPage":
@@ -119,6 +144,7 @@ public class MemberController extends HttpServlet {
 				msg = "회원 탈퇴 실패";
 				if(result > 0) {
 					msg = "회원 탈퇴 성공";
+					session.invalidate();
 				}
 				request.setAttribute("result", msg);
 				request.setAttribute("url", "../");

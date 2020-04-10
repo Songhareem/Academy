@@ -6,13 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-
+	<c:import url="../template/header.jsp"></c:import>
+	
 	<div class="container">
 		<div class="row">
 			<h1>memberPage</h1>
@@ -33,10 +31,31 @@
 				</tr>
 				
 			</table>
+			
+			<!--
 			<a href="./memberUpdate" class="btn btn-primary" >Update</a>
 			<a href="./memberDelete" class="btn btn-danger" >Delete</a>
+			 -->
+			 
+			 <button id="update" class="btn btn-primary">Update</button>
+			 <button id="delete" class="btn btn-danger">Delete</button>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		// js 복습
+		var del = document.getElementById("delete");
+		del.addEventListener("click", function() {
+			var result = confirm("정말 삭제 하시겠습니까?");
+			if(result)
+				location.href="./memberDelete";
+		});
+		
+		// jQurey 복습
+		$("#update").click(function() {
+			location.href="./memberUpdate";
+		});
+	</script>
 	
 </body>
 </html>

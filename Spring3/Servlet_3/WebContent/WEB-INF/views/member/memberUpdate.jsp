@@ -21,36 +21,35 @@
 		<p>This is some text.</p>
 		<p>This is another text.</p>
 		
-		
 		<!-- ${pageContext.request.contextPath} -->
-		<form action="./memberJoin" method="post">
-			<h2>memberJoin</h2>
+		<form action="./memberUpdate" method="post">
+			<h2>memberUpdate</h2>
 			<div class="form-group">
 				<label for="id">ID:</label> 
-				<input type="text" class="form-control" id="id" name="id">
+				<input type="text" class="form-control" id="id" name="id" value="${sessionScope.member.id}" readonly>
 			</div>
 			<div class="form-group">
 				<label for="pw">PW : </label> 
-				<input type="password" class="form-control" id="pw" name="pw">
+				<input type="password" class="form-control" id="pw" value="${sessionScope.member.pw}" name="pw">
 			</div>
 			<div class="form-group">
 				<label for="name">Name:</label> 
-				<input type="text" class="form-control" id="name" name="name">
+				<input type="text" class="form-control" id="name" value="${sessionScope.member.name}" name="name">
 			</div>
 			<div class="form-group">
 				<label for="age">Age:</label> 
-				<input type="text" class="form-control" id="age" name="age">
+				<input type="text" class="form-control" id="age" value="${sessionScope.member.age}" name="age">
 			</div>
 			<div class="form-group">
 				<label for="email">Email:</label> 
-				<input type="email" class="form-control" id="email" name="email">
+				<input type="email" class="form-control" id="email" value="${sessionScope.member.email}" name="email">
 			</div>
 			<div class="form-group">
 				<label for="phone">Phone:</label> 
-				<input type="text" class="form-control" id="phone" name="phone">
+				<input type="text" class="form-control" id="phone" value="${sessionScope.member.phone}" name="phone">
 			</div>
 			
-			<button type="submit" class="btn btn-info">Join</button>
+			<button type="submit" class="btn btn-info">Update</button>
 		</form>
 	</div>
 	

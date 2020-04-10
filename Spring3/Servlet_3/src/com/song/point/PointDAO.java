@@ -21,7 +21,7 @@ public class PointDAO {
 		ResultSet rs = pst.executeQuery();
 
 		ArrayList<PointDTO> pdtoList = new ArrayList<PointDTO>();
-		while(rs.next() == true) {
+		while(rs.next()) {
 			PointDTO pointDTO = new PointDTO();
 			
 			pointDTO.setName(rs.getString("name"));
@@ -124,9 +124,7 @@ public class PointDAO {
 		pst.setDouble(6, pointDTO.getAvg());
 		pst.setInt(7, pointDTO.getNum());
 		
-		System.out.println("save");
 		int result = pst.executeUpdate();
-		System.out.println("Mod save");
 		
 		pst.close();
 		conn.close();

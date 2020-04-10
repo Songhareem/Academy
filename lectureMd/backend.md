@@ -43,11 +43,12 @@
 - Response(응답)
     - Server에서 Client로 보내는 데이터 (HTML,JS,CSS,images)
 
-- Client to Server 방법
-    - Web brower에 URL 직접입력
-    - HTML a 태그 (개발자가 미리 작성)
-    - JS 의 location.href 사용 (개발자가 미리 작성)
-    - form태그 (개발자가 미리 작성, 데이터 작성은 client)
+- Client to Server (Request) 방법
+    - (GET)Web brower에 URL 직접입력
+    - (GET)HTML a 태그 < a href="URL{?이름=값&이름=값&...}">
+    - (GET)JS 의 location.href : location.href="URL{?이름=값&이름=값&...}";
+    - (GET)form 태그 < form action="URL주소" method="GET">
+    - (POST)form 태그 < orm action="URL주소" method="POST">
 
 - Parameter?
     - Client에서 Server로 보내는 Data
@@ -155,7 +156,9 @@
                 - requestScope : 요청 발생시 생성, 응답 발생시 소멸
                 - sessionScope : 웹브라우저가 처음 웹서버에 요청했을때 생성, 일정 시간이 흐르거나 웹브라우저 종료시 소멸
                 - applicationScope : 서버(WSA) 실행시 생성, 서버(WSA) 종료시 소멸
-    
+                - scope는 생략가능
+                    - page -> req -> session -> application으로 속성명 탐색
+                    - 서로 다른 scope에 같은 속성명이 있을 경우 처음 찾은거 사용
         - 연산자
             - 산술 연산자
                 - +, -, *, /, %
