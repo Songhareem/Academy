@@ -30,6 +30,7 @@ public class EncodingFilter implements Filter {
 		request.setCharacterEncoding(enc);
 		System.out.println("Encoding Filter In");
 		
+		
 		// 다음 필터가 있다면 필터로 전달, 없다면 Servlet으로 전달
 		chain.doFilter(request, response);
 		
