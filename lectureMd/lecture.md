@@ -81,4 +81,16 @@
         - casting을 따로 해줄 필요 없음
     - 명시적 변환
         - 큰 변수값을 작은 변수값에 넣을때 발생(float -> int 등)
-        - casting 따로 필요, ex) int i = (int)5.5f; 
+        - casting 따로 필요, ex) int i = (int)5.5f;
+
+# Project import 후 Err 해결?
+
+- project
+    - fire -> import -> General -> Existing Project ... -> Browser -> 플로젝트 폴더 선택
+    - import할 프로젝트 선택
+
+- Err 구간
+    - JDK 에러(자바 코드 내에서 빨간 밑줄 가면 보통 JDK 에러)
+        - 해결 : 프로젝트 우클릭 -> properties -> Java Build Path -> Libraries탭 -> JDK선택 -> Edit -> Alternate JRE 세팅 또는 Workspace default JRE 세팅
+    - 서버 에러
+        - 해결 : 프로젝트 우클릭 -> properties -> targeted runtimes -> 내가 프로젝트에 사용했던 서버로 변경
