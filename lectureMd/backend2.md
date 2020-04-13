@@ -38,7 +38,7 @@
 # Spring Framework
 
 - 특징
-    - POJO
+    - POJO(Plain Old Java Object) : 상속없는 순수한 자바 클래스
     - IOC
     - DI (Dependency Injection)
         - 다른 클래스가 필요한 클래스에서 해당 클래스를 받는것(생성하는 것)
@@ -53,7 +53,6 @@
     - 높은 확장성
 
 - 디자인 패턴 + API 관리
-- Container : 객체의 생명주기 관리자
 
 - 개발환경
     - perspective를 제외하고 Servlet과 환경 동일
@@ -70,3 +69,48 @@
     - 프로젝트 우클릭 -> maven -> update project : recompile 또는 API 재 다운
     - C:\users\user명\.m2\repository\하위 폴더 전부 삭제 후 STS 시작 : 모든 API 삭제
     - 다른 사람의 오류가 없는 repository 복사 후 .m2 폴더에 붙여넣기
+
+
+# Spring
+
+- 용어 정리
+    - bean : container에서 생성 및 관리 하는 객체
+    - container : 객체 생명주기 관리
+
+
+- DispatcherServlet Class
+    - 모든 요청은 DispatchServlet으로 전달
+    - DispatchServlet 에서 HandlerMapping에 URL 전달
+    - HandlerMapping은 DispatcherServlet에 다시 전달
+    - Dispatcher는 Controller로 request 전달
+    - Controller를 통해 받은 값으로 DispatcherServlet은 InterView에 값 전달
+    - InterView는 값을 통해 어떤 .jsp파일로 가야할지 반환
+    - DispatcherServlet은 .jsp 파일을 찾아감 
+
+    - DispatcherServlet 설정 파일
+        - /WEB-INF/spring/appServlet/servlet-context.xml
+            - DispatcherServlet, Controller 설정
+            - ```
+              <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		        <beans:property name="prefix" value="/WEB-INF/views/" />
+		        <beans:property name="suffix" value=".jsp" />
+	          </beans:bean>
+              ```
+            - prefix + 경로명 + suffix
+            - /WEB-INF/ 하위의 폴더를 수정한다면 prefix 경로도 수정
+
+        - /WEB-INF/spring/root-context.xml 
+            - App 전체 설정
+
+- Controller 작성법
+    - POJO로 작성
+        - 일반 클래스 작성(컨트롤러)
+        - @Controller 선언
+        - @RequestMapping(value="요청url 공통 경로")
+        - public String 메서드명 작성(컨트롤러 내부)
+        - @RequestMapping(value="요청url" method = RequestMethod.GET|POST)
+    
+    - 메서드 return
+        - String    : Client에서 보내고자 하는 .jsp의 url
+        - void      : value와 url가 같을 때, void로 해도 상관 없음
+        
