@@ -84,9 +84,12 @@
 		<url-pattern>/point/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- 다중 mapping 가능 -->
+	<!-- 
 	<filter-mapping>
 		<filter-name>admin</filter-name>
 		<url-pattern>/notice/noticeAdd</url-pattern>
 	</filter-mapping>
-	
+	 -->
+	 
 </web-app>

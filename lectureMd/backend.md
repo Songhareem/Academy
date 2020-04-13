@@ -67,6 +67,14 @@
 		    	System.out.println(names.nextElement());
 		  }
           ```
+    - 서버 내에서 사용하는 파라미터
+        - web.xml에 파라미터를 등록해서 사용
+            - ServletConfig
+                - 각각의 Servlet에서 사용하는 파라미터
+                - getServletConfig().getInitParameter("");
+            - ServletContext
+                - 전체의 Servlet에서 사용하는 파라미터
+                - getServletContext().getInitParameter("");-
 
 - Method
     - 요청 메서드 
@@ -137,6 +145,12 @@
         - Server에 존재
         - Web Browser별로 하나씩 생성
         - HttpSession session;
+    - Config
+        - Servlet(jsp)의 자체 정보를 가지는 객체
+        - servlet : getServletConfig();
+    - Application
+        - web application의 공통 정보를 가지는 객체
+        - servlet : getServletContext();
 
 - Attribute
     - 내장객체의 어떤값을 저장하거나 꺼내올때 사용
