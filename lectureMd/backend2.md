@@ -113,4 +113,10 @@
     - 메서드 return
         - String    : Client에서 보내고자 하는 .jsp의 url
         - void      : value와 url가 같을 때, void로 해도 상관 없음
-        
+
+- front에 필요한 것들
+    - css/js/image 등은 resources 폴더 내에 넣어야한다
+    - 혹은 servlet-context.xml 에서 resources 맵핑을 추가로 해야한다
+    - ```
+      <resources mapping="/resources/**" location="/resources/" />
+      ```
