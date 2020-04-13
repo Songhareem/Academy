@@ -42,4 +42,10 @@
 - form에서 데이터 넘어가는지 확인?
     - 개발자툴 Network 하단 Form Data 살펴보기
 
-- 
+# Filter   
+
+- 일종의 Java Class
+- 요청이 발생하면 Filter -> Controller(Servlet)
+- 응답시 Filter -> Client
+- 요청시 필터의 순서는 web.xml 위에서 아래로
+- 응답시 필터의 순서는 web.xml 아래에서 위로
