@@ -4,5 +4,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+
+	<!-- memberDAO memberDAO = new memberDAO() -->
+	<bean class="com.song.spring_legacy.member.MemberDAO" id="memberDAO"></bean>
+	
+	<!-- MemberService memberService = new MemberService() -->
+	<bean class="com.song.spring_legacy.member.MemberService" id="memberService">
+		<constructor-arg name="memberDAO" ref="memberDAO"></constructor-arg>	
+	</bean>
+	
+	
+	
 </beans>
