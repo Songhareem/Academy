@@ -1,12 +1,10 @@
-package com.song.Spring_legacy2.notice;
+package com.song.Spring_legacy2.qna;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,33 +13,33 @@ import org.springframework.web.servlet.ModelAndView;
 import com.song.Spring_legacy2.board.BoardVO;
 
 @Controller
-@RequestMapping(value = "/notice/**")
-public class NoticeController {
+@RequestMapping(value = "/qna/**")
+public class QnaController {
 
 	@Autowired
-	private NoticeService noticeService;
+	private QnaService qnaService;
 	
 	private int perPage = 10;
 	
 	// 모든 요청에 다 추가
 	@ModelAttribute("board")
 	public String getBoard() throws Exception {
-		return "notice";
+		return "qna";
 	}
 	
-	@RequestMapping(value = "noticeList")
+	@RequestMapping(value = "qnaList")
 	public ModelAndView getBoardList(@RequestParam(defaultValue = "1") int curPage, ModelAndView mv) throws Exception {
 		
-		List<BoardVO> ndtoList = noticeService.boardList(curPage, perPage);
+		List<BoardVO> ndtoList = qnaService.boardList(curPage, perPage);
 		mv.addObject("list", ndtoList);
 		mv.setViewName("board/boardList");
 		return mv;
 	}
 	
-	@RequestMapping(value = "noticeSelect")
+	@RequestMapping(value = "qnaSelect")
 	public ModelAndView getBoardSelect(long num) throws Exception {
 		
-		BoardVO boardVO = noticeService.boardSelect(num);
+		BoardVO boardVO = qnaService.boardSelect(num);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("vo", boardVO);
 		mv.setViewName("board/boardSelect");
@@ -49,7 +47,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "noticeWrite")
+	@RequestMapping(value = "qnaWrite")
 	public ModelAndView getBoardWrite() throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
@@ -58,17 +56,18 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView postBoardWrite(NoticeVO noticeVO, ModelAndView mv) throws Exception {
+	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
+	public ModelAndView postBoardWrite(QnaVO qnaVO, ModelAndView mv) throws Exception {
 		
 		String view = "common/result";
-		noticeVO.setWriter("admin");
-		int result = noticeService.boardWrite(noticeVO);
+		qnaVO.setWriter("admin");
+		int result = qnaService.boardWrite(qnaVO);		
 		if(result > 0) {
+			System.out.println("글쓰기 성공");
 			mv.addObject("result", "글쓰기 성공");
-			mv.addObject("url", "./noticeList");	
+			mv.addObject("url", "./qnaList");	
 		} else {
-			view = "redirect: ./noticeWrite";
+			view = "redirect: ./qnaWrite";
 		}		
 		
 		mv.setViewName(view);
@@ -76,39 +75,39 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "noticeUpdate")
-	public ModelAndView getBoardUpdate(NoticeVO noticeVO, ModelAndView mv) throws Exception {
+	@RequestMapping(value = "qnaUpdate")
+	public ModelAndView getBoardUpdate(QnaVO qnaVO, ModelAndView mv) throws Exception {
 		
-		mv.addObject("vo",noticeVO);
+		mv.addObject("vo",qnaVO);
 		mv.setViewName("board/boardUpdate");
 		return mv;
 	}
 	
-	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public ModelAndView postBoardUpdate(NoticeVO noticeVO, ModelAndView mv) throws Exception {
+	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
+	public ModelAndView postBoardUpdate(QnaVO qnaVO, ModelAndView mv) throws Exception {
 		
-		int result = noticeService.boardUpdate(noticeVO);
+		int result = qnaService.boardUpdate(qnaVO);
 		if(result > 0) {
-			mv.setViewName("redirect: ./noticeSelect?num="+noticeVO.getNum());
+			mv.setViewName("redirect: ./qnaSelect?num="+qnaVO.getNum());
 		} else {
 			mv.addObject("result", "공지 수정 실패");
-			mv.addObject("url", "./noticeSelect?num="+noticeVO.getNum());
+			mv.addObject("url", "./qnaSelect?num="+qnaVO.getNum());
 			mv.setViewName("common/result");
 		}
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "noticeDelete")
+	@RequestMapping(value = "qnaDelete")
 	public ModelAndView getBoardDelete(long num, ModelAndView mv) throws Exception {
 		
 		String view = "common/result";
-		int result = noticeService.boardDelete(num);
+		int result = qnaService.boardDelete(num);
 		if(result > 0) {
-			view = "redirect: ./noticeList";
+			view = "redirect: ./qnaList";
 		} else {
 			mv.addObject("result", "삭제 실패");
-			mv.addObject("url", "./noticeSelect?num="+num);
+			mv.addObject("url", "./qnaSelect?num="+num);
 		}
 		
 		mv.setViewName(view);

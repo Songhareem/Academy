@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.song.Spring_legacy2.qna.QnaDAO">
+	
+	<select id="boardCount" resultType="java.lang.Long">
+		SELECT COUNT(num) FROM qna
+	</select>
+	
+	<select id="boardList" parameterType="java.util.Map" resultType="com.song.Spring_legacy2.qna.QnaVO">
+		SELECT * FROM
+		(SELECT N.*, rownum R FROM
+		(SELECT * FROM qna WHERE num >= 1 ORDER BY num DESC) N)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.song.Spring_legacy2.qna.QnaVO">
+		SELECT * FROM qna WHERE num=#{num}
+	</select>
+	
+	<insert id="boardWrite" parameterType="com.song.Spring_legacy2.qna.QnaVO">
+		INSERT INTO qna VALUES(board_seq.nextval,#{title},#{writer},#{contents},sysdate,0,0,0,0)
+	</insert>
+	
+	<insert id="boardUpdate" parameterType="com.song.Spring_legacy2.qna.QnaVO">
+		UPDATE qna SET title=#{title}, writer=#{writer}, contents=#{contents}, regdate=sysdate WHERE num = #{num}
+	</insert>
+	
+	<insert id="hitUpdate" parameterType="com.song.Spring_legacy2.qna.QnaVO">
+		UPDATE qna SET hit = 1+(SELECT hit FROM qna WHERE num = #{num}) WHERE num = #{num}
+	</insert>
+	
+	<insert id="boardDelete" parameterType="java.lang.Long">
+		DELETE FROM qna WHERE num=#{num}
+	</insert>
+</mapper>

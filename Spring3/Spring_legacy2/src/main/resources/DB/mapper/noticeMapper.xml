@@ -6,7 +6,7 @@
 <mapper namespace="com.song.Spring_legacy2.notice.NoticeDAO">
 	
 	<select id="boardCount" resultType="java.lang.Long">
-		SELECT COUNT(num) FROM notice;
+		SELECT COUNT(num) FROM notice
 	</select>
 	
 	<select id="boardList" parameterType="java.util.Map" resultType="com.song.Spring_legacy2.notice.NoticeVO">

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.song.Spring_legacy2.member.MemberDAO">
+	
+	<select id="memberLogin" parameterType="com.song.Spring_legacy2.member.MemberVO" resultType="com.song.Spring_legacy2.member.MemberVO">
+		SELECT * FROM member WHERE id=#{id} AND pw=#{pw}
+	</select>
+	
+	<insert id="memberJoin" parameterType="com.song.Spring_legacy2.member.MemberVO">
+		INSERT INTO member VALUES(#{id},#{pw},#{name},#{age},#{email},#{phone})
+	</insert>
+	
+	<insert id="memberUpdate" parameterType="com.song.Spring_legacy2.member.MemberVO">
+		UPDATE member SET pw=#{pw}, name=#{name}, age=#{age}, email=#{email}, phone=#{phone} WHERE id=#{id}
+	</insert>
+	
+	<insert id="memberDelete" parameterType="com.song.Spring_legacy2.member.MemberVO">
+		DELETE FROM member WHERE id = #{id}
+	</insert>
+</mapper>
