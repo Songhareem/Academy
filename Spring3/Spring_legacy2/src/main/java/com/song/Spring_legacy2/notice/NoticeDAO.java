@@ -1,6 +1,7 @@
 package com.song.Spring_legacy2.notice;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,21 @@ public class NoticeDAO implements BoardDAO{
 	}
 
 	@Override
-	public List<BoardVO> boardList() throws Exception {
-			
-		return null;
+	public long boardCount() throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"boardCount");
+	}
+	
+	@Override
+	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE+"boardList", map);
 	}
 
 	@Override
-	public BoardVO boardSelect(BoardVO boardVO) throws Exception {
+	public BoardVO boardSelect(long num) throws Exception {
 		
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"boardSelect", num);
 	}
 
 	@Override
@@ -51,4 +58,6 @@ public class NoticeDAO implements BoardDAO{
 		
 		return sqlSession.delete(NAMESPACE+"boardDelete", num);
 	}
+
+	
 }

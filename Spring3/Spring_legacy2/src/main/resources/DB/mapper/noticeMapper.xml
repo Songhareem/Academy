@@ -5,6 +5,21 @@
   
 <mapper namespace="com.song.Spring_legacy2.notice.NoticeDAO">
 	
+	<select id="boardCount" resultType="java.lang.Long">
+		SELECT COUNT(num) FROM notice;
+	</select>
+	
+	<select id="boardList" parameterType="java.util.Map" resultType="com.song.Spring_legacy2.notice.NoticeVO">
+		SELECT * FROM
+		(SELECT N.*, rownum R FROM
+		(SELECT * FROM notice WHERE num >= 1 ORDER BY num DESC) N)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.song.Spring_legacy2.notice.NoticeVO">
+		SELECT * FROM notice WHERE num=#{num}
+	</select>
+	
 	<insert id="boardWrite" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
 		INSERT INTO notice VALUES(board_seq.nextval,#{title},#{writer},#{contents},sysdate,0)
 	</insert>

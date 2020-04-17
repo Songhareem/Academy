@@ -186,12 +186,12 @@
         - @Inject   : 객체 주입, Java 제공
             - 객체주입 우선순위
                 - Type 검색
-                - - 사용
+                - 이름 검색
+            - 사용
                 - setter
                 - 일반메서드
                 - 생성자
                 - 멤버변수
-                - 이름 검색
         - @Resource : 객체주입, 실행시 타입이 안맞으면 에러
             - 객체주입 우선순위
                 - 이름 검색
@@ -210,7 +210,7 @@
 # test용 Junit
 
 - API 등록
-    - junit(4.7->4.12)로, spring testContext...(spring framework의 버전과 같은 버전) pom.xml에 등록
+    - junit 버전 4.7->4.12이상으로 교체, spring testContext...(spring framework의 버전과 같은 버전) pom.xml에 등록
 
 - src/test/java
     - new -> junit test case 생성
@@ -221,3 +221,86 @@
           ```
     - test 메서드 추가
         - 메서드 선언부에 @Test 추가
+        - assert 단정문을 통해 테스트
+
+# root-context.xml
+
+- API 등록
+    - Connection pool
+        - ```
+            <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+                <property name="username" value="user02"/>
+                <property name="password" value="user02"/>
+                <property name="url" value="jdbc:oracle:thin:@192.168.56.101:1521:xe"></property>
+                <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+            </bean>
+          ```
+    - SqlSessionFactoryBean
+        - ```
+            <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+                <property name="dataSource" ref="dataSource"/>
+                <property name="mapperLocations" value="classpath:DB/mapper/*Mapper.xml"/>
+            </bean>
+          ```
+    - SqlSession
+        - ```
+            <bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+                <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+            </bean>
+          ```
+
+# Mapper file
+
+- src/main/resources/** 에 생성
+    - **에 생성할 폴더와 파일명은 개발자 임의로 지정, 단 SqlSessionFactoryBean에 있는 패턴대로 만들어야 함
+    - 생성된 xml 파일에 스키마 생성
+        - ```
+            // 예시
+            <?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE mapper
+            PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+            
+            <mapper namespace="com.song.Spring_legacy2.notice.NoticeDAO">
+                <select id="boardList" resultType="com.song.Spring_legacy2.notice.NoticeVO">
+                    SELECT * FROM notice ORDER BY num DESC
+                </select>
+                
+                <select id="boardSelect" parameterType="java.lang.Long" resultType="com.song.Spring_legacy2.notice.NoticeVO">
+                    SELECT * FROM notice WHERE num=#{num}
+                </select>
+
+                <insert id="boardWrite" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
+                    INSERT INTO notice VALUES(board_seq.nextval,#{title},#{writer},#{contents},sysdate,0)
+                </insert>
+                
+                <insert id="boardUpdate" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
+                    UPDATE notice SET title=#{title}, writer=#{writer}, contents=#{contents}, regdate=sysdate WHERE num = #{num}
+                </insert>
+                
+                <insert id="hitUpdate" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
+                    UPDATE notice SET hit = 1+(SELECT hit FROM notice WHERE num = #{num}) WHERE num = #{num}
+                </insert>
+                
+                <insert id="boardDelete" parameterType="java.lang.Long">
+                    DELETE FROM notice WHERE num=#{num}
+                </insert>
+            </mapper>
+          ```
+        - id 는 DAO의 메서드명으로(필수는 아님)
+        - parameterType은 Type의 풀패키지(Long 같은 경우, java.lang.Long)
+        - 매개변수는 getter에서 get을 땐 것을 #{}로 감싼것
+        - DAO 클래스 내에 SqlSession 타입의 멤버변수 선언 
+-           - @Autowired
+            - String NAMESPACE="Maapper XML namespacr 값과 동일한 ";
+        - SqlSessoin
+        - sqlSesssion.Insert(NAMESPACE명, id명)
+        - sqlSesssion.Insert(NAMESPACE명, parameter)
+
+        - Select의 결과
+            - 결과가 한개 일때 (결과가 여러개 나오면 ERR!!)
+                - sqlSession.selectOne(NAMESPACE명, id명)
+                - sqlSession.selectOne(NAMESPACE명, parameter)
+            - 결과가 여러개 일때
+                - sqlSession.selectList(NAMESPACE명, id명)
+                - sqlSession.selectList(NAMESPACE명, parameter) 
