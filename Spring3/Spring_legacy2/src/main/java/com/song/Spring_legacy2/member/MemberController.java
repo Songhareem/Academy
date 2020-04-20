@@ -1,5 +1,7 @@
 package com.song.Spring_legacy2.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.song.Spring_legacy2.member.memberPage.MemberPager;
+
 @Controller
 @RequestMapping(value = "/member/**")
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@RequestMapping(value = "memberList")
+	public ModelAndView getMemberList(MemberPager pager, ModelAndView mv) throws Exception {
+		
+		List<MemberVO> mvoList = memberService.memberList(pager);
+		mv.addObject("list", mvoList);
+		mv.addObject("pager", pager);
+		mv.setViewName("member/memberList");
+		
+		return mv;
+	}
 	
 	// memberJoin
 	@RequestMapping(value = "memberJoin")

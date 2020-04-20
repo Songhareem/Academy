@@ -3,6 +3,8 @@ package com.song.Spring_legacy2.board;
 import java.util.List;
 import java.util.Map;
 
+import com.song.Spring_legacy2.board.page.Pager;
+
 public interface BoardDAO {
 
 	// 멤버 상수
@@ -13,8 +15,8 @@ public interface BoardDAO {
 	public int boardWrite(BoardVO boardVO) throws Exception;
 	
 	// select All / One
-	public long boardCount() throws Exception;
-	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception;
+	public long boardCount(Pager pager) throws Exception;
+	public List<BoardVO> boardList(Pager pager) throws Exception;
 	public BoardVO boardSelect(long num) throws Exception;
 	// update
 	public int boardUpdate(BoardVO boardVO) throws Exception;

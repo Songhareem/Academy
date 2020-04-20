@@ -9,7 +9,7 @@
 		SELECT COUNT(num) FROM qna
 	</select>
 	
-	<select id="boardList" parameterType="java.util.Map" resultType="com.song.Spring_legacy2.qna.QnaVO">
+	<select id="boardList" parameterType="com.song.Spring_legacy2.board.page.Pager" resultType="com.song.Spring_legacy2.qna.QnaVO">
 		SELECT * FROM
 		(SELECT N.*, rownum R FROM
 		(SELECT * FROM qna WHERE num >= 1 ORDER BY num DESC) N)

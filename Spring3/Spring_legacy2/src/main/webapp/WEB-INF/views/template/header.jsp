@@ -12,6 +12,7 @@
 			<li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
 			<li><a href="${pageContext.request.contextPath}/notice/noticeList">noticeList</a></li>
 			<li><a href="${pageContext.request.contextPath}/qna/qnaList">qnaList</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/memberList">memberList</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<c:if test="${empty sessionScope.member}">

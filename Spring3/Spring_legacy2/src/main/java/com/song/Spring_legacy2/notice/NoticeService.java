@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.song.Spring_legacy2.board.BoardService;
 import com.song.Spring_legacy2.board.BoardVO;
+import com.song.Spring_legacy2.board.page.Pager;
 
 @Service
 public class NoticeService implements BoardService {
@@ -23,25 +24,19 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public long boardCount() throws Exception {
+	public long boardCount(Pager pager) throws Exception {
 		
-		return noticeDAO.boardCount();
+		return noticeDAO.boardCount(pager);
 	}
 	
 	@Override
-	public List<BoardVO> boardList(int curPage, int perPage) throws Exception {
+	public List<BoardVO> boardList(Pager pager) throws Exception {
 		
-		int startRow = (curPage-1)*perPage+1;
-		int lastRow = curPage*perPage;
-		long totalCount = noticeDAO.boardCount();
-		long totalPage = totalCount/perPage;
-		if(totalCount%perPage != 0) {
-			totalPage++;
-		}
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("startRow", startRow);
-		map.put("lastRow", lastRow);
-		return noticeDAO.boardList(map);
+		pager.makeRow();
+		long totalCount = noticeDAO.boardCount(pager);
+		pager.makePage(totalCount);
+		
+		return noticeDAO.boardList(pager);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.song.Spring_legacy2.board.BoardVO;
+import com.song.Spring_legacy2.board.page.Pager;
 
 @Controller
 @RequestMapping(value = "/qna/**")
@@ -19,8 +20,6 @@ public class QnaController {
 	@Autowired
 	private QnaService qnaService;
 	
-	private int perPage = 10;
-	
 	// 모든 요청에 다 추가
 	@ModelAttribute("board")
 	public String getBoard() throws Exception {
@@ -28,10 +27,14 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "qnaList")
-	public ModelAndView getBoardList(@RequestParam(defaultValue = "1") int curPage, ModelAndView mv) throws Exception {
+	public ModelAndView getBoardList(Long curPage, ModelAndView mv) throws Exception {
 		
-		List<BoardVO> ndtoList = qnaService.boardList(curPage, perPage);
+		Pager pager = new Pager();
+		pager.setCurPage(curPage);
+		pager.setPerPage(10);
+		List<BoardVO> ndtoList = qnaService.boardList(pager);
 		mv.addObject("list", ndtoList);
+		mv.addObject("pager", 10);
 		mv.setViewName("board/boardList");
 		return mv;
 	}

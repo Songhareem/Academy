@@ -304,3 +304,37 @@
             - 결과가 여러개 일때
                 - sqlSession.selectList(NAMESPACE명, id명)
                 - sqlSession.selectList(NAMESPACE명, parameter) 
+
+# List page 처리
+
+- 파라미터
+    - 현재 페이지 번호
+    - 검색 종류
+    - 검색어
+
+- DB에서 일정한 수 만큼 조회
+    - ROWNUM 으로 조회
+    - startRow, lastRow
+    - 검색처리 (Like 이용)
+
+- 페이지 처리 계산
+    - 전체글의 수(검색 처리 포함)
+    - 전체글의 수로 전체 페이지 수를 구하기
+    - 전체 페이지 수로 전체 블럭 수를 구하기
+    - 현재 페이지 번호로 현재 블럭 번호 구하기
+    - 현재 블럭번호로 시작번호 및 끝번호 구하기
+    - 현재 블럭번호가 전체 블럭과 같으면 끝번호에 전체 페이지 수 넣기
+
+- 검색 처리
+
+# Status Code
+
+- 400번대 : front
+    - 403 Forbidden : 권한에 의한 요청 거절 
+    - 404 Not Found : 요청한 페이지를 찾을 수 없음 (해당 url controller가 있는지?, jsp가 존재하는지)
+    - 405 Method Not Allowd : 메소드 맵핑 에러
+
+- 500번대 : back
+          : Exception 발생
+
+- 기타 : 실행자체가 안될때는 각종 xml 파일 확인

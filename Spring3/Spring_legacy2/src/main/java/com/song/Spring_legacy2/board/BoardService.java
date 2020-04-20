@@ -2,14 +2,16 @@ package com.song.Spring_legacy2.board;
 
 import java.util.List;
 
+import com.song.Spring_legacy2.board.page.Pager;
+
 public interface BoardService {
 	
 	// insert
 	public int boardWrite(BoardVO boardVO) throws Exception;
 
 	// select All / One
-	public long boardCount() throws Exception;
-	public List<BoardVO> boardList(int curPage, int perPage) throws Exception;
+	public long boardCount(Pager pager) throws Exception;
+	public List<BoardVO> boardList(Pager pager) throws Exception;
 	public BoardVO boardSelect(long num) throws Exception;
 
 	// update

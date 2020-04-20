@@ -5,6 +5,42 @@
   
 <mapper namespace="com.song.Spring_legacy2.member.MemberDAO">
 	
+	<sql id="search">
+		LIKE '%'||#{search}||'%'
+	</sql>
+	
+	<select id="memberCount" parameterType="com.song.Spring_legacy2.member.memberPage.MemberPager" resultType="java.lang.Long">
+		SELECT COUNT(rownum) FROM member
+		<where>
+			<if test="kind == 'id'">
+				id <include refid="search"></include>
+			</if>
+			<if test="kind == 'name'">
+				name <include refid="search"></include>
+			</if>
+			<if test="kind == 'email'">
+				email <include refid="search"></include>
+			</if>
+			<if test="kind == 'phone'">
+				phone <include refid="search"></include>
+			</if>
+		</where>
+	</select>
+	
+	<select id="memberList" parameterType="com.song.Spring_legacy2.member.memberPage.MemberPager" resultType="com.song.Spring_legacy2.member.MemberVO">
+		SELECT * FROM
+		(SELECT M.*, rownum R FROM
+		(SELECT * FROM member WHERE
+		<choose>
+			<when test="kind == 'name'">name</when>
+			<when test="kind == 'email'">email</when>
+			<when test="kind == 'phone'">phone</when>
+			<otherwise>id</otherwise>
+		</choose>
+		LIKE '%'||#{search}||'%') M)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
 	<select id="memberLogin" parameterType="com.song.Spring_legacy2.member.MemberVO" resultType="com.song.Spring_legacy2.member.MemberVO">
 		SELECT * FROM member WHERE id=#{id} AND pw=#{pw}
 	</select>

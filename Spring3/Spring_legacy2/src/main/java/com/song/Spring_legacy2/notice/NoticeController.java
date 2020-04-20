@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.song.Spring_legacy2.board.BoardVO;
+import com.song.Spring_legacy2.board.page.Pager;
 
 @Controller
 @RequestMapping(value = "/notice/**")
@@ -21,8 +22,6 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
-	private int perPage = 10;
-	
 	// 모든 요청에 다 추가
 	@ModelAttribute("board")
 	public String getBoard() throws Exception {
@@ -30,10 +29,14 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeList")
-	public ModelAndView getBoardList(@RequestParam(defaultValue = "1") int curPage, ModelAndView mv) throws Exception {
+	public ModelAndView getBoardList(Pager pager, ModelAndView mv) throws Exception {
 		
-		List<BoardVO> ndtoList = noticeService.boardList(curPage, perPage);
+		System.out.println(pager.getKind());
+		System.out.println(pager.getSearch());
+		
+		List<BoardVO> ndtoList = noticeService.boardList(pager);
 		mv.addObject("list", ndtoList);
+		mv.addObject("pager", pager);
 		mv.setViewName("board/boardList");
 		return mv;
 	}
