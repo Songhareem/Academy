@@ -18,7 +18,7 @@
 			<h2>memberLogin</h2>
 			<div class="form-group">
 				<label for="id">ID:</label> 
-				<input type="text" class="form-control" id="id" name="id">
+				<input type="text" class="form-control" id="id" name="id" value="${cookie.uid.value}">
 			</div>
 			<div class="form-group">
 				<label for="pw">PW : </label> 

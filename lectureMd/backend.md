@@ -196,6 +196,8 @@
                 - ${not empty 값}
             - 삼항연산자
                 - ${조건식?a:b}
+            - Cookie
+                - ${cookie.쿠키명.value}
                 
     - JSTL (Java Server Pages Standard Tag Library)
         - 라이브러리 다운 필요

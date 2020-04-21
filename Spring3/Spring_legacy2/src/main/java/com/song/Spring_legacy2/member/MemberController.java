@@ -2,15 +2,18 @@ package com.song.Spring_legacy2.member;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.song.Spring_legacy2.member.memberPage.MemberPager;
+import com.song.Spring_legacy2.util.Pager;
 
 @Controller
 @RequestMapping(value = "/member/**")
@@ -20,7 +23,7 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@RequestMapping(value = "memberList")
-	public ModelAndView getMemberList(MemberPager pager, ModelAndView mv) throws Exception {
+	public ModelAndView getMemberList(Pager pager, ModelAndView mv) throws Exception {
 		
 		List<MemberVO> mvoList = memberService.memberList(pager);
 		mv.addObject("list", mvoList);
@@ -59,15 +62,26 @@ public class MemberController {
 
 	// memberLogin
 	@RequestMapping(value = "memberLogin")
-	public ModelAndView getMemberLogin(ModelAndView mv) throws Exception {
+	public ModelAndView getMemberLogin(ModelAndView mv, @CookieValue(value = "uid", required = false) String uid) throws Exception {
 		
+		//mv.addObject("uid", uid);
 		mv.setViewName("member/memberLogin");
-		
 		return mv;
 	}
 	
 	@RequestMapping(value = "memberLogin", method = RequestMethod.POST)
-	public ModelAndView postMemberLogin(ModelAndView mv, MemberVO memberVO, HttpSession session) throws Exception {
+	public ModelAndView postMemberLogin(ModelAndView mv, String remember, MemberVO memberVO, HttpServletResponse response, HttpSession session) throws Exception {
+		
+		// 쿠키 발행
+		Cookie cookie = new Cookie("uid", "");
+		if(remember != null) {
+			cookie.setValue(memberVO.getId());
+			cookie.setMaxAge(1000 * 60 * 30);
+		} else {
+			cookie.setMaxAge(0);			
+		}
+		
+		response.addCookie(cookie);
 		
 		memberVO = memberService.memberLogin(memberVO);
 		if(memberVO != null) {

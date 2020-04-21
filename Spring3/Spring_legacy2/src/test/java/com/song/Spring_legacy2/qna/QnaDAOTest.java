@@ -17,38 +17,35 @@ public class QnaDAOTest extends AbstractTestCase{
 	@Autowired
 	private QnaDAO qnaDAO;
 	
-//	@Test
-//	public void boardWriteTest() throws Exception{
-//		
-//		String writer="";
-//		String title="";
-//		String contents="";
-//		for(int i=0; i<150; i++) {
-//			QnaVO qnaVO = new QnaVO();
-//			if(i%3 == 0) {
-//				writer = "choi";
-//				title = "Fx";
-//				contents = "Effecter";
-//			} else if(i%3 == 1) {
-//				writer = "Reem";
-//				title = "Computer";
-//				contents = "Programmer";
-//			} else {
-//				writer = "Min";
-//				title = "Besiness";
-//				contents = "Markecter";
-//			}
-//			qnaVO.setTitle(title+" "+i);
-//			qnaVO.setWriter(writer);
-//			qnaVO.setContents(contents+" "+i);
-//
-//			int result = qnaDAO.boardWrite(qnaVO);
-//			if(i == 50 || i == 100) {
-//				Thread.sleep(2000);
-//			}
-//		}
-//		//assertEquals(1, result);
-//	}
+	@Test
+	public void boardWriteTest() throws Exception{
+		
+		String writer="";
+		String title="";
+		String contents="";
+		for(int i=0; i<50; i++) {
+			QnaVO qnaVO = new QnaVO();
+			if(i%3 == 0) {
+				writer = "choi";
+				title = "Fx";
+				contents = "Effecter";
+			} else if(i%3 == 1) {
+				writer = "Reem";
+				title = "Computer";
+				contents = "Programmer";
+			} else {
+				writer = "Min";
+				title = "Besiness";
+				contents = "Markecter";
+			}
+			qnaVO.setTitle(title+" "+i);
+			qnaVO.setWriter(writer);
+			qnaVO.setContents(contents+" "+i);
+
+			int result = qnaDAO.boardWrite(qnaVO);
+		}
+		//assertEquals(1, result);
+	}
 
 //	@Test
 //	public void boardDeleteTest() throws Exception {

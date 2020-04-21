@@ -6,8 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.song.Spring_legacy2.member.memberPage.MemberPager;
-
+import com.song.Spring_legacy2.util.Pager;
 
 @Repository
 public class MemberDAO {
@@ -17,13 +16,13 @@ public class MemberDAO {
 	private final String NAMESPACE = "com.song.Spring_legacy2.member.MemberDAO.";
 	
 	// memberCount
-	public Long memberCount(MemberPager pager) throws Exception {
+	public Long memberCount(Pager pager) throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE+"memberCount", pager);
 	}
 	
 	// memberList
-	public List<MemberVO> memberList(MemberPager pager) throws Exception {
+	public List<MemberVO> memberList(Pager pager) throws Exception {
 		
 		return sqlSession.selectList(NAMESPACE+"memberList", pager);
 	}

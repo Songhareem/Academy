@@ -16,11 +16,22 @@
 	<!-- SqlSessionFactoryBean -->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:DB/config/mybatisConfig.xml"></property>
 		<property name="mapperLocations" value="classpath:DB/mapper/*Mapper.xml"/>
 	</bean>
 	
 	<!-- sql Session -->
 	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<!-- multipart -->
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<!-- 인코딩 설정 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 파일 하나당 용량 제한 단위 byte 예시 10MB -->
+		<property name="maxUploadSizePerFile" value="10485760"></property>
+		<!-- 총 파일의 용량 제한 단위 byte 예시 100MB -->
+		<property name="maxUploadSize" value="104857600"></property>
 	</bean>
 </beans>

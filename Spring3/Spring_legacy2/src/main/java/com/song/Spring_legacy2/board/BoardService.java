@@ -2,7 +2,7 @@ package com.song.Spring_legacy2.board;
 
 import java.util.List;
 
-import com.song.Spring_legacy2.board.page.Pager;
+import com.song.Spring_legacy2.util.Pager;
 
 public interface BoardService {
 	

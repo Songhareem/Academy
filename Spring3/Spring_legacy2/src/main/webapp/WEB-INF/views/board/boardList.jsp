@@ -40,7 +40,14 @@
 				<c:forEach items="${list}" var="vo">
 				<tr class="info">
 					<td>${vo.num}</td>
-					<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
+					<td>
+						<c:catch>
+							<c:forEach begin="1" end="${vo.dept}" var="i">
+								--	
+							</c:forEach>
+						</c:catch>
+						<a href="./${board}Select?num=${vo.num}">${vo.title}</a>
+					</td>
 					<td>${vo.writer}</td>
 					<td>${vo.regDate}</td>
 					<td>${vo.hit}</td>
@@ -62,9 +69,13 @@
 				</ul>
 			</div>
 			
-			<div>
-				<a href="./${board}Write" class="btn btn-primary" >WRITE</a>
-			</div>
+			<c:catch>
+				<c:if test="${(member ne null && board eq 'qna') || (member.id eq 'admin' && board eq 'notice')}">
+					<div>
+						<a href="./${board}Write" class="btn btn-primary" >WRITE</a>
+					</div>
+				</c:if>
+			</c:catch>
 		</div>
 	</div>
 	

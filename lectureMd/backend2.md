@@ -261,30 +261,84 @@
             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
             
-            <mapper namespace="com.song.Spring_legacy2.notice.NoticeDAO">
-                <select id="boardList" resultType="com.song.Spring_legacy2.notice.NoticeVO">
-                    SELECT * FROM notice ORDER BY num DESC
-                </select>
-                
-                <select id="boardSelect" parameterType="java.lang.Long" resultType="com.song.Spring_legacy2.notice.NoticeVO">
-                    SELECT * FROM notice WHERE num=#{num}
-                </select>
+            <mapper namespace="com.song.Spring_legacy2.qna.QnaDAO">
 
-                <insert id="boardWrite" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
-                    INSERT INTO notice VALUES(board_seq.nextval,#{title},#{writer},#{contents},sysdate,0)
+                <!-- 부분 SQL -->
+                <sql id="search">
+                    LIKE '%'||#{search}||'%'
+                </sql>
+                
+                <sql id="search2">
+                    WHERE
+                    <choose>
+                        <when test="kind == 'bt'"> title </when>
+                        <when test="kind == 'bw'"> writer </when>			
+                        <otherwise>contents</otherwise>
+                    </choose>
+                    <include refid="search"></include>
+                </sql>
+                
+                 <!-- if, switch(choose) SQL -->
+                <select id="boardCount" parameterType="Pager" resultType="Long">
+                    SELECT COUNT(num) FROM qna
+                    <where>
+                        <if test="kind == 'bt'">
+                            title <include refid="search"></include>
+                        </if>
+                        <if test="kind == 'bw'">
+                            writer <include refid="search"></include>
+                        </if>
+                        <if test="kind == 'bc'">
+                            contents <include refid="search"></include>
+                        </if>
+                    </where>
+                </select>
+                
+                <select id="boardList" parameterType="Pager" resultType="QnaVO">
+                    SELECT * FROM
+                    (SELECT Q.*, rownum R FROM
+                    (SELECT * FROM qna 
+                    <include refid="search2"></include>
+                    ORDER BY ref DESC, step ASC) Q)
+                    WHERE R BETWEEN #{startRow} AND #{lastRow}
+                </select>
+                
+                <select id="boardSelect" parameterType="Long" resultType="QnaVO">
+                    SELECT * FROM qna WHERE num=#{num}
+                </select>
+                
+                <insert id="boardWrite" parameterType="QnaVO">
+                    INSERT INTO qna VALUES(
+                    board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0, board_seq.currval, 0, 0 )
+                </insert>
+                    
+                <insert id="boardReply" parameterType="QnaVO">
+                    INSERT INTO qna VALUES(
+                    board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0,
+                    (SELECT ref FROM qna WHERE num = #{num}),
+                    (SELECT step FROM qna WHERE num = #{num}) + 1,
+                    (SELECT dept FROM qna WHERE num = #{num}) + 1 
+                    )
                 </insert>
                 
-                <insert id="boardUpdate" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
-                    UPDATE notice SET title=#{title}, writer=#{writer}, contents=#{contents}, regdate=sysdate WHERE num = #{num}
-                </insert>
+                <update id="boardReplyUpdate" parameterType="QnaVO">
+                    UPDATE qna SET step = 1 + step WHERE
+                    ref = (SELECT ref FROM qna WHERE num = #{num})
+                    AND
+                    step > (SELECT step FROM qna WHERE num = #{num})
+                </update>
                 
-                <insert id="hitUpdate" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
-                    UPDATE notice SET hit = 1+(SELECT hit FROM notice WHERE num = #{num}) WHERE num = #{num}
-                </insert>
+                <update id="boardUpdate" parameterType="QnaVO">
+                    UPDATE qna SET title=#{title}, writer=#{writer}, contents=#{contents}, regdate=sysdate WHERE num = #{num}
+                </update>
                 
-                <insert id="boardDelete" parameterType="java.lang.Long">
-                    DELETE FROM notice WHERE num=#{num}
-                </insert>
+                <update id="hitUpdate" parameterType="QnaVO">
+                    UPDATE qna SET hit = 1+(SELECT hit FROM qna WHERE num = #{num}) WHERE num = #{num}
+                </update>
+                
+                <delete id="boardDelete" parameterType="Long">
+                    DELETE FROM qna WHERE num=#{num}
+                </delete>
             </mapper>
           ```
         - id 는 DAO의 메서드명으로(필수는 아님)
@@ -338,3 +392,60 @@
           : Exception 발생
 
 - 기타 : 실행자체가 안될때는 각종 xml 파일 확인
+
+# Config.xml
+
+- src/main/resources/**
+- 폴더 생성과 파일명은 개발자 마음
+- new -> xml 파일 생성
+- xml 파일내 스키마 생성
+    - ```
+        <!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+      ```
+- xml 파일 내에 alias 선언
+    - ```
+        <configuration>
+            <typeAliases>
+                <typeAlias type="java.lang.Long" alias="Long"/>
+                <typeAlias type="com.song.Spring_legacy2.notice.NoticeVO" alias="NoticeVO"/>
+                <typeAlias type="com.song.Spring_legacy2.member.MemberVO" alias="MemberVO"/>
+                <typeAlias type="com.song.Spring_legacy2.qna.QnaVO" alias="QnaVO"/>	
+                <typeAlias type="com.song.Spring_legacy2.util.Pager" alias="Pager"/>
+            </typeAliases>
+        </configuration>
+      ```
+- root-context.xml
+    - ```
+        <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+		    ...
+		    <property name="configLocation" value="classpath:DB/config/mybatisConfig.xml"></property>
+		    ...
+	    </bean>
+      ```
+
+# Session & Cookie
+
+- Session : 서버 생성, 서버 저장
+- Cookie : 서버 생성, 클라 저장(작은 용량의 text)
+    - 클라에서 요청시, cookie 같이 이동
+    - 발행한 서버에서만 사용 가능
+    - key(String), value(String) 형식
+
+# FileUpload & FileDonwload
+
+- API
+    - ```
+        <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+      ```
+
+- client
+    - form tag
+        - method = POST
+        - enctype="multipart/form-data"

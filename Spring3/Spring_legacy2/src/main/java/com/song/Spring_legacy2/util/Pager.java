@@ -1,4 +1,4 @@
-package com.song.Spring_legacy2.board.page;
+package com.song.Spring_legacy2.util;
 
 public class Pager {
 

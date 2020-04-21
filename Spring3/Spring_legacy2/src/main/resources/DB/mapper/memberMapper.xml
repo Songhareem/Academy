@@ -9,7 +9,7 @@
 		LIKE '%'||#{search}||'%'
 	</sql>
 	
-	<select id="memberCount" parameterType="com.song.Spring_legacy2.member.memberPage.MemberPager" resultType="java.lang.Long">
+	<select id="memberCount" parameterType="com.song.Spring_legacy2.util.Pager" resultType="java.lang.Long">
 		SELECT COUNT(rownum) FROM member
 		<where>
 			<if test="kind == 'id'">
@@ -27,7 +27,7 @@
 		</where>
 	</select>
 	
-	<select id="memberList" parameterType="com.song.Spring_legacy2.member.memberPage.MemberPager" resultType="com.song.Spring_legacy2.member.MemberVO">
+	<select id="memberList" parameterType="Pager" resultType="MemberVO">
 		SELECT * FROM
 		(SELECT M.*, rownum R FROM
 		(SELECT * FROM member WHERE
@@ -41,19 +41,19 @@
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="memberLogin" parameterType="com.song.Spring_legacy2.member.MemberVO" resultType="com.song.Spring_legacy2.member.MemberVO">
+	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
 		SELECT * FROM member WHERE id=#{id} AND pw=#{pw}
 	</select>
 	
-	<insert id="memberJoin" parameterType="com.song.Spring_legacy2.member.MemberVO">
+	<insert id="memberJoin" parameterType="MemberVO">
 		INSERT INTO member VALUES(#{id},#{pw},#{name},#{age},#{email},#{phone})
 	</insert>
 	
-	<insert id="memberUpdate" parameterType="com.song.Spring_legacy2.member.MemberVO">
+	<insert id="memberUpdate" parameterType="MemberVO">
 		UPDATE member SET pw=#{pw}, name=#{name}, age=#{age}, email=#{email}, phone=#{phone} WHERE id=#{id}
 	</insert>
 	
-	<insert id="memberDelete" parameterType="com.song.Spring_legacy2.member.MemberVO">
+	<insert id="memberDelete" parameterType="MemberVO">
 		DELETE FROM member WHERE id = #{id}
 	</insert>
 </mapper>

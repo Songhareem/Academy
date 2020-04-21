@@ -2,37 +2,81 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+  
 <mapper namespace="com.song.Spring_legacy2.qna.QnaDAO">
 	
-	<select id="boardCount" resultType="java.lang.Long">
+	<sql id="search">
+		LIKE '%'||#{search}||'%'
+	</sql>
+	
+	<sql id="search2">
+		WHERE
+		<choose>
+			<when test="kind == 'bt'"> title </when>
+			<when test="kind == 'bw'"> writer </when>			
+			<otherwise>contents</otherwise>
+		</choose>
+		<include refid="search"></include>
+	</sql>
+	
+	<select id="boardCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(num) FROM qna
+		<where>
+			<if test="kind == 'bt'">
+				title <include refid="search"></include>
+			</if>
+			<if test="kind == 'bw'">
+				writer <include refid="search"></include>
+			</if>
+			<if test="kind == 'bc'">
+				contents <include refid="search"></include>
+			</if>
+		</where>
 	</select>
 	
-	<select id="boardList" parameterType="com.song.Spring_legacy2.board.page.Pager" resultType="com.song.Spring_legacy2.qna.QnaVO">
+	<select id="boardList" parameterType="Pager" resultType="QnaVO">
 		SELECT * FROM
-		(SELECT N.*, rownum R FROM
-		(SELECT * FROM qna WHERE num >= 1 ORDER BY num DESC) N)
+		(SELECT Q.*, rownum R FROM
+		(SELECT * FROM qna 
+		 <include refid="search2"></include>
+		 ORDER BY ref DESC, step ASC) Q)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.song.Spring_legacy2.qna.QnaVO">
+	<select id="boardSelect" parameterType="Long" resultType="QnaVO">
 		SELECT * FROM qna WHERE num=#{num}
 	</select>
 	
-	<insert id="boardWrite" parameterType="com.song.Spring_legacy2.qna.QnaVO">
-		INSERT INTO qna VALUES(board_seq.nextval,#{title},#{writer},#{contents},sysdate,0,0,0,0)
+	<insert id="boardWrite" parameterType="QnaVO">
+		INSERT INTO qna VALUES(
+		board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0, board_seq.currval, 0, 0 )
+	</insert>
+		
+	<insert id="boardReply" parameterType="QnaVO">
+		INSERT INTO qna VALUES(
+		board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0,
+		(SELECT ref FROM qna WHERE num = #{num}),
+		(SELECT step FROM qna WHERE num = #{num}) + 1,
+		(SELECT dept FROM qna WHERE num = #{num}) + 1 
+		)
 	</insert>
 	
-	<insert id="boardUpdate" parameterType="com.song.Spring_legacy2.qna.QnaVO">
+	<update id="boardReplyUpdate" parameterType="QnaVO">
+		UPDATE qna SET step = 1 + step WHERE
+		ref = (SELECT ref FROM qna WHERE num = #{num})
+		AND
+		step > (SELECT step FROM qna WHERE num = #{num})
+	</update>
+	
+	<update id="boardUpdate" parameterType="QnaVO">
 		UPDATE qna SET title=#{title}, writer=#{writer}, contents=#{contents}, regdate=sysdate WHERE num = #{num}
-	</insert>
+	</update>
 	
-	<insert id="hitUpdate" parameterType="com.song.Spring_legacy2.qna.QnaVO">
+	<update id="hitUpdate" parameterType="QnaVO">
 		UPDATE qna SET hit = 1+(SELECT hit FROM qna WHERE num = #{num}) WHERE num = #{num}
-	</insert>
+	</update>
 	
-	<insert id="boardDelete" parameterType="java.lang.Long">
+	<delete id="boardDelete" parameterType="Long">
 		DELETE FROM qna WHERE num=#{num}
-	</insert>
+	</delete>
 </mapper>

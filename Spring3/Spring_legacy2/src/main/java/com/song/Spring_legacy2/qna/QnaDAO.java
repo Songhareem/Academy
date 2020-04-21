@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.song.Spring_legacy2.board.BoardDAO;
 import com.song.Spring_legacy2.board.BoardVO;
-import com.song.Spring_legacy2.board.page.Pager;
+import com.song.Spring_legacy2.util.Pager;
 
 @Repository
 public class QnaDAO implements BoardDAO{
@@ -58,5 +58,15 @@ public class QnaDAO implements BoardDAO{
 	public int boardDelete(long num) throws Exception {
 		
 		return sqlSession.delete(NAMESPACE+"boardDelete", num);
+	}
+	
+	public int boardReplyUpdate(BoardVO boardVO) throws Exception {
+		
+		return sqlSession.update(NAMESPACE+"boardReplyUpdate", boardVO);
+	}
+	
+	public int boardReply(BoardVO boardVO) throws Exception {
+		
+		return sqlSession.insert(NAMESPACE+"boardReply", boardVO);
 	}
 }

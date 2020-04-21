@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.song.Spring_legacy2.board.BoardService;
 import com.song.Spring_legacy2.board.BoardVO;
-import com.song.Spring_legacy2.board.page.Pager;
+import com.song.Spring_legacy2.util.Pager;
 
 @Service
 public class NoticeService implements BoardService {

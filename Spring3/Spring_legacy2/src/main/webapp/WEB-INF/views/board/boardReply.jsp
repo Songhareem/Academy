@@ -15,15 +15,22 @@
 	<div class="container">
 		
 		<!-- ${pageContext.request.contextPath} -->
-		<form action="./${board}Write" method="post">
-			<h1>${board}Write</h1>
+		<form action="./${board}Reply" method="post">
+			<h1>${board}Reply</h1>
 			<div class="form-group">
 				<label for="subtitle">제목 : </label> 
 				<input type="text" class="form-control" id="title" name="title">
 			</div>
 			<div class="form-group">
+				<label for="content">작성자:</label> 
+				<input type="text" class="form-control" id="writer" name="writer">
+			</div>
+			<div class="form-group">
 				<label for="content">글내용:</label> 
 				<input type="text" class="form-control" id="contents" name="contents">
+			</div>
+			<div>
+				<input type="hidden" class="form-control" id="num" name="num" value="${num}">
 			</div>
 
 			<button type="submit" class="btn btn-info">Submit</button>

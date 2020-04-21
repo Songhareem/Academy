@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.song.Spring_legacy2.member.memberPage.MemberPager;
+import com.song.Spring_legacy2.util.Pager;
 
 @Service
 public class MemberService {
@@ -14,7 +14,7 @@ public class MemberService {
 	private MemberDAO memberDAO;
 	
 	// memberList
-	public List<MemberVO> memberList(MemberPager pager) throws Exception {
+	public List<MemberVO> memberList(Pager pager) throws Exception {
 		
 		pager.makeRow();
 		long totalCount = memberDAO.memberCount(pager);

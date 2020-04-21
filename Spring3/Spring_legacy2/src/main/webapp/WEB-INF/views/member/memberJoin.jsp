@@ -15,7 +15,7 @@
 	<div class="container">
 		
 		<!-- ${pageContext.request.contextPath} -->
-		<form action="./memberJoin" method="post">
+		<form action="./memberJoin" method="post" enctype="multipart/form-data">
 			<h2>memberJoin</h2>
 			<div class="form-group">
 				<label for="id">ID:</label> 
@@ -40,6 +40,11 @@
 			<div class="form-group">
 				<label for="phone">Phone:</label> 
 				<input type="text" class="form-control" id="phone" name="phone">
+			</div>
+			
+			<div class="form-group">
+				<label for="thumb">Thumb:</label> 
+				<input type="file" class="form-control" id="thumb" name="thumb">
 			</div>
 			
 			<button type="submit" class="btn btn-info">Join</button>

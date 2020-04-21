@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.song.Spring_legacy2.board.BoardDAO;
 import com.song.Spring_legacy2.board.BoardVO;
-import com.song.Spring_legacy2.board.page.Pager;
+import com.song.Spring_legacy2.util.Pager;
 
 @Repository
 public class NoticeDAO implements BoardDAO{

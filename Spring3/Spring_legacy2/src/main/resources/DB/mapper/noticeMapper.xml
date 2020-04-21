@@ -9,7 +9,7 @@
 		LIKE '%'||#{search}||'%'
 	</sql>
 	
-	<select id="boardCount" parameterType="com.song.Spring_legacy2.board.page.Pager" resultType="java.lang.Long">
+	<select id="boardCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(num) FROM notice
 		<where>
 			<if test="kind == 'bt'">
@@ -24,7 +24,7 @@
 		</where>
 	</select>
 	
-	<select id="boardList" parameterType="com.song.Spring_legacy2.board.page.Pager" resultType="com.song.Spring_legacy2.notice.NoticeVO">
+	<select id="boardList" parameterType="Pager" resultType="NoticeVO">
 		SELECT * FROM
 		(SELECT N.*, rownum R FROM
 		(SELECT * FROM notice WHERE
@@ -37,23 +37,23 @@
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.song.Spring_legacy2.notice.NoticeVO">
+	<select id="boardSelect" parameterType="Long" resultType="NoticeVO">
 		SELECT * FROM notice WHERE num=#{num}
 	</select>
 	
-	<insert id="boardWrite" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
+	<insert id="boardWrite" parameterType="NoticeVO">
 		INSERT INTO notice VALUES(board_seq.nextval,#{title},#{writer},#{contents},sysdate,0)
 	</insert>
 	
-	<insert id="boardUpdate" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
+	<insert id="boardUpdate" parameterType="NoticeVO">
 		UPDATE notice SET title=#{title}, writer=#{writer}, contents=#{contents}, regdate=sysdate WHERE num = #{num}
 	</insert>
 	
-	<insert id="hitUpdate" parameterType="com.song.Spring_legacy2.notice.NoticeVO">
+	<insert id="hitUpdate" parameterType="NoticeVO">
 		UPDATE notice SET hit = 1+(SELECT hit FROM notice WHERE num = #{num}) WHERE num = #{num}
 	</insert>
 	
-	<insert id="boardDelete" parameterType="java.lang.Long">
+	<insert id="boardDelete" parameterType="Long">
 		DELETE FROM notice WHERE num=#{num}
 	</insert>
 </mapper>

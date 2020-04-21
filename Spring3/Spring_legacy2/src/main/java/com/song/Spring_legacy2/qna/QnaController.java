@@ -4,14 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.song.Spring_legacy2.board.BoardVO;
-import com.song.Spring_legacy2.board.page.Pager;
+import com.song.Spring_legacy2.util.Pager;
 
 @Controller
 @RequestMapping(value = "/qna/**")
@@ -26,15 +27,12 @@ public class QnaController {
 		return "qna";
 	}
 	
-	@RequestMapping(value = "qnaList")
-	public ModelAndView getBoardList(Long curPage, ModelAndView mv) throws Exception {
+	@GetMapping("qnaList")
+	public ModelAndView getBoardList(Pager pager, ModelAndView mv) throws Exception {
 		
-		Pager pager = new Pager();
-		pager.setCurPage(curPage);
-		pager.setPerPage(10);
 		List<BoardVO> ndtoList = qnaService.boardList(pager);
 		mv.addObject("list", ndtoList);
-		mv.addObject("pager", 10);
+		mv.addObject("pager", pager);
 		mv.setViewName("board/boardList");
 		return mv;
 	}
@@ -51,11 +49,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "qnaWrite")
-	public ModelAndView getBoardWrite() throws Exception {
+	public ModelAndView getBoardWrite(ModelAndView mv) throws Exception {
 		
-		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/boardWrite");
-		
 		return mv;
 	}
 	
@@ -116,6 +112,27 @@ public class QnaController {
 		mv.setViewName(view);
 		
 		return mv;
+	}
+	
+	@GetMapping("qnaReply")
+	public ModelAndView getBoardReply(long num, ModelAndView mv) throws Exception {
+	
+		mv.addObject("num", num);
+		mv.setViewName("board/boardReply");
+		return mv;
+	}
+	
+	@PostMapping("qnaReply")
+	public ModelAndView postBoardReply(QnaVO qnaVO, ModelAndView mv) throws Exception {
 		
+		int result = qnaService.boardReply(qnaVO);
+		if(result > 0) {
+			mv.setViewName("redirect: ./qnaList");
+		} else {
+			mv.addObject("result", "삭제 실패");
+			mv.addObject("url", "./qnaList");
+			mv.setViewName("common/result");
+		}
+		return mv;
 	}
 }

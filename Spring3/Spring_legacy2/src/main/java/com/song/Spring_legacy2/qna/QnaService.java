@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.song.Spring_legacy2.board.BoardService;
 import com.song.Spring_legacy2.board.BoardVO;
-import com.song.Spring_legacy2.board.page.Pager;
+import com.song.Spring_legacy2.util.Pager;
 
 @Service
 public class QnaService implements BoardService{
@@ -69,5 +69,12 @@ public class QnaService implements BoardService{
 	public int boardDelete(long num) throws Exception {
 		
 		return qnaDAO.boardDelete(num);
+	}
+	
+	public int boardReply(BoardVO boardVO) throws Exception {
+		
+		int result = qnaDAO.boardReplyUpdate(boardVO);
+		result = qnaDAO.boardReply(boardVO);
+		return result;
 	}
 }
