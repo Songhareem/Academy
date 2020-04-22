@@ -9,6 +9,23 @@
 		LIKE '%'||#{search}||'%'
 	</sql>
 	
+	<resultMap type="MemberVO" id="loginResult">
+		<!-- PK 로 꺼내오는 값은 id 태그, 나머지는 result 태그 -->
+		<id column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="name" property="name"/>
+		<result column="age" property="age"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		
+		<!-- 1대1관계 -->
+		<association property="memberFileVO" javaType="MemberFileVO">
+			<result column="fileName" property="fileName"/>
+			<result column="originName" property="originName"/>
+		</association>
+		
+	</resultMap>
+	
 	<select id="memberCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(rownum) FROM member
 		<where>
@@ -41,8 +58,11 @@
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
-		SELECT * FROM member WHERE id=#{id} AND pw=#{pw}
+	<select id="memberLogin" parameterType="MemberVO" resultMap="loginResult">
+		SELECT M.*, F.filename, F.originname
+		FROM member M left join memberFile F
+		on (M.id = F.id)
+		WHERE M.id = #{id} and M.pw = #{pw}
 	</select>
 	
 	<insert id="memberJoin" parameterType="MemberVO">

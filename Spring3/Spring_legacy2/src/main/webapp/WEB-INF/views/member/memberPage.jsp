@@ -29,7 +29,7 @@
 					<td>${member.age}</td>
 					<td>${member.email}</td>
 					<td>${member.phone}</td>
-					<td><img src="../resources/images/memberUpload/${file.fileName}"/></td>
+					<td><img src="../resources/images/memberUpload/${member.memberFileVO.fileName}"/></td>
 					<td><a href="./memberFileDelete">fileDelete</a></td>
 				</tr>
 				

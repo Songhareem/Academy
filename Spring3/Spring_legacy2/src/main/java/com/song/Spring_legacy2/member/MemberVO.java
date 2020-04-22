@@ -1,5 +1,7 @@
 package com.song.Spring_legacy2.member;
 
+import com.song.Spring_legacy2.member.memberFile.MemberFileVO;
+
 public class MemberVO {
 
 	private String id;
@@ -8,6 +10,7 @@ public class MemberVO {
 	private int age;
 	private String email;
 	private String phone;
+	private MemberFileVO memberFileVO;
 
 	public String getId() {
 		return id;
@@ -56,4 +59,13 @@ public class MemberVO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	public MemberFileVO getMemberFileVO() {
+		return memberFileVO;
+	}
+
+	public void setMemberFileVO(MemberFileVO memberFileVO) {
+		this.memberFileVO = memberFileVO;
+	}
+	
 }

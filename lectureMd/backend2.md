@@ -278,7 +278,23 @@
                     <include refid="search"></include>
                 </sql>
                 
-                 <!-- if, switch(choose) SQL -->
+                <!-- resultMap : 조회된 컬럼명과 VO의 변수명이 일치되지 않을 때 강제 Mapping 시키는 태크-->
+                <!-- 보통 Join의 결과물을 맵핑하고 싶을 때 사용 -->
+                <resultMap type="MemberVO" id="">
+                    
+                    <!-- PK 로 꺼내오는 값은 id 태그, 나머지는 result 태그 -->
+                    <id column = "조회결과의 컬럼명" property="VO의 멤버변수명"/>
+                    <result column = "조회결과의 컬럼명" property="VO의 멤버변수명"/>
+                    
+                    <!-- 1대1관계 (1부모 : 1자식) -->
+		            <association property="멤버변수명" javaType="멤버변수 타입명(풀 패키지명)">
+                        <id column = "조회결과의 컬럼명" property="멤버변수의 멤버변수명"/>
+                        <result column = "조회결과의 컬럼명" property="멤버변수의 멤버변수명"/>
+                    </association>
+
+                </resultMap>
+
+                <!-- if, switch(choose) SQL -->
                 <select id="boardCount" parameterType="Pager" resultType="Long">
                     SELECT COUNT(num) FROM qna
                     <where>
