@@ -21,6 +21,7 @@
 					<td>나이</td>
 					<td>이메일</td>
 					<td>전화번호</td>
+					<td>프로필<td>
 				</tr>
 				<tr>
 					<td>${member.id}</td>
@@ -28,6 +29,8 @@
 					<td>${member.age}</td>
 					<td>${member.email}</td>
 					<td>${member.phone}</td>
+					<td><img src="../resources/images/memberUpload/${file.fileName}"/></td>
+					<td><a href="./memberFileDelete">fileDelete</a></td>
 				</tr>
 				
 			</table>

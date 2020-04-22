@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.song.Spring_legacy2.member.memberFile.MemberFileVO;
 import com.song.Spring_legacy2.util.Pager;
 
 @Controller
@@ -44,9 +46,21 @@ public class MemberController {
 	
 	// memberJoin
 	@RequestMapping(value = "memberJoin", method = RequestMethod.POST)
-	public ModelAndView postMemberJoin(ModelAndView mv, MemberVO memberVO) throws Exception {
+	public ModelAndView postMemberJoin(ModelAndView mv, MemberVO memberVO, MultipartFile thumb, HttpSession session) throws Exception {
 		
-		int result = memberService.memberJoin(memberVO);
+		// 파일 업로드시 실제 이름
+		//String thumbName = thumb.getOriginalFilename();
+		// 파라미터 명
+		//System.out.println(thumb.getName());
+		// 파일 사이즈(용량)
+		//System.out.println(thumb.getSize());
+		// 파일 확장자
+		//System.out.println(thumb.getContentType());
+		
+		// 클라와의 연결 스트림
+		// thumb.getInputStream();
+		
+		int result = memberService.memberJoin(memberVO, thumb, session);
 		if(result > 0) {
 			mv.addObject("result", "회원가입 성공");
 			mv.addObject("url", "../");
@@ -122,9 +136,31 @@ public class MemberController {
 	
 	// memberPage
 	@RequestMapping(value = "memberPage")
-	public ModelAndView getMemberPage(ModelAndView mv) throws Exception {
+	public ModelAndView getMemberPage(ModelAndView mv, HttpSession session) throws Exception {
 		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		MemberFileVO memberFileVO = new MemberFileVO();
+		memberFileVO.setId(memberVO.getId());
+		memberFileVO = memberService.memberPage(memberFileVO);
+		
+		mv.addObject("file", memberFileVO);
 		mv.setViewName("member/memberPage");
+		
+		return mv;
+	}
+	
+	// memberFileDelete
+	@RequestMapping(value = "memberFileDelete")
+	public ModelAndView getMemberFileDelete(ModelAndView mv, HttpSession session) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		MemberFileVO memberFileVO = new MemberFileVO();
+		memberFileVO.setId(memberVO.getId());
+		int result = memberService.MemberFileDelete(memberFileVO, session);
+		if(result > 0) {
+			mv.setViewName("redirect: ./memberPage");
+		}
+		
 		return mv;
 	}
 	
@@ -135,6 +171,7 @@ public class MemberController {
 		memberVO = (MemberVO)session.getAttribute("member");
 		int result = memberService.memberDelete(memberVO);
 		if(result > 0) {			
+			session.invalidate();
 			mv.addObject("result", "회원 탈퇴 성공");
 			mv.addObject("url", "./memberLogin");
 		} else {

@@ -8,6 +8,7 @@
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="com.song.Spring_legacy2.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.song.Spring_legacy2.member.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.song.Spring_legacy2.member.memberFile.MemberFileVO" alias="MemberFileVO"/>
 		<typeAlias type="com.song.Spring_legacy2.qna.QnaVO" alias="QnaVO"/>	
 		<typeAlias type="com.song.Spring_legacy2.util.Pager" alias="Pager"/>
 	</typeAliases>

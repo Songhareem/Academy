@@ -9,7 +9,7 @@
 		LIKE '%'||#{search}||'%'
 	</sql>
 	
-	<select id="memberCount" parameterType="com.song.Spring_legacy2.util.Pager" resultType="java.lang.Long">
+	<select id="memberCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(rownum) FROM member
 		<where>
 			<if test="kind == 'id'">

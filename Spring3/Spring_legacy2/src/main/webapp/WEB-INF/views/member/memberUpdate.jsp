@@ -48,6 +48,10 @@
 				<label for="phone">Phone:</label> 
 				<input type="text" class="form-control" id="phone" value="${sessionScope.member.phone}" name="phone">
 			</div>
+			<div class="form-group">
+				<label for="file">File:</label> 
+				<input type="file" enctype class="form-control" id="thumb" value="" name="thumb">
+			</div>
 			
 			<button type="submit" class="btn btn-info">Update</button>
 		</form>

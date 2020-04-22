@@ -444,8 +444,45 @@
             <version>1.4</version>
         </dependency>
       ```
-
+    - xxx-context.xml(root-context.xml)
+        - ```
+            <!-- multipart resolver -->
+            <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+                <!-- 인코딩 설정 -->
+                <property name="defaultEncoding" value="UTF-8"></property>
+                <!-- 파일 하나당 용량 제한 단위 byte 예시 10MB -->
+                <property name="maxUploadSizePerFile" value="10485760"></property>
+                <!-- 총 파일의 용량 제한 단위 byte 예시 100MB -->
+                <property name="maxUploadSize" value="104857600"></property>
+            </bean>
+          ```
 - client
     - form tag
         - method = POST
         - enctype="multipart/form-data"
+
+- back
+    - controller의 해당 url 매개변수로 MultipartFile
+        - 파일이 한개인 경우, MultipartFile Client에서_선언한_변수명
+        - 파일이 여러개인 경우, MultipartFile[] Client에서_선언한_변수명
+    - multipart Method
+        - ```
+                // 파일 업로드시 실제 이름
+                String thumbName = thumb.getOriginalFilename();
+                // 파라미터 명
+                System.out.println(thumb.getName());
+                // 파일 사이즈(용량)
+                System.out.println(thumb.getSize());
+                // 파일 확장자
+                System.out.println(thumb.getContentType());              
+                // 0,1 로 파일 뽑아냄
+                System.out.println(thumb.getBytes());
+          ```
+- 저장
+    - DB
+        - BLOB Type : 최대 2GB (DB에서 이진데이터를 저장하는 타입)
+    - HDD
+        - 서버 HDD에 파일 저장
+            - 저장할 폴더의 실제 경로를 알아옴
+        - 경로명 DB에 저장
+        - service단에서 해결

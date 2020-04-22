@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.song.Spring_legacy2.member.memberFile.MemberFileDAO">
+	
+	<insert id="memberFileInsert" parameterType="MemberFileVO">
+		INSERT INTO memberFile VALUES(#{id}, #{fileName}, #{originName})
+	</insert>
+	
+	<select id="memberFileSelect" parameterType="MemberFileVO" resultType="MemberFileVO">
+		SELECT * FROM memberFile WHERE id = #{id}	
+	</select>
+	
+	<delete id="memberFileDelete" parameterType="MemberFileVO">
+		DELETE FROM memberFile WHERE id = #{id} 
+	</delete>
+</mapper>
