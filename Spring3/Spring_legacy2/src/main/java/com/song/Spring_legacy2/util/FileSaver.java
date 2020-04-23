@@ -25,8 +25,9 @@ public class FileSaver {
 		
 		// 파일 이름 교체
 		String fileName = null;
+		System.out.println("before");
 		fileName = this.makeNameByTime(file.getOriginalFilename());
-		System.out.println(fileName);
+		System.out.println("fileName : " + fileName);
 	
 		// 파일 HDD에 저장 (FileCopyUtils 사용)
 		f = new File(f, fileName);
@@ -72,7 +73,7 @@ public class FileSaver {
 		// 파일 이름 교체
 		String fileName = null;
 		fileName = this.makeNameByTime(file.getOriginalFilename());
-		System.out.println(fileName);
+		System.out.println("fileName" + fileName);
 		
 		// 파일 HDD에 저장
 		f = new File(f, fileName);
@@ -100,9 +101,7 @@ public class FileSaver {
 		
 		String uuid = UUID.randomUUID().toString();
 		
-		String[] nameInfo = name.split("\\.");
-		
-		return nameInfo[0] + "_" + uuid + "." + nameInfo[1];
+		return uuid;
 	}
 	
 	// fileDelete

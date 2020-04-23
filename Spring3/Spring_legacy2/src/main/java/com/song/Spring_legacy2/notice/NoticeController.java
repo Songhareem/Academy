@@ -45,9 +45,11 @@ public class NoticeController {
 	@RequestMapping(value = "noticeSelect")
 	public ModelAndView getBoardSelect(long num) throws Exception {
 		
+		System.out.println(num);
 		BoardVO boardVO = noticeService.boardSelect(num);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("vo", boardVO);
+		System.out.println("Select getNum : "+boardVO.getNum());
+		mv.addObject("vo", boardVO);		
 		mv.setViewName("board/boardSelect");
 		
 		return mv;
@@ -63,11 +65,12 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView postBoardWrite(NoticeVO noticeVO, MultipartFile[] files, ModelAndView mv) throws Exception {
+	public ModelAndView postBoardWrite(BoardVO boardVO, MultipartFile[] files, ModelAndView mv) throws Exception {
 		
 		String view = "common/result";
-		noticeVO.setWriter("admin");
-		int result = noticeService.boardWrite(noticeVO, files);
+		boardVO.setWriter("admin");
+		int result = noticeService.boardWrite(boardVO, files);
+		
 		if(result > 0) { 
 			mv.addObject("result", "글쓰기 성공"); mv.addObject("url","./noticeList"); 
 		} else { 
@@ -82,6 +85,7 @@ public class NoticeController {
 	@RequestMapping(value = "noticeUpdate")
 	public ModelAndView getBoardUpdate(NoticeVO noticeVO, ModelAndView mv) throws Exception {
 		
+		noticeVO = (NoticeVO)noticeService.boardSelect(noticeVO.getNum());
 		mv.addObject("vo",noticeVO);
 		mv.setViewName("board/boardUpdate");
 		return mv;

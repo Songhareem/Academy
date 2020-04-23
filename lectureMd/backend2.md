@@ -109,8 +109,9 @@
     - DispatchServlet 에서 HandlerMapping에 URL 전달
     - HandlerMapping은 DispatcherServlet에 다시 전달
     - Dispatcher는 Controller로 request 전달
-    - Controller를 통해 받은 값으로 DispatcherServlet은 InterView에 값 전달
-    - InterView는 값을 통해 어떤 .jsp파일로 가야할지 반환
+    - Controller은 DispatchServlet 통해 ModelAndView return
+    - DispatcherServlet은 InternalView Resolver에 ModelAndView의 View값 전달
+    - InterView Resolver는 값을 통해 어떤 .jsp파일로 가야할지 반환
     - DispatcherServlet은 .jsp 파일을 찾아감 
 
     - DispatcherServlet 설정 파일
@@ -508,3 +509,37 @@
             - 저장할 폴더의 실제 경로를 알아옴
         - 경로명 DB에 저장
         - service단에서 해결
+
+# File Download
+
+- /file/fileDown
+    - file 다운로드 필요 req param
+        - fileNum
+
+- file down class 작성 (Custom View 생성)
+    - extent AbstractView
+    - @Override 함수 작성
+
+- servlet-context에 bean 추가
+    - ```
+        <!-- costom Resolver : return되는 view의 이름과 같은 클래스(extends AbstractView를 상속한)가 있다면 실행 없다면 다음 Resolver -->
+        <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+            <!-- 우선순위 지정 낮을수록 높음 -->
+            <beans:property name="order" value="0"/>   
+        </beans:bean>
+      ```
+
+# 위지위그(WYSIWYG: What You See Is What You Get)
+
+- 문서 편집 과정에서 화면에 포맷된 낱말, 문장이 출력물과 동일하게 나오는 방식을 말한다.
+
+- API
+    - CKeditor ref
+        - https://ckeditor.com/
+    - Summernote ref
+        - https://summernote.org/
+        - CDN 방식
+            - ```
+                <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+                <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+              ```

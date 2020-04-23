@@ -32,7 +32,7 @@ public class QnaService implements BoardService{
 	@Override
 	public int boardWrite(BoardVO boardVO, MultipartFile[] files) throws Exception {
 		
-		String path = servletContext.getRealPath("/resources/images/uploadQna");
+		String path = servletContext.getRealPath("/resources/images/qnaUpload");
 		System.out.println(path);
 
 		int result = qnaDAO.boardWrite(boardVO);
@@ -40,7 +40,7 @@ public class QnaService implements BoardService{
 		for (MultipartFile multipartFile : files) {
 		
 			BoardFileVO boardFileVO = new BoardFileVO();
-			String fileName = fileSaver.saveByUtils(multipartFile, path);
+			String fileName = fileSaver.saveByTransfer(multipartFile, path);
 			boardFileVO.setNum(boardVO.getNum());
 			boardFileVO.setFileName(fileName);
 			boardFileVO.setOriginName(multipartFile.getOriginalFilename());

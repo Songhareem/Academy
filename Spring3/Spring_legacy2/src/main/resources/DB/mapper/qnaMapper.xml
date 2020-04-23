@@ -19,6 +19,27 @@
 		<include refid="search"></include>
 	</sql>
 	
+	<resultMap type="QnaVO" id="selectResult">
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
+		<result column="regDate" property="regDate"/>
+		<result column="hit" property="hit"/>
+		<result column="ref" property="ref"/>
+		<result column="step" property="step"/>
+		<result column="dept" property="dept"/>
+		
+		<!-- 1대N 관계 -->
+		<collection property="boardFileVOs" javaType="java.util.List" ofType="BoardFileVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="num" property="num"/>
+			<result column="fileName" property="fileName"/>
+			<result column="originName" property="originName"/>
+			<result column="board" property="board"/>
+		</collection>
+	</resultMap>
+	
 	<select id="boardCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(num) FROM qna
 		<where>
@@ -43,8 +64,11 @@
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="boardSelect" parameterType="Long" resultType="QnaVO">
-		SELECT * FROM qna WHERE num=#{num}
+	<select id="boardSelect" parameterType="Long" resultMap="selectResult">
+		SELECT Q.*, B.*
+		FROM qna Q left join boardfile B
+		ON (Q.num = B.num)
+		WHERE Q.num = #{num} AND B.board = 2
 	</select>
 	
 	<insert id="boardWrite" parameterType="QnaVO">

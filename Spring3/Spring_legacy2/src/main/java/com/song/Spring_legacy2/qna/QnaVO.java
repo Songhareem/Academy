@@ -1,6 +1,9 @@
 package com.song.Spring_legacy2.qna;
 
+import java.util.List;
+
 import com.song.Spring_legacy2.board.BoardVO;
+import com.song.Spring_legacy2.board.file.BoardFileVO;
 
 public class QnaVO extends BoardVO{
 	
@@ -15,6 +18,8 @@ public class QnaVO extends BoardVO{
 	private long step;
 	// 화면 출력시, 들여쓰기 횟수 저장, 원본글 - 0번, 나머지 - 부모글 dept + 1
 	private long dept;
+	
+	private List<BoardFileVO> boardFileVOs;
 	
 	//SELECT * FROM qna order by ref desc, step asc;
 	
@@ -35,5 +40,12 @@ public class QnaVO extends BoardVO{
 	}
 	public void setDept(long dept) {
 		this.dept = dept;
+	}
+	
+	public List<BoardFileVO> getBoardFileVOs() {
+		return boardFileVOs;
+	}
+	public void setBoardFileVOs(List<BoardFileVO> boardFileVOs) {
+		this.boardFileVOs = boardFileVOs;
 	}
 }

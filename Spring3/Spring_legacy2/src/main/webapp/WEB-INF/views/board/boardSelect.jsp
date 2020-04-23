@@ -34,11 +34,16 @@
 			<div class="well">${vo.contents}</div>
 			
 			<div>
-				<a href="./${board}Update?
-					num=${vo.num}&title=${vo.title}&
-					writer=${vo.writer}&regDate=${vo.regDate}&
-					hit=${vo.hit}&contents=${vo.contents}" 
-					class="btn btn-primary" > Update </a>
+				<c:forEach items="${vo.boardFileVOs}" var="boardFileVO">
+					<a href="../boardFile/fileDown?fileNum=${boardFileVO.fileNum}&board=${boardFileVO.board}">
+						${boardFileVO.originName}
+					</a>
+					<br>
+				</c:forEach>
+			</div>
+			
+			<div>
+				<a href="./${board}Update?num=${vo.num}" class="btn btn-primary">Update</a>
 				<a href="./${board}Delete?num=${vo.num}" class="btn btn-danger" >Delete</a>
 				<c:if test="${board ne 'notice'}">
 					<a href="./${board}Reply?num=${vo.num}" class="btn btn-info" >Reply</a>

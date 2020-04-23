@@ -33,26 +33,25 @@ public class NoticeService implements BoardService {
 	@Override
 	public int boardWrite(BoardVO boardVO, MultipartFile[] files) throws Exception {
 		
-		String path = servletContext.getRealPath("/resources/images/uploadNotice");
+		String path = servletContext.getRealPath("/resources/images/noticeUpload");
 		System.out.println(path);
 
 		// get notice seq
 		boardVO.setNum(noticeDAO.boardNum());
-		System.out.println();
 		
 		int result = noticeDAO.boardWrite(boardVO);
 		
 		for (MultipartFile multipartFile : files) {
-		
+			
 			BoardFileVO boardFileVO = new BoardFileVO();
-			String fileName = fileSaver.saveByUtils(multipartFile, path);
+			String fileName = fileSaver.saveByTransfer(multipartFile, path);
 			boardFileVO.setNum(boardVO.getNum());
 			boardFileVO.setFileName(fileName);
 			boardFileVO.setOriginName(multipartFile.getOriginalFilename());
 			boardFileVO.setBoard(1);
 			boardFileDAO.boardFileInsert(boardFileVO);
 		}
-		
+
 		return result;
 	}
 

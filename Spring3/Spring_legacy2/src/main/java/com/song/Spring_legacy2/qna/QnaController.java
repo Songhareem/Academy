@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.song.Spring_legacy2.board.BoardVO;
+import com.song.Spring_legacy2.notice.NoticeVO;
 import com.song.Spring_legacy2.util.Pager;
 
 @Controller
@@ -78,6 +79,7 @@ public class QnaController {
 	@RequestMapping(value = "qnaUpdate")
 	public ModelAndView getBoardUpdate(QnaVO qnaVO, ModelAndView mv) throws Exception {
 		
+		qnaVO = (QnaVO)qnaService.boardSelect(qnaVO.getNum());
 		mv.addObject("vo",qnaVO);
 		mv.setViewName("board/boardUpdate");
 		return mv;

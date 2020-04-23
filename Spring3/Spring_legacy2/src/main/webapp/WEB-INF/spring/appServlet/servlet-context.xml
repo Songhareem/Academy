@@ -17,8 +17,15 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="order" value="1"/>
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- costom Resolver : return되는 view의 이름과 같은 클래스(extends AbstractView를 상속한)가 있다면 실행 없다면 다음 Resolver -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<!-- 우선순위 지정 낮을수록 높음 -->
+		<beans:property name="order" value="0"/>
 	</beans:bean>
 	
 	<context:component-scan base-package="com.song.Spring_legacy2" />

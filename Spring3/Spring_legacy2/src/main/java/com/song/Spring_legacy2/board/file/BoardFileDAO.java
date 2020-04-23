@@ -20,7 +20,7 @@ public class BoardFileDAO {
 	// R
 	public BoardFileVO boardFileSelect(BoardFileVO boardFileVO) throws Exception {
 		
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"boardFileSelect", boardFileVO);
 	}
 	
 	// U
