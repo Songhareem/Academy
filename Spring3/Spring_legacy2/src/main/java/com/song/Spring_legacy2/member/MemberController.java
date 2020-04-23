@@ -136,14 +136,8 @@ public class MemberController {
 	
 	// memberPage
 	@RequestMapping(value = "memberPage")
-	public ModelAndView getMemberPage(ModelAndView mv, HttpSession session) throws Exception {
+	public ModelAndView getMemberPage(ModelAndView mv) throws Exception {
 		
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		MemberFileVO memberFileVO = new MemberFileVO();
-		memberFileVO.setId(memberVO.getId());
-		memberFileVO = memberService.memberPage(memberFileVO);
-		
-		mv.addObject("file", memberFileVO);
 		mv.setViewName("member/memberPage");
 		
 		return mv;

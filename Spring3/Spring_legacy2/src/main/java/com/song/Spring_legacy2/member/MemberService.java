@@ -75,12 +75,6 @@ public class MemberService {
 		return memberDAO.memberDelete(memberVO);
 	}
 	
-	// memberPage
-	public MemberFileVO memberPage(MemberFileVO memberFileVO) throws Exception {
-		
-		return memberFileDAO.memberFileSelect(memberFileVO);
-	}
-	
 	// memberFileDelete
 	public int MemberFileDelete(MemberFileVO memberFileVO, HttpSession session) throws Exception {
 		
