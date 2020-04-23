@@ -15,15 +15,20 @@
 	<div class="container">
 		
 		<!-- ${pageContext.request.contextPath} -->
-		<form action="./${board}Write" method="post">
+		<form action="./${board}Write" method="post" enctype="multipart/form-data">
 			<h1>${board}Write</h1>
 			<div class="form-group">
-				<label for="subtitle">제목 : </label> 
+				<label for="title">제목 : </label> 
 				<input type="text" class="form-control" id="title" name="title">
 			</div>
 			<div class="form-group">
 				<label for="content">글내용:</label> 
 				<input type="text" class="form-control" id="contents" name="contents">
+			</div>
+			<div class="form-group">
+				<label for="file">Files:</label>
+				<input type="file" class="form-control" id="file" name="files"> 
+				<input type="file" class="form-control" id="file" name="files">
 			</div>
 
 			<button type="submit" class="btn btn-info">Submit</button>

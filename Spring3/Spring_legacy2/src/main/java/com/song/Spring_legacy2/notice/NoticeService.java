@@ -4,11 +4,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.song.Spring_legacy2.board.BoardService;
 import com.song.Spring_legacy2.board.BoardVO;
+import com.song.Spring_legacy2.board.file.BoardFileDAO;
+import com.song.Spring_legacy2.board.file.BoardFileVO;
+import com.song.Spring_legacy2.util.FileSaver;
 import com.song.Spring_legacy2.util.Pager;
 
 @Service
@@ -16,11 +23,37 @@ public class NoticeService implements BoardService {
 
 	@Autowired
 	private NoticeDAO noticeDAO;
+	@Autowired
+	private FileSaver fileSaver;
+	@Autowired
+	private BoardFileDAO boardFileDAO;
+	@Autowired
+	private ServletContext servletContext;
 	
 	@Override
-	public int boardWrite(BoardVO boardVO) throws Exception {
+	public int boardWrite(BoardVO boardVO, MultipartFile[] files) throws Exception {
 		
-		return noticeDAO.boardWrite(boardVO);
+		String path = servletContext.getRealPath("/resources/images/uploadNotice");
+		System.out.println(path);
+
+		// get notice seq
+		boardVO.setNum(noticeDAO.boardNum());
+		System.out.println();
+		
+		int result = noticeDAO.boardWrite(boardVO);
+		
+		for (MultipartFile multipartFile : files) {
+		
+			BoardFileVO boardFileVO = new BoardFileVO();
+			String fileName = fileSaver.saveByUtils(multipartFile, path);
+			boardFileVO.setNum(boardVO.getNum());
+			boardFileVO.setFileName(fileName);
+			boardFileVO.setOriginName(multipartFile.getOriginalFilename());
+			boardFileVO.setBoard(1);
+			boardFileDAO.boardFileInsert(boardFileVO);
+		}
+		
+		return result;
 	}
 
 	@Override

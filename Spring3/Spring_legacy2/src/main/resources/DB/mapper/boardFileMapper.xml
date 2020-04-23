@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.song.Spring_legacy2.board.file.BoardFileDAO">
+	
+	<insert id="boardFileInsert" parameterType="BoardFileVO">
+		INSERT INTO boardFile VALUES(file_seq.nextval, #{num}, #{fileName}, #{originName}, #{board})
+	</insert>
+	
+	<select id="boardFileSelect" parameterType="BoardFileVO" resultType="BoardFileVO">
+		SELECT * FROM boardFile WHERE fileNum = #{fileNum}	
+	</select>
+	
+	<delete id="boardFileDelete" parameterType="BoardFileVO">
+		DELETE FROM boardFile WHERE fileNum = #{fileNum} 
+	</delete>
+</mapper>

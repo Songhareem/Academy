@@ -374,7 +374,13 @@
             - 결과가 여러개 일때
                 - sqlSession.selectList(NAMESPACE명, id명)
                 - sqlSession.selectList(NAMESPACE명, parameter) 
-
+        
+        - Insert시 seqNum을 받아오는 방법
+            - ```
+                <selectKey keyProperty="결과값을 받을 파라미터변수 내의 멤버변수명" order="BEFORE" resultType="리턴받을 값의 타입">
+                    select board_seq.nextval from dual
+                </selectKey>
+              ```
 # List page 처리
 
 - 파라미터

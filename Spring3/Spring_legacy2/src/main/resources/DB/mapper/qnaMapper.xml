@@ -48,8 +48,12 @@
 	</select>
 	
 	<insert id="boardWrite" parameterType="QnaVO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+			select board_seq.nextval from dual
+		</selectKey>
+		
 		INSERT INTO qna VALUES(
-		board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0, board_seq.currval, 0, 0 )
+		#{num}, #{title}, #{writer}, #{contents}, sysdate, 0, #{num}, 0, 0 )
 	</insert>
 		
 	<insert id="boardReply" parameterType="QnaVO">

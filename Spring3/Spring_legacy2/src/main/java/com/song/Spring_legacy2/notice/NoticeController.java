@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.song.Spring_legacy2.board.BoardVO;
@@ -62,18 +63,17 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView postBoardWrite(NoticeVO noticeVO, ModelAndView mv) throws Exception {
+	public ModelAndView postBoardWrite(NoticeVO noticeVO, MultipartFile[] files, ModelAndView mv) throws Exception {
 		
 		String view = "common/result";
 		noticeVO.setWriter("admin");
-		int result = noticeService.boardWrite(noticeVO);
-		if(result > 0) {
-			mv.addObject("result", "글쓰기 성공");
-			mv.addObject("url", "./noticeList");	
-		} else {
-			view = "redirect: ./noticeWrite";
-		}		
-		
+		int result = noticeService.boardWrite(noticeVO, files);
+		if(result > 0) { 
+			mv.addObject("result", "글쓰기 성공"); mv.addObject("url","./noticeList"); 
+		} else { 
+			view = "redirect: ./noticeWrite"; 
+		}
+			
 		mv.setViewName(view);
 		
 		return mv;

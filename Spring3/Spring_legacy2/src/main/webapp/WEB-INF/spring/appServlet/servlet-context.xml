@@ -22,8 +22,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.song.Spring_legacy2" />
-	<context:component-scan base-package="com.song.Spring_legacy2.notice" />
-	
-	
 	
 </beans:beans>

@@ -37,23 +37,27 @@
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
+	<select id="boardNum" resultType="Long">
+		SELECT board_seq.nextval FROM dual 
+	</select>
+	
 	<select id="boardSelect" parameterType="Long" resultType="NoticeVO">
 		SELECT * FROM notice WHERE num=#{num}
 	</select>
 	
 	<insert id="boardWrite" parameterType="NoticeVO">
-		INSERT INTO notice VALUES(board_seq.nextval,#{title},#{writer},#{contents},sysdate,0)
+		INSERT INTO notice VALUES(#{num},#{title},#{writer},#{contents},sysdate,0)
 	</insert>
 	
-	<insert id="boardUpdate" parameterType="NoticeVO">
+	<update id="boardUpdate" parameterType="NoticeVO">
 		UPDATE notice SET title=#{title}, writer=#{writer}, contents=#{contents}, regdate=sysdate WHERE num = #{num}
-	</insert>
+	</update>
 	
-	<insert id="hitUpdate" parameterType="NoticeVO">
+	<update id="hitUpdate" parameterType="NoticeVO">
 		UPDATE notice SET hit = 1+(SELECT hit FROM notice WHERE num = #{num}) WHERE num = #{num}
-	</insert>
+	</update>
 	
-	<insert id="boardDelete" parameterType="Long">
+	<delete id="boardDelete" parameterType="Long">
 		DELETE FROM notice WHERE num=#{num}
-	</insert>
+	</delete>
 </mapper>

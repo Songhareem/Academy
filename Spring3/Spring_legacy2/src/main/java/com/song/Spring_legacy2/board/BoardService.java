@@ -2,12 +2,14 @@ package com.song.Spring_legacy2.board;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.song.Spring_legacy2.util.Pager;
 
 public interface BoardService {
 	
 	// insert
-	public int boardWrite(BoardVO boardVO) throws Exception;
+	public int boardWrite(BoardVO boardVO, MultipartFile[] files) throws Exception;
 
 	// select All / One
 	public long boardCount(Pager pager) throws Exception;

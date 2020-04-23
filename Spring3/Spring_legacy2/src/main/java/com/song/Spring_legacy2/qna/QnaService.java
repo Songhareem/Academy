@@ -4,11 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.song.Spring_legacy2.board.BoardService;
 import com.song.Spring_legacy2.board.BoardVO;
+import com.song.Spring_legacy2.board.file.BoardFileDAO;
+import com.song.Spring_legacy2.board.file.BoardFileVO;
+import com.song.Spring_legacy2.util.FileSaver;
 import com.song.Spring_legacy2.util.Pager;
 
 @Service
@@ -16,11 +22,33 @@ public class QnaService implements BoardService{
 
 	@Autowired
 	private QnaDAO qnaDAO;
-
+	@Autowired
+	private FileSaver fileSaver;
+	@Autowired
+	private BoardFileDAO boardFileDAO;
+	@Autowired
+	private ServletContext servletContext;
+	
 	@Override
-	public int boardWrite(BoardVO boardVO) throws Exception {
+	public int boardWrite(BoardVO boardVO, MultipartFile[] files) throws Exception {
 		
-		return qnaDAO.boardWrite(boardVO);
+		String path = servletContext.getRealPath("/resources/images/uploadQna");
+		System.out.println(path);
+
+		int result = qnaDAO.boardWrite(boardVO);
+		
+		for (MultipartFile multipartFile : files) {
+		
+			BoardFileVO boardFileVO = new BoardFileVO();
+			String fileName = fileSaver.saveByUtils(multipartFile, path);
+			boardFileVO.setNum(boardVO.getNum());
+			boardFileVO.setFileName(fileName);
+			boardFileVO.setOriginName(multipartFile.getOriginalFilename());
+			boardFileVO.setBoard(2);
+			boardFileDAO.boardFileInsert(boardFileVO);
+		}
+		
+		return result;
 	}
 
 	@Override
