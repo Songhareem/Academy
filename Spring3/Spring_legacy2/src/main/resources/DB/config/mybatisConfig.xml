@@ -11,6 +11,7 @@
 		<typeAlias type="com.song.Spring_legacy2.qna.QnaVO" alias="QnaVO"/>
 		<typeAlias type="com.song.Spring_legacy2.member.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.song.Spring_legacy2.member.memberFile.MemberFileVO" alias="MemberFileVO"/>
+		<typeAlias type="com.song.Spring_legacy2.memo.MemoVO" alias="MemoVO"/>
 		<typeAlias type="com.song.Spring_legacy2.util.Pager" alias="Pager"/>
 	</typeAliases>
 </configuration>

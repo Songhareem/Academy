@@ -25,6 +25,12 @@ public class MemberService {
 	@Autowired
 	private FileSaver fileSaver;
 	
+	// memberIdCheck
+	public Long memberIdCheck(MemberVO memberVO) throws Exception {
+
+		return memberDAO.memberIdCheck(memberVO);
+	}
+	
 	// memberList
 	public List<MemberVO> memberList(Pager pager) throws Exception {
 		

@@ -50,7 +50,7 @@ public class FileSaver {
 		// 파일 이름 교체
 		String fileName = null;
 		fileName = this.makeNameByUUID(file.getOriginalFilename());
-		System.out.println(fileName);
+		//System.out.println(fileName);
 		
 		// 파일 HDD에 저장
 		f = new File(f, fileName);
@@ -110,7 +110,7 @@ public class FileSaver {
 		boolean check=false;
 		int result=0;
 		if(file.exists()) {
-			System.out.println("save");
+			//System.out.println("save");
 			check = file.delete();
 		}
 		if(check) {

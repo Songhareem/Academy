@@ -47,9 +47,9 @@
 		(SELECT N.*, rownum R FROM
 		(SELECT * FROM notice WHERE
 		<choose>
-			<when test="kind == 'bt'"> title </when>
+			<when test="kind == 'bc'"> contents </when>
 			<when test="kind == 'bw'"> writer </when>			
-			<otherwise>contents</otherwise>
+			<otherwise>writer</otherwise>
 		</choose>
 		<include refid="search"></include> AND num >= 1 ORDER BY num DESC) N)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
@@ -63,7 +63,7 @@
 		SELECT N.*, B.*
 		FROM notice N left join boardfile B
 		ON (N.num = B.num)
-		WHERE N.num = #{num} AND B.board = 1
+		WHERE N.num = #{num}
 	</select>
 	
 	<insert id="boardWrite" parameterType="NoticeVO">

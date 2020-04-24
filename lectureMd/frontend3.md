@@ -71,24 +71,20 @@
         - $("선택자").removeClass("클래스명{ 클래스명 ...}");   : 해당 요소 클래스 삭제
         - $("선택자").toggleClass("클래스명{ 클래스명 ...}");   
 
-    - Traversing Up
+    - 자기자신 기준 부모 선택
         - $("선택자").parent();                         : 선택자 직속 부모
         - $("선택자").parents();                        : 선택자의 모든 부모
         - $("선택자").parentUntil("멈추고 싶은 tag명");
 
-    - Traversing Down
+    - 자기자신 기준 자식 선택
         - $("선택자").children();               : 선택자의 직속 자식득
         - $("선택자").children();               : 선택자의 족속들중  자식
-        - $("선택자").find("찾는 자식명");       : 선택자 아버지 를 찾는ㅁ 찾는 자식명
+        - $("선택자").find("찾는 자식명");       : 선택자 부모를 찾는 자식명
 
-    - Traber siblings
+    - 자기자신 기준 자기 선택
         - next
         - nextAll
         - nextUtil
         - prev
         - prevAll
         - preUtil
-
-    - 
-    
-- Ajax

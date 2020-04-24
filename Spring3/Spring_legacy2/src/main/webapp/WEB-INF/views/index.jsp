@@ -22,7 +22,24 @@
 		<p>This is another text.</p>
 		
 		<h2>Index</h2>
+		
+		<button id="btn">BUTTON</button>
 	</div>
 
+	<script type="text/javascript">
+		$(`#btn`).click(function() {
+			
+			// jquery Ajax
+			// Get(url, param)
+			alert("start");
+			$.get("./notive/noticeSelect?num=100", function(result) {
+				console.log(result);
+			});
+			alert("finish");
+			
+			// Post(url, param)
+			$.post();
+		});
+	</script>
 </body>
 </html>

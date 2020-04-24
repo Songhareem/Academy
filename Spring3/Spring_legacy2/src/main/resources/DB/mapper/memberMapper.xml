@@ -26,6 +26,10 @@
 		
 	</resultMap>
 	
+	<select id="memberIdCheck" parameterType="memberVO" resultType="Long">
+		SELECT COUNT(id) FROM member WHERE id = #{id}
+	</select>
+	
 	<select id="memberCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(rownum) FROM member
 		<where>

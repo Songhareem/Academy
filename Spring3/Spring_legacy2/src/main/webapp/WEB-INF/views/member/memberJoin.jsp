@@ -50,6 +50,28 @@
 			<button type="submit" class="btn btn-info">Join</button>
 		</form>
 	</div>
-	
+
+	<script type="text/javascript">
+		$(`#id`).blur(function() {
+			var id = $(`#id`).val();
+			if(id == "") {
+				return;
+			}
+			
+			
+			$.post("./memberIdCheck", {id : id}, function(result) {
+				result = result.trim();
+				if(result == 1) {
+					alert("중복ID");
+					$(`#id`).val("");
+					$(`#id`).focus();
+				} else {
+					alert("사용가능한 ID");
+					$(`#id`).attr("readOnly", "readOnly");
+					$(`#pw`).focus();
+				}
+			});
+		});
+	</script>
 </body>
 </html>

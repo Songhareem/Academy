@@ -68,7 +68,7 @@
 		SELECT Q.*, B.*
 		FROM qna Q left join boardfile B
 		ON (Q.num = B.num)
-		WHERE Q.num = #{num} AND B.board = 2
+		WHERE Q.num = #{num}
 	</select>
 	
 	<insert id="boardWrite" parameterType="QnaVO">

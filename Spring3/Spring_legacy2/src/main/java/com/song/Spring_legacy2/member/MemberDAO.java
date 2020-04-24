@@ -15,6 +15,12 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.song.Spring_legacy2.member.MemberDAO.";
 	
+	// memberIdCheck
+	public Long memberIdCheck(MemberVO memberVO) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"memberIdCheck", memberVO);
+	}
+	
 	// memberCount
 	public Long memberCount(Pager pager) throws Exception {
 		

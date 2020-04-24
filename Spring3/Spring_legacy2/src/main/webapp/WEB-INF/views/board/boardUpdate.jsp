@@ -33,8 +33,13 @@
 					${vo.contents}
 				</textarea>
 			</div>
+			<div class="form-group">
+				<label for="file">Files:</label>
+				<input type="file" class="form-control" id="file" name="files"> 
+				<input type="file" class="form-control" id="file" name="files">
+			</div>
 
-			<button type="submit" class="btn btn-info">Submit</button>
+			<input type="submit" class="btn btn-info" value="Submit"/>
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -45,6 +50,7 @@
 			  maxHeight: 400,             // set maximum height of editor
 			  focus: true                  // set focus to editable area after initializing summernote
 			});
+		//$('#contents').summernote(${vo.contents});
 	});
 	
 	</script>

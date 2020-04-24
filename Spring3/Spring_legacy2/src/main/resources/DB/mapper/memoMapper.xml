@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.song.Spring_legacy2.memo.MemoDAO">
+
+	<insert id="memoInsert" parameterType="MemoVO">
+		INSERT INTO memo VALUES(memo_seq.nextval, #{writer}, #{contents} ,sysdate)
+	</insert>
+	
+	<select id="memoList" parameterType="Pager" resultType="MemoVO">
+		SELECT * FROM
+		(SELECT M.*, rownum R FROM
+		(SELECT * FROM memo WHERE num > 0 ORDER BY num DESC) M)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+
+</mapper>

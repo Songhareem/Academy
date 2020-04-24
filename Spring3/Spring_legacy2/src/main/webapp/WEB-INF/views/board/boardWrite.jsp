@@ -16,7 +16,7 @@
 	<div class="container">
 		
 		<!-- ${pageContext.request.contextPath} -->
-		<form action="./${board}Write" method="post" enctype="multipart/form-data">
+		<form id="form" action="./${board}Write" method="post" enctype="multipart/form-data">
 			<h1>${board}Write</h1>
 			<div class="form-group">
 				<label for="title">제목 : </label> 
@@ -24,28 +24,22 @@
 			</div>
 			<div class="form-group">
 				<label for="content">글내용:</label> 
-				<textarea rows="20" cols="" class="form-control" id="contents" name="contents"></textarea>
+				<textarea rows="20" cols="" class="form-control" id="contents"></textarea>
 			</div>
-			<div class="form-group">
-				<label for="file">Files:</label>
-				<input type="file" class="form-control" id="file" name="files"> 
-				<input type="file" class="form-control" id="file" name="files">
+			
+			<input type="button" id="add" class="btn btn-default" value="Add File"/>
+			<div id="fileDiv" class="form-group">
 			</div>
-
-			<button type="submit" class="btn btn-info">Submit</button>
+				
+				<!-- summerNote 입력해도 null 넘어가는 버그있는경우 -->
+				<input type="hidden" id="buffer" name="contents">
+			
+			<div>
+				<input type="button" id="btn" class="btn btn-info" value = "Submit">
+			</div>
 		</form>
 
 	</div>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('#contents').summernote({
-			  height: 400,                 // set editor height
-			  minHeight: 100,             // set minimum height of editor
-			  maxHeight: 400,             // set maximum height of editor
-			  focus: true                  // set focus to editable area after initializing summernote
-			});
-	});
-	
-	</script>
+	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 </body>
 </html>

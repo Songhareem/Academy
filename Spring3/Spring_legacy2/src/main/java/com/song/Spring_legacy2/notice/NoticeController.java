@@ -1,6 +1,9 @@
 package com.song.Spring_legacy2.notice;
 
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +48,6 @@ public class NoticeController {
 	@RequestMapping(value = "noticeSelect")
 	public ModelAndView getBoardSelect(long num) throws Exception {
 		
-		System.out.println(num);
 		BoardVO boardVO = noticeService.boardSelect(num);
 		ModelAndView mv = new ModelAndView();
 		System.out.println("Select getNum : "+boardVO.getNum());
@@ -65,7 +67,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView postBoardWrite(BoardVO boardVO, MultipartFile[] files, ModelAndView mv) throws Exception {
+	public ModelAndView postBoardWrite(HttpServletRequest request, BoardVO boardVO, MultipartFile[] files, ModelAndView mv) throws Exception {
 		
 		String view = "common/result";
 		boardVO.setWriter("admin");
