@@ -1,5 +1,6 @@
 package com.song.Spring_legacy2.member;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +33,17 @@ public class MemberController {
 		long result = memberService.memberIdCheck(memberVO);
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	@GetMapping(value = "memberLists")
+	public ModelAndView memberLists(Pager pager, ModelAndView mv) throws Exception {
+		
+		List<MemberVO> mvoList = memberService.memberList(pager);
+		mv.addObject("list", mvoList);
+		mv.addObject("pager", pager);
+		mv.setViewName("member/memberLists");
+		
 		return mv;
 	}
 	
@@ -183,6 +196,18 @@ public class MemberController {
 			mv.addObject("url", "./memberPage"); // 미완
 		}
 		mv.setViewName("common/result");
+		return mv;
+	}
+	
+	//memberDeletes
+	@GetMapping("memberDeletes")
+	public ModelAndView memberDeletes(String ids[], ModelAndView mv ) throws Exception {
+		
+		// arr -> list
+		List<String> list = Arrays.asList(ids);
+		int result = memberService.memberDeletes(list);			
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

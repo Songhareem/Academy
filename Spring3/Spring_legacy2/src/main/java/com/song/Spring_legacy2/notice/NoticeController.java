@@ -112,6 +112,7 @@ public class NoticeController {
 	public ModelAndView getBoardDelete(long num, ModelAndView mv) throws Exception {
 		
 		String view = "common/result";
+		// boardfile 같이 delete 시켜야함
 		int result = noticeService.boardDelete(num);
 		if(result > 0) {
 			view = "redirect: ./noticeList";

@@ -6,6 +6,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="java.lang.Long" alias="Long"/>
+		<typeAlias type="java.util.List" alias="List"/>
 		<typeAlias type="com.song.Spring_legacy2.board.file.BoardFileVO" alias="BoardFileVO"/>
 		<typeAlias type="com.song.Spring_legacy2.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.song.Spring_legacy2.qna.QnaVO" alias="QnaVO"/>

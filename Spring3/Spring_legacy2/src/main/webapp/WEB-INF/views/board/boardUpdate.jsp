@@ -35,8 +35,11 @@
 			</div>
 			<div class="form-group">
 				<label for="file">Files:</label>
-				<input type="file" class="form-control" id="file" name="files"> 
-				<input type="file" class="form-control" id="file" name="files">
+				<c:forEach items="${vo.boardFileVOs}" var="fileVO">
+					<p>${fileVO.originName} <i id="${fileVO.fileNum}" class="glyphicon glyphicon-remove-sign fileDelete"></i></p>
+				</c:forEach> 
+				<!-- <input type="file" class="form-control" id="file" name="files">
+				<input type="file" class="form-control" id="file" name="files"> -->
 			</div>
 
 			<input type="submit" class="btn btn-info" value="Submit"/>
@@ -51,6 +54,21 @@
 			  focus: true                  // set focus to editable area after initializing summernote
 			});
 		//$('#contents').summernote(${vo.contents});
+	});
+	
+	$(".fileDelete").click(function(){
+		var target = $(this);
+		var fileNum = $(this).attr("id");
+		console.log(fileNum);
+		$.post("../boardFile/fileDelete", {fileNum: fileNum},function(data){
+			data = data.trim(); 
+			alert(data);
+			if(data > 0) {
+				target.parent().remove();
+			} else {
+				alert("file delete fail");
+			}
+		});
 	});
 	
 	</script>

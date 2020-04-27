@@ -543,3 +543,36 @@
                 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
                 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
               ```
+# 댓글
+
+- ref
+    - 원본글과 답글을 그룹으로 묶을 DATA 
+    - 원본글 : 자기 자신의 글번호를 ref에 넣기 
+    - 답글 : 부모글의 ref를 자기 자신의 ref에 넣기
+- step
+    - 그룹내에서 정렬을 위한 값
+    - 원본글 : 0 
+    - 자식 : 0보다 크면 됨
+	- ref값이 부모의 ref와 같은것과 stap이 부모의 step보다 큰것들을 step + 1
+- dept
+    - 화면 출력시, 들여쓰기 횟수 저장
+    - 원본글 : 0번
+    - 답글 : 부모글 혹은 답글 dept + 1
+
+- 구현
+    - 1) step 업데이트
+        - ```
+            UPDATE qna SET step = 1 + step WHERE
+            ref = (SELECT ref FROM qna WHERE num = #{num})
+            AND
+            step > (SELECT step FROM qna WHERE num = #{num})
+          ```
+    - 2) Reply 가능한 post data Insert
+        - ```
+            INSERT INTO qna VALUES(
+            board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0,
+            (SELECT ref FROM qna WHERE num = #{num}),
+            (SELECT step FROM qna WHERE num = #{num}) + 1,
+            (SELECT dept FROM qna WHERE num = #{num}) + 1 
+            )
+          ```

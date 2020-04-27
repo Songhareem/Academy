@@ -2,10 +2,9 @@
 $(document).ready(function() {
 	$('#contents').summernote({
 		height : 400, // set editor height
-		minHeight : 100, // set minimum height of editor
+		minHeight : 400, // set minimum height of editor
 		maxHeight : 400, // set maximum height of editor
 		focus : true
-	// set focus to editable area after initializing summernote
 	});
 });
 

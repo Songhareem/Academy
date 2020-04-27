@@ -330,13 +330,7 @@
     - fixed             : 절대위치, 보이는 화면 내부에서의 절대위치
     - relative          : 상대위치
     - z-index           : static에서는 사용불가, z-index를 이용하여 3차원 표현 가능(0~999)
-
-# javascript
-
-# Jquery
-
-# Ajax
-
+    
 # ref
 
 - 배경화면 이미지 down : https://grafolio.naver.com/works/list.grfl

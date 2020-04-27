@@ -88,3 +88,24 @@
         - prev
         - prevAll
         - preUtil
+
+# JSTL
+
+- 반복문
+    - ```
+        <c:foreach items="key" var="value" varStatus="i">
+            ${i.index}      : 0 부터 순서 번호(index 번호)
+            ${i.count}      : 1 부터 순서 번호
+            ${i.firet}      : 현재 루프가 처음인지 반환(true/false)
+            ${i.last}       : 현재 루프가 마지막인지 반환(true/false)
+            ${i.current}    : i값에 해당하는 현재 value 
+        </c:foreach>
+
+        <c:foreach begin="startVal" end="endVal" varStatus="i">
+            ${i.begin}      : 시작번호 반환
+            ${i.end}        : 끝번호 반환
+            ${i.step}       : 증가값 반환
+        </c:foreach>
+    ```
+
+

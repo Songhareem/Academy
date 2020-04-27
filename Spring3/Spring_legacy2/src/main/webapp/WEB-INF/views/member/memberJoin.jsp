@@ -58,8 +58,24 @@
 				return;
 			}
 			
+			// Ajax 방식
+			$.ajax({
+				type: "post",			// method 형식 "get" / "post"
+				url: "./memberIdCheck",	// URL 주소
+				data: {					// param
+					id : id
+				},
+				success: function(data, status) {
+					alert(data);
+				},
+				error: function() {
+					alert("err");
+				}
+			});
 			
-			$.post("./memberIdCheck", {id : id}, function(result) {
+			
+			// post 방식
+			/* 	$.post("./memberIdCheck", {id : id}, function(result) {
 				result = result.trim();
 				if(result == 1) {
 					alert("중복ID");
@@ -70,7 +86,7 @@
 					$(`#id`).attr("readOnly", "readOnly");
 					$(`#pw`).focus();
 				}
-			});
+			}); */
 		});
 	</script>
 </body>
