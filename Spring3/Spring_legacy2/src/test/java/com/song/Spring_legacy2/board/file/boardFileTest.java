@@ -2,6 +2,8 @@ package com.song.Spring_legacy2.board.file;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

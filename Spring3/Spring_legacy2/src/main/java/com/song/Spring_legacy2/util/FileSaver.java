@@ -100,8 +100,9 @@ public class FileSaver {
 	public String makeNameByUUID(String name) {
 		
 		String uuid = UUID.randomUUID().toString();
+		String extension = name.substring(name.lastIndexOf("."));
 		
-		return uuid;
+		return uuid + extension;
 	}
 	
 	// fileDelete

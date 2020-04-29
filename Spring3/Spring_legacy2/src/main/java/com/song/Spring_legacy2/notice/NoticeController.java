@@ -34,10 +34,7 @@ public class NoticeController {
 	
 	@RequestMapping(value = "noticeList")
 	public ModelAndView getBoardList(Pager pager, ModelAndView mv) throws Exception {
-		
-		System.out.println(pager.getKind());
-		System.out.println(pager.getSearch());
-		
+				
 		List<BoardVO> ndtoList = noticeService.boardList(pager);
 		mv.addObject("list", ndtoList);
 		mv.addObject("pager", pager);
@@ -94,9 +91,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public ModelAndView postBoardUpdate(NoticeVO noticeVO, ModelAndView mv) throws Exception {
+	public ModelAndView postBoardUpdate(NoticeVO noticeVO, MultipartFile[] files, ModelAndView mv) throws Exception {
 		
-		int result = noticeService.boardUpdate(noticeVO);
+		int result = noticeService.boardUpdate(noticeVO, files);
 		if(result > 0) {
 			mv.setViewName("redirect: ./noticeSelect?num="+noticeVO.getNum());
 		} else {

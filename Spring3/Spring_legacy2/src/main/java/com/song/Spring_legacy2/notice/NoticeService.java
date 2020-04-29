@@ -41,18 +41,19 @@ public class NoticeService implements BoardService {
 		
 		int result = noticeDAO.boardWrite(boardVO);
 		
-		for (MultipartFile multipartFile : files) {
+		for (MultipartFile file : files) {
 			
-			if(multipartFile.getSize() > 0) {
-			
-				BoardFileVO boardFileVO = new BoardFileVO();
-				String fileName = fileSaver.saveByTransfer(multipartFile, path);
-				boardFileVO.setNum(boardVO.getNum());
-				boardFileVO.setFileName(fileName);
-				boardFileVO.setOriginName(multipartFile.getOriginalFilename());
-				boardFileVO.setBoard(1);
-				boardFileDAO.boardFileInsert(boardFileVO);
+			if(file.getSize() == 0) {
+				continue;
 			}
+			
+			BoardFileVO boardFileVO = new BoardFileVO();
+			String fileName = fileSaver.saveByTransfer(file, path);
+			boardFileVO.setNum(boardVO.getNum());
+			boardFileVO.setFileName(fileName);
+			boardFileVO.setOriginName(file.getOriginalFilename());
+			boardFileVO.setBoard(1);
+			boardFileDAO.boardFileInsert(boardFileVO);
 		}
 
 		return result;
@@ -81,9 +82,29 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
+	public int boardUpdate(BoardVO boardVO, MultipartFile[] files) throws Exception {
 		
-		return noticeDAO.boardUpdate(boardVO);
+		String path = servletContext.getRealPath("/resources/images/noticeUpload");
+		System.out.println(path);
+		
+		int result = noticeDAO.boardUpdate(boardVO);
+		
+		for (MultipartFile file : files) {
+			
+			if(file.getSize() == 0) {
+				continue;
+			}
+			
+			BoardFileVO boardFileVO = new BoardFileVO();
+			String fileName = fileSaver.saveByTransfer(file, path);
+			boardFileVO.setNum(boardVO.getNum());
+			boardFileVO.setFileName(fileName);
+			boardFileVO.setOriginName(file.getOriginalFilename());
+			boardFileVO.setBoard(1);
+			result = boardFileDAO.boardFileInsert(boardFileVO);
+		}
+
+		return result;
 	}
 
 	@Override
@@ -94,6 +115,19 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int boardDelete(long num) throws Exception {
+		
+		String path = servletContext.getRealPath("/resources/images/noticeUpload");
+
+		List<BoardFileVO> list = boardFileDAO.boardFileList(num);
+		
+		// 1. HDD 에서 삭제
+		for (BoardFileVO boardFileVO : list) {
+			
+			fileSaver.deleteFile(boardFileVO.getFileName(), path);
+		}
+		
+		// 2. DB(boardFile) 에서 file삭제
+		boardFileDAO.boardFileDeleteCascade(num);
 		
 		return noticeDAO.boardDelete(num);
 	}

@@ -86,9 +86,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
-	public ModelAndView postBoardUpdate(QnaVO qnaVO, ModelAndView mv) throws Exception {
+	public ModelAndView postBoardUpdate(QnaVO qnaVO, ModelAndView mv,  MultipartFile[] files) throws Exception {
 		
-		int result = qnaService.boardUpdate(qnaVO);
+		int result = qnaService.boardUpdate(qnaVO, files);
 		if(result > 0) {
 			mv.setViewName("redirect: ./qnaSelect?num="+qnaVO.getNum());
 		} else {

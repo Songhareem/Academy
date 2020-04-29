@@ -9,6 +9,8 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
+	<!-- controller 및 DispatcherServlet 관련  -->
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 

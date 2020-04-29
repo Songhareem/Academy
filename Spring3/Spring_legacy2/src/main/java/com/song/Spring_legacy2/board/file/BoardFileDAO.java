@@ -1,5 +1,7 @@
 package com.song.Spring_legacy2.board.file;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,11 +25,21 @@ public class BoardFileDAO {
 		return sqlSession.selectOne(NAMESPACE+"boardFileSelect", boardFileVO);
 	}
 	
+	public List<BoardFileVO> boardFileList(Long num) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE+"boardFileList", num);
+	}
+	
 	// U
 	
 	// D
 	public int boardFileDelete(BoardFileVO boardFileVO) throws Exception {
 		
 		return sqlSession.delete(NAMESPACE+"boardFileDelete", boardFileVO);
+	}
+	
+	public int boardFileDeleteCascade(Long num) throws Exception {
+		
+		return sqlSession.delete(NAMESPACE+"boardFileDeleteCascade", num);
 	}
 }

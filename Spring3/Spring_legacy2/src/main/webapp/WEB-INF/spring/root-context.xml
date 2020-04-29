@@ -5,6 +5,8 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
+	<!-- controller 및 DispatcherServlet 이외 나머지 관련  -->
+	
 	<!-- db pool 가져오기 -->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
 		<property name="username" value="user02"/>

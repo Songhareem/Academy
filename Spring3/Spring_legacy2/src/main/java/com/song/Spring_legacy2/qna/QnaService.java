@@ -82,7 +82,7 @@ public class QnaService implements BoardService{
 	}
 
 	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
+	public int boardUpdate(BoardVO boardVO, MultipartFile[] files) throws Exception {
 		
 		return qnaDAO.boardUpdate(boardVO);
 	}

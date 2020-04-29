@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -16,8 +18,8 @@
 	<div class="container">
 
 		<!-- ${pageContext.request.contextPath} -->
-		<form action="./${board}Update" method="post">
-			<h1>${board}Update</h1>
+		<form action="./${board}Update" method="post" enctype="multipart/form-data">
+			<h1>${fn:toUpperCase(board)}Update</h1>
 			
 			<input type="hidden" class="form-control" id="num" name="num" value="${vo.num}">
 			<input type="hidden" class="form-control" id="writer" name="writer" value="${vo.writer}">
@@ -33,18 +35,23 @@
 					${vo.contents}
 				</textarea>
 			</div>
+
+			<input type="button" id="add" class="btn btn-default" value="Add File"/>
+			<div id="fileDiv" class="form-group">
+			
+			</div>
+			
 			<div class="form-group">
 				<label for="file">Files:</label>
 				<c:forEach items="${vo.boardFileVOs}" var="fileVO">
 					<p>${fileVO.originName} <i id="${fileVO.fileNum}" class="glyphicon glyphicon-remove-sign fileDelete"></i></p>
 				</c:forEach> 
-				<!-- <input type="file" class="form-control" id="file" name="files">
-				<input type="file" class="form-control" id="file" name="files"> -->
 			</div>
 
 			<input type="submit" class="btn btn-info" value="Submit"/>
 		</form>
 	</div>
+	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('#contents').summernote({
@@ -56,15 +63,25 @@
 		//$('#contents').summernote(${vo.contents});
 	});
 	
+	var size = ${vo.boardFileVOs.size()}
+	fileNow = fileNow + size;
+	
 	$(".fileDelete").click(function(){
+		
+		var check = confirm("파일을 삭제하시겠습니까?");
+		if(!check) {
+			return;
+		}
+		
 		var target = $(this);
 		var fileNum = $(this).attr("id");
-		console.log(fileNum);
+
 		$.post("../boardFile/fileDelete", {fileNum: fileNum},function(data){
 			data = data.trim(); 
 			alert(data);
 			if(data > 0) {
 				target.parent().remove();
+				fileNow--;
 			} else {
 				alert("file delete fail");
 			}

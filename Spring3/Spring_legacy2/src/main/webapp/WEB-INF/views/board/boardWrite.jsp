@@ -24,7 +24,7 @@
 			</div>
 			<div class="form-group">
 				<label for="content">글내용:</label> 
-				<textarea rows="20" cols="" class="form-control" id="contents"></textarea>
+				<textarea rows="20" cols="" class="form-control" id="contents" name="contents"></textarea>
 			</div>
 			
 			<input type="button" id="add" class="btn btn-default" value="Add File"/>
@@ -32,7 +32,7 @@
 			</div>
 				
 				<!-- summerNote 입력해도 null 넘어가는 버그있는경우 -->
-				<input type="hidden" id="buffer" name="contents">
+				<!-- <input type="hidden" id="buffer" name="contents"> -->
 			
 			<div>
 				<input type="button" id="btn" class="btn btn-info" value = "Submit">
@@ -40,6 +40,7 @@
 		</form>
 
 	</div>
+
 	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ public interface BoardService {
 	public BoardVO boardSelect(long num) throws Exception;
 
 	// update
-	public int boardUpdate(BoardVO boardVO) throws Exception;
+	public int boardUpdate(BoardVO boardVO,  MultipartFile[] files) throws Exception;
 	public int hitUpdate(BoardVO boardVO) throws Exception;
 
 	// delete

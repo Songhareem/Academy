@@ -10,10 +10,18 @@
 	</insert>
 	
 	<select id="boardFileSelect" parameterType="BoardFileVO" resultType="BoardFileVO">
-		SELECT * FROM boardFile WHERE fileNum = #{fileNum} AND board = #{board}	
+		SELECT * FROM boardFile WHERE fileNum = #{fileNum}	
 	</select>
 	
 	<delete id="boardFileDelete" parameterType="BoardFileVO">
 		DELETE FROM boardFile WHERE fileNum = #{fileNum} 
 	</delete>
+	
+	<delete id="boardFileDeleteCascade" parameterType="Long">
+		DELETE FROM boardFile WHERE num = #{num} 
+	</delete>
+	
+	<select id="boardFileList" parameterType="Long" resultType="boardFileVO">
+		SELECT * FROM boardFile WHERE num = #{num}
+	</select>
 </mapper>
