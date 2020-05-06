@@ -43,3 +43,8 @@
                 </interceptors>
               ```
         - @Component
+
+# properties
+
+- 필요 데이터를 외부에 두고 읽어서 사용, key value 형식
+- 위치 : src/main/resources/*
