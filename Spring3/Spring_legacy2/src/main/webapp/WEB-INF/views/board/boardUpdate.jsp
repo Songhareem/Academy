@@ -43,9 +43,11 @@
 			
 			<div class="form-group">
 				<label for="file">Files:</label>
-				<c:forEach items="${vo.boardFileVOs}" var="fileVO">
-					<p>${fileVO.originName} <i id="${fileVO.fileNum}" class="glyphicon glyphicon-remove-sign fileDelete"></i></p>
-				</c:forEach> 
+				<c:catch>
+					<c:forEach items="${vo.boardFileVOs}" var="fileVO">
+						<p>${fileVO.originName} <i id="${fileVO.fileNum}" class="glyphicon glyphicon-remove-sign fileDelete"></i></p>
+					</c:forEach> 
+				</c:catch>
 			</div>
 
 			<input type="submit" class="btn btn-info" value="Submit"/>
@@ -77,8 +79,7 @@
 		var fileNum = $(this).attr("id");
 
 		$.post("../boardFile/fileDelete", {fileNum: fileNum},function(data){
-			data = data.trim(); 
-			alert(data);
+			
 			if(data > 0) {
 				target.parent().remove();
 				fileNow--;

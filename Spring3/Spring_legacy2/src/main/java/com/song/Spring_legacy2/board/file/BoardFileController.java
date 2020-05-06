@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,14 +31,12 @@ public class BoardFileController {
 	}
 	
 	@PostMapping("summerDelete")
-	public ModelAndView fileDelete(String fileName, HttpSession session) throws Exception {
+	@ResponseBody
+	public int fileDelete(String fileName, HttpSession session) throws Exception {
 		
-		ModelAndView mv = new ModelAndView();
 		int result = boardFileService.boardFileDelete(fileName, session);
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
 		
-		return mv;
+		return result;
 	}
 	
 	@PostMapping("fileDelete")

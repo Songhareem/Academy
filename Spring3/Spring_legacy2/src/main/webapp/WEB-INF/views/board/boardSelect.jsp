@@ -34,12 +34,14 @@
 			<div class="well">${vo.contents}</div>
 			
 			<div>
-				<c:forEach items="${vo.boardFileVOs}" var="boardFileVO">
-					<a href="../boardFile/fileDown?fileNum=${boardFileVO.fileNum}&board=${boardFileVO.board}">
-						${boardFileVO.originName}
-					</a>
-					<br>
-				</c:forEach>
+				<c:catch>
+					<c:forEach items="${vo.boardFileVOs}" var="boardFileVO">
+						<a href="../boardFile/fileDown?fileNum=${boardFileVO.fileNum}&board=${boardFileVO.board}">
+							${boardFileVO.originName}
+						</a>
+						<br>
+					</c:forEach>
+				</c:catch>
 			</div>
 			
 			<div>

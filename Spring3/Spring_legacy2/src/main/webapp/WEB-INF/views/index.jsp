@@ -24,6 +24,8 @@
 		<h2>Index</h2>
 		
 		<button id="btn">BUTTON</button>
+		<button id="btn2">BUTTON2</button>
+		
 	</div>
 
 	<script type="text/javascript">
@@ -31,15 +33,29 @@
 			
 			// jquery Ajax
 			// Get(url, param)
-			alert("start");
-			$.get("./notive/noticeSelect?num=100", function(result) {
-				console.log(result);
-			});
-			alert("finish");
 			
-			// Post(url, param)
-			$.post();
+			$.get("./json/json1", function(data) {
+				//0. data가 String인지 Json Onject인지 판별
+				// "key":"value" = String
+				// object = json object
+				console.log(data);
+				
+				//1. String 이라면, Json Object 변환
+				//data = data.trim();
+				//data = JSON.parse(data);
+				console.log(data.num);
+				console.log(data.title);
+				console.log(data.writer);
+				console.log(data.contents);
+			});
 		});
+		
+		$(`#btn2`).click(function() {
+			$.get("https://api.manana.kr/exchange/rate.json?base=KRW&code=KRW,USD,JPY", function(data) {
+				console.log(data[1].rate);
+			});
+		});
+	
 	</script>
 </body>
 </html>

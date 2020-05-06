@@ -76,7 +76,7 @@ public class QnaController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "qnaUpdate")
+	@GetMapping("qnaUpdate")
 	public ModelAndView getBoardUpdate(QnaVO qnaVO, ModelAndView mv) throws Exception {
 		
 		qnaVO = (QnaVO)qnaService.boardSelect(qnaVO.getNum());
@@ -85,7 +85,7 @@ public class QnaController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
+	@PostMapping("qnaUpdate")
 	public ModelAndView postBoardUpdate(QnaVO qnaVO, ModelAndView mv,  MultipartFile[] files) throws Exception {
 		
 		int result = qnaService.boardUpdate(qnaVO, files);

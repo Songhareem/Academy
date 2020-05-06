@@ -30,6 +30,41 @@
 		<beans:property name="order" value="0"/>
 	</beans:bean>
 	
+	<interceptors>
+		<interceptor>
+			<!-- URL Pattern -->
+			<mapping path="/*"/>
+			<!-- Interceptor class -->
+			<beans:bean class="com.song.Spring_legacy2.interceptor.TestInterceptor">
+			</beans:bean>
+		</interceptor>
+		
+		<interceptor>
+			<!-- URL Pattern -->
+			<mapping path="/notice/*"/>
+			<exclude-mapping path="/notice/noticeList"/>
+			<exclude-mapping path="/notice/noticeSelect"/>
+			<!-- 생성한 객체 참조 -->
+			<beans:ref bean="noticeInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<!-- URL Pattern -->
+			<mapping path="/member/memberPage"/>
+			<!-- 생성한 객체 참조 -->
+			<beans:ref bean="memberInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<!-- URL Pattern -->
+			<mapping path="/qna/*"/>
+			<exclude-mapping path="/qna/qnaList"/>
+			<!-- 생성한 객체 참조 -->
+			<beans:ref bean="qnaInterceptor"/>
+		</interceptor>
+		
+	</interceptors>
+	
 	<context:component-scan base-package="com.song.Spring_legacy2" />
 	
 </beans:beans>
