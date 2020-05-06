@@ -48,3 +48,27 @@
 
 - 필요 데이터를 외부에 두고 읽어서 사용, key value 형식
 - 위치 : src/main/resources/*
+- properties 파일 생성
+- .gitignore에 properties 파일 추가할 것
+- *.propertices
+    - ```
+        oracle.user = user02
+        oracle.pw = user02
+        oracle.url = jdbc:oracle:thin:@192.168.56.101:1521:xe
+        oracle.driver = oracle.jdbc.driver.OracleDriver
+      ```
+- root-context.xml에 properties 읽어오는 bean 추가 및 DB 에 적용
+    - ```
+        <!-- properties 읽어오기 -->
+        <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
+            <property name="locations" value="classpath:DB/config/*.properties"></property>
+        </bean>
+        
+        <!-- db pool 가져오기 -->
+        <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+            <property name="username" value="${oracle.user}"/>
+            <property name="password" value="${oracle.pw}"/>
+            <property name="url" value="${oracle.url}"/>
+            <property name="driverClassName" value="${oracle.driver}"/>
+        </bean>
+      ```
