@@ -6,11 +6,15 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.song.Spring_legacy2.transfer.Card;
+import com.song.Spring_legacy2.transfer.Transfer;
 
 /**
  * Handles requests for the application home page.
@@ -27,6 +31,12 @@ public class HomeController {
 	@Value("${oracle.user}")
 	private String user;
 	
+	@Autowired
+	private Transfer transfer;
+	
+	@Autowired
+	private Card card;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
@@ -36,7 +46,11 @@ public class HomeController {
 //		String formattedDate = dateFormat.format(date);
 //		model.addAttribute("serverTime", formattedDate );
 		
-		System.out.println(user);
+		transfer.bus(1000);
+		
+		transfer.subway(2000, "3호선");
+		
+		transfer.texi();
 		
 		return "index";
 	}
