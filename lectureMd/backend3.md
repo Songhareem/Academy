@@ -72,7 +72,20 @@
             <property name="driverClassName" value="${oracle.driver}"/>
         </bean>
       ```
+- root-context.xml namespace util 추가 후 properties 적용
+    - ```
+        <!-- properties 읽어오기 -->
+        <util:properties location="classpath:DB/config/db.properties" id="db"/>
+        
+        <!-- db pool 가져오기 -->
+        <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+            <property name="username" value="#{db['oracle.user']}"/>
+            <property name="password" value="#{db['oracle.pw']}"/>
+            <property name="url" value="#{db['oracle.url']}"/>
+            <property name="driverClassName" value="#{db['oracle.driver']}"/>
+        </bean>
+      ```
 - java 소스 코드에서 사용
     - ```
-        
+        @Value("#{id명['key']}")
       ``` 
