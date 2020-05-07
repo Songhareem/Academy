@@ -146,11 +146,11 @@
                     <artifactId>aspectjweaver</artifactId>
                     <version>${org.aspectj-version}</version>
                 </dependency>
-            ` ---
+              ```
     - 사용법
         - xml 이용 (*.context)
             - new Spring bean configuration file(aop-context.xml)
-            - web.xml에 등록
+            - web.xml에 등록(root-context param이 있는곳에 적용)
             - namespace aop 체크
             - aop-context.xml 내부
                 - ```
@@ -180,7 +180,16 @@
                         }
                     }
                   ```
-        - @bean 이용
+        - Annotation 이용
+            - new Spring bean configuration file(aopAnno-context.xml)
+            - web.xml에 등록(servlet-context param이 있는곳에 적용)
+            - namespace aop 체크
+            - aopAnno-context.xml 내부
+                - ```
+                    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+                  ```
+            - advice 클래스 내부
+                - 
 
 # 트랜젝션
 

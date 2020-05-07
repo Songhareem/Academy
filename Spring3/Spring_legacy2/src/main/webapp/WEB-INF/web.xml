@@ -22,7 +22,9 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-		/WEB-INF/spring/*-context.xml
+		<!-- /WEB-INF/spring/*-context.xml -->
+		/WEB-INF/spring/root-context.xml
+		<!-- /WEB-INF/spring/aop-context.xml -->
 		</param-value>
 	</context-param>
 	
@@ -37,7 +39,10 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+			<param-value>
+			/WEB-INF/spring/appServlet/servlet-context.xml
+			/WEB-INF/spring/appServlet/aopAnno-context.xml
+			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

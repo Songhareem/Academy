@@ -46,11 +46,11 @@ public class HomeController {
 //		String formattedDate = dateFormat.format(date);
 //		model.addAttribute("serverTime", formattedDate );
 		
-		transfer.bus(1000);
-		
-		transfer.subway(2000, "3호선");
-		
-		transfer.texi();
+//		transfer.bus(1000);
+//		
+//		transfer.subway(2000, "3호선");
+//		
+//		transfer.texi();
 		
 		return "index";
 	}

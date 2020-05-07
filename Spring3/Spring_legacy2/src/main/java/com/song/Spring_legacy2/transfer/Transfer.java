@@ -1,5 +1,8 @@
 package com.song.Spring_legacy2.transfer;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Transfer {
 	
 	public void bus(int money) {
