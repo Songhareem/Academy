@@ -72,3 +72,7 @@
             <property name="driverClassName" value="${oracle.driver}"/>
         </bean>
       ```
+- java 소스 코드에서 사용
+    - ```
+        
+      ``` 
