@@ -65,10 +65,11 @@
 		
 	</interceptors>
 	
-	
-	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
+	<!-- properties -->
+	<!-- <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
 		<beans:property name="locations" value="classpath:DB/config/*.properties"/>
-	</beans:bean>
+	</beans:bean> -->
+	<context:property-placeholder location="classpath:DB/config/*.properties"/>
 	
 	<context:component-scan base-package="com.song.Spring_legacy2" />
 	

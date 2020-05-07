@@ -57,7 +57,7 @@
         oracle.url = jdbc:oracle:thin:@192.168.56.101:1521:xe
         oracle.driver = oracle.jdbc.driver.OracleDriver
       ```
-- root-context.xml에 properties 읽어오는 bean 추가 및 DB 에 적용
+- root-context.xml에 properties 읽어오는 bean 추가 및 DB 에 적용(안되면 servlet-context에도 적용)
     - ```
         <!-- properties 읽어오기 -->
         <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
@@ -72,7 +72,12 @@
             <property name="driverClassName" value="${oracle.driver}"/>
         </bean>
       ```
+- *-context.xml에 다른 방식으로 bean 추가 및 적용
+    - ```
+        <context:property-placeholder location="classpath:DB/config/*.properties"/>
+      ```
 - java 소스 코드에서 사용
     - ```
-        
+        @Value("${oracle.user}")
+	    private String user;
       ``` 
