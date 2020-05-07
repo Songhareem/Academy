@@ -128,7 +128,7 @@
     - within(com.iu..*)  : com.iu 하위 패키지 포함 모든 클래스의 메서드 
 
 - aop 적용    
-    - API 등록 (pom.xml)
+    - 필요 API 등록 (pom.xml)
         - Spring-aop
             - ```
                 <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
@@ -189,8 +189,82 @@
                     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
                   ```
             - advice 클래스 내부
-                - 
+                - ```
+                    @Component
+                    @Aspect
+                    public class Card {
+                        
+                        @AfterReturning("execution(* com.song.Spring_legacy2.transfer.Transfer.*())")
+                        public void cardAfter() {
+                            System.out.println("---------------------");
+                            System.out.println("카드 결제");
+                        }
+                        
+                        @Around("execution(* com.song.Spring_legacy2.transfer.Transfer.*(*,..))")
+                        public Object cardCheck(ProceedingJoinPoint join) throws Throwable {
+                            
+                            System.out.println("---------------------");
+                            System.out.println("카드chekc in");
+                        
+                            Object[] ar = join.getArgs();
+                            
+                            for (Object object : ar) {
+                                
+                                System.out.println(object);
+                            }
+                            Object object = join.proceed();
+                            
+                            System.out.println("카드chekc out");
+                        
+                            return object;
+                        }
+                    }
+                  ```
+            - pointcut 클래스 내부
+                - ```
+                    @Component
+                  ```
 
 # 트랜젝션
 
 - 삽입, 삭제, 수정 중 두가지 이상이 한 작업에서 일어날 때, 트랜젝션 처리 필요
+
+- 필요 API
+    - AOP lib
+    - spring-tx
+        - ```
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${org.springframework-version}</version>
+            </dependency>
+          ```
+    - 사용전 공통사항
+        - *-context.xml에 객체 생성
+            - ```
+                <!-- transaction 관리자 -->
+                <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+                    <property name="dataSource" ref="dataSource"></property>
+                </bean>
+              ```
+        - namespace에서 tx check 후, xml에 추가
+            - <tx:annotation-driven proxy-target-class="true"/>
+    - 사용
+        - xml
+            - root-context.xml
+              - ```
+                    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+                        <tx:attributes>
+                            <tx:method name="*" rollback-for="Exception"/>
+                        </tx:attributes>
+                    </tx:advice>
+                    
+                    <aop:config>
+                        <aop:pointcut expression="execute(* com.song.Spring_legacy2..*Service.*(..))" id="requireTx"/>
+                        <aop:advisor advice-ref="txAdvice" pointcut-ref="requireTx"/>
+                    </aop:config>
+                ```
+        - anno
+            - method 또는 클래스 선언부에 @Transactional 선언
+                - exception 발생시, 자동 rollback (메소드 or 클래스 단위)

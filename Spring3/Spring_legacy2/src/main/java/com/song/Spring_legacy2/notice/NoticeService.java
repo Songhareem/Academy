@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.song.Spring_legacy2.board.BoardService;
@@ -16,6 +17,7 @@ import com.song.Spring_legacy2.util.FileSaver;
 import com.song.Spring_legacy2.util.Pager;
 
 @Service
+@Transactional
 public class NoticeService implements BoardService {
 
 	@Autowired
@@ -50,7 +52,10 @@ public class NoticeService implements BoardService {
 			boardFileVO.setFileName(fileName);
 			boardFileVO.setOriginName(file.getOriginalFilename());
 			boardFileVO.setBoard(1);
-			boardFileDAO.boardFileInsert(boardFileVO);
+			result = boardFileDAO.boardFileInsert(boardFileVO);
+//			if(result < 1) {
+//				throw new Exception();
+//			}
 		}
 
 		return result;
