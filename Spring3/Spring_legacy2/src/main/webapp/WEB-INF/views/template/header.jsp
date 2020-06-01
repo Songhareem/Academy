@@ -36,7 +36,7 @@
 	</div>
 </nav>
 
-<%-- <div class="container">
+<div class="container">
   <h2>Carousel Example</h2>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -85,4 +85,4 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-</div> --%>
+</div>
