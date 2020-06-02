@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.song.mysql.board.notice.NoticeRepository">
+	
+	<insert id="setInsert" parameterType="com.song.mysql.board.notice.NoticeVO">
+		INSERT INTO notice VALUES(null, #{title}, #{writer}, #{contents}, now(), 0)
+	</insert>
+	
+	<update id="setUpdate" parameterType="com.song.mysql.board.notice.NoticeVO">
+		UPDATE notice SET title=#{title}, writer=#{writer}, contents=#{contents} WHERE num=#{num}
+	</update>
+	
+	<delete id="setDelete" parameterType="com.song.mysql.board.notice.NoticeVO">
+		DELETE FROM notice WHERE num = #{num}
+	</delete>
+	
+	<select id="getSelectOne" parameterType="com.song.mysql.board.notice.NoticeVO" resultType="com.song.mysql.board.notice.NoticeVO">
+		SELECT * FROM notice WHERE num=#{num}
+	</select>
+	
+	<select id="getSelectList" resultType="com.song.mysql.board.notice.NoticeVO">
+		SELECT * FROM notice
+	</select>
+</mapper>

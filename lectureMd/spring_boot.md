@@ -19,6 +19,7 @@
     - window - preperence
         - encode - utf-8
         - General - web browser - external - 원하는 브라우저
+        - General - contentTypes - text - java properties file - encode를 UTF-8 후, update클릭
 - 실행
     - 프로젝트 우클릭 - run as - spring boot app
 - 사용
@@ -29,7 +30,9 @@
         - spring boot ~ 검색
         - dependency 복사 붙여넣기
         - version 에러시, version 명시 삭제
-
+- src/main/resources
+    - static (배포시에 사라지는 폴더)
+        - 이미지, js 등을 넣는 폴더
 # Annotation
 
 - 객체 생성
@@ -192,3 +195,31 @@
     - JSP 관련 API 추가
         - jstl : https://mvnrepository.com/artifact/javax.servlet/jstl/1.2
         - Tomcat Embed Jasper : 
+
+# fileUpload
+
+- API는 이미 등록되어 있음
+
+- mutipartFileResolver 등록 필요
+    - application.properties에 등록
+        - ```
+            # mutipartFileResolver
+            # multipart 사용여부
+            spring.servlet.multipart.enabled=true
+            # 각 파일 당 최대 파일 크기
+            spring.servlet.multipart.max-file-size=10MB
+            # 총 파일 크기
+            spring.servlet.multipart.max-request-size=50MB 
+          ``` 
+
+- form태그 method="post" enctype="multipart/form-data"
+
+- controller의 매개변수로 multipartFile 선언
+
+# Transaction
+
+- 트랜젝션이 필요한 서비스 선언부에 @Transactional 선언
+    - @Transactional(rollbackFor = Exception.class)
+
+- 테스트 클래스에서 값이 넣어지길 원지않고 테스트만 원한다면, 선언부에
+    - @Transactional(value=true)
