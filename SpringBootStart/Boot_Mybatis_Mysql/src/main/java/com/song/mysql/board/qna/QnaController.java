@@ -1,4 +1,4 @@
-package com.song.mysql.board.notice;
+package com.song.mysql.board.qna;
 
 import java.util.List;
 
@@ -13,23 +13,23 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.song.mysql.board.BoardVO;
-import com.song.mysql.board.notice.noticeFile.NoticeFileVO;
+import com.song.mysql.board.qna.qnaFile.QnaFileVO;
 import com.song.mysql.util.Pager;
 
 @Controller
-@RequestMapping("/notice/**/")
-public class NoticeController {
+@RequestMapping("/qna/**/")
+public class QnaController {
 
 	@Autowired
-	private NoticeService noticeService;
+	private QnaService qnaService;
 	
 	@ModelAttribute("board")
 	public String getBoard() {
 		
-		return "notice";
+		return "qna";
 	}
 	
-	@GetMapping("noticeWrite")
+	@GetMapping("qnaWrite")
 	public ModelAndView setInsert() throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
@@ -39,20 +39,20 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@PostMapping("noticeWrite")
-	public String setInsert(NoticeVO noticeVO, RedirectAttributes rd, MultipartFile[] files) throws Exception {
+	@PostMapping("qnaWrite")
+	public String setInsert(QnaVO qnaVO, RedirectAttributes rd, MultipartFile[] files) throws Exception {
 		
-		int result = noticeService.setInsert(noticeVO, files);
+		int result = qnaService.setInsert(qnaVO, files);
 		rd.addFlashAttribute("result", result);
-		return "redirect:./noticeList";
+		return "redirect:./qnaList";
 	}
 	
-	@GetMapping("noticeList")
+	@GetMapping("qnaList")
 	public ModelAndView getSelectList(Pager pager) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<BoardVO> list = noticeService.getSelectList(pager);	
+		List<BoardVO> list = qnaService.getSelectList(pager);	
 		
 		mv.addObject("list", list);
 		mv.addObject("Pager", pager);
@@ -60,22 +60,22 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@GetMapping("noticeSelect")
+	@GetMapping("qnaSelect")
 	public ModelAndView getSelectOne(BoardVO boardVO) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		boardVO = noticeService.getSelectOne(boardVO);
+		boardVO = qnaService.getSelectOne(boardVO);
 		
 		mv.addObject("vo", boardVO);
 		mv.setViewName("board/boardSelect");
 		return mv;
 	}
 
-	@GetMapping("noticeUpdate")
+	@GetMapping("qnaUpdate")
 	public ModelAndView setUpdate(BoardVO boardVO, ModelAndView mv) throws Exception {
 		
-		boardVO = noticeService.getSelectOne(boardVO);
+		boardVO = qnaService.getSelectOne(boardVO);
 		
 		mv.addObject("vo", boardVO);
 		mv.addObject("path", "Update");
@@ -83,12 +83,12 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@PostMapping("noticeUpdate")
+	@PostMapping("qnaUpdate")
 	public ModelAndView setUpdate(BoardVO boardVO) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		int result = noticeService.setUpdate(boardVO);
+		int result = qnaService.setUpdate(boardVO);
 		
 		System.out.println("result : "+result);
 		String msg = "업데이트 실패";
@@ -96,17 +96,17 @@ public class NoticeController {
 			msg = "업데이트 성공";
 		}
 		mv.addObject("result", msg);
-		mv.addObject("url", "./noticeList");
+		mv.addObject("url", "./qnaList");
 		mv.setViewName("common/result");
 		return mv;
 	}
 	
-	@GetMapping("noticeDelete")
+	@GetMapping("qnaDelete")
 	public ModelAndView setDelete(BoardVO boardVO) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		int result = noticeService.setDelete(boardVO);
+		int result = qnaService.setDelete(boardVO);
 		
 		System.out.println("result : "+result);
 		String msg = "삭제 실패";
@@ -114,19 +114,20 @@ public class NoticeController {
 			msg = "삭제 성공";
 		}
 		mv.addObject("result", msg);
-		mv.addObject("url", "./noticeList");
+		mv.addObject("url", "./qnaList");
 		mv.setViewName("common/result");
 		return mv;
 	}
 	
+	// param : fileNum
 	@GetMapping("fileDown")
-	public ModelAndView fileDown(NoticeFileVO noticeFileVO) throws Exception {
+	public ModelAndView fileDown(QnaFileVO qnaFileVO) throws Exception {
 	
 		ModelAndView mv = new ModelAndView();
 		
-		noticeFileVO = noticeService.fileDown(noticeFileVO);
-		mv.addObject("fileVO", noticeFileVO);
-		mv.addObject("path", "upload/notice/");
+		qnaFileVO = qnaService.fileDown(qnaFileVO);
+		mv.addObject("fileVO", qnaFileVO);
+		mv.addObject("path", "upload/qna/");
 		// fileDown 객체 찾아보고 없으면 .jsp 찾아봄
 		mv.setViewName("fileDown");
 		return mv;

@@ -1,4 +1,4 @@
-package com.song.mysql.board.notice;
+package com.song.mysql.board.qna;
 
 import java.io.File;
 import java.util.List;
@@ -11,89 +11,89 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.song.mysql.board.BoardService;
 import com.song.mysql.board.BoardVO;
-import com.song.mysql.board.notice.noticeFile.NoticeFileRepository;
-import com.song.mysql.board.notice.noticeFile.NoticeFileVO;
+import com.song.mysql.board.qna.qnaFile.QnaFileRepository;
+import com.song.mysql.board.qna.qnaFile.QnaFileVO;
 import com.song.mysql.util.FileManager;
 import com.song.mysql.util.FilePathMaker;
 import com.song.mysql.util.Pager;
 
 @Service
 @Transactional
-public class NoticeService implements BoardService {
+public class QnaService implements BoardService {
 
 	@Autowired
-	private NoticeRepository noticeRepository; 
+	private QnaRepository qnaRepository; 
 	@Autowired
-	private NoticeFileRepository noticeFileRepository;
+	private QnaFileRepository qnaFileRepository;
 	@Autowired
 	private FilePathMaker pathMaker;	// 파일 경로 생성
 	@Autowired
 	private FileManager fileManager;	// 파일 저장 매니저
-	@Value("${board.notice.filePath}")
+	@Value("${board.qna.filePath}")
 	private String filePath;
 	
 	@Override
 	public int setInsert(BoardVO boardVO, MultipartFile[] files) throws Exception {
-		// TODO Auto-generated method stub
-		
-		//File file = pathMaker.getUserResourceLoader(filePath);
+
 		File file = pathMaker.getUseClassPathResource(filePath);
-		//File file = pathMaker.getUseServletContext(filePath);
 		System.out.println("insert filePath: "+filePath);
 		
-		int result = noticeRepository.setInsert(boardVO);
-		System.out.println(boardVO.getNum());
+		// 기본 데이터 및 ref insert
+		int result = qnaRepository.setInsert(boardVO);
+		QnaVO qnaVO = new QnaVO();
+		qnaVO.setNum(boardVO.getNum());
+		qnaVO.setRef(boardVO.getNum());
+		result = qnaRepository.setRef(qnaVO);
+		
 		for (MultipartFile multipartFile : files) {
 			// 빈값 오는거 받지않음
 			if(!(multipartFile.getSize() > 0))
 				continue;
 			
 			String fileName = fileManager.saveTransfer(multipartFile, file);
-			NoticeFileVO noticeFileVO = new NoticeFileVO();
-			noticeFileVO.setNum(boardVO.getNum());
-			noticeFileVO.setFileName(fileName);
-			noticeFileVO.setOriName(multipartFile.getOriginalFilename());
-		
+			QnaFileVO qnaFileVO = new QnaFileVO();
+			qnaFileVO.setNum(boardVO.getNum());
+			qnaFileVO.setFileName(fileName);
+			qnaFileVO.setOriName(multipartFile.getOriginalFilename());
+				
 			System.out.println(fileName);
 		
 			// file Table 에 값 넣기
-			result = noticeFileRepository.setInsert(noticeFileVO);
+			result = qnaFileRepository.setInsert(qnaFileVO);
 		}
-		
-		// boardTable에 fileVOs 넣고 넣기
+			
 		return result;
 	}
 
 	@Override
 	public int setUpdate(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeRepository.setUpdate(boardVO);
+		return qnaRepository.setUpdate(boardVO);
 	}
 
 	@Override
 	public int setDelete(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeRepository.setDelete(boardVO);
+		return qnaRepository.setDelete(boardVO);
 	}
 
 	@Override
 	public BoardVO getSelectOne(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeRepository.getSelectOne(boardVO);
+		return qnaRepository.getSelectOne(boardVO);
 	}
 
 	@Override
 	public List<BoardVO> getSelectList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		long totalNum = noticeRepository.getSelectCount(pager);
+		long totalNum = qnaRepository.getSelectCount(pager);
 		pager.makeRow();
 		pager.makePage(totalNum);
-		return noticeRepository.getSelectList(pager);
-	}
-
-	public NoticeFileVO fileDown(NoticeFileVO noticeFileVO) throws Exception {
-	
-		return noticeFileRepository.fileDown(noticeFileVO);
+		return qnaRepository.getSelectList(pager);
 	}
 	
+	public QnaFileVO fileDown(QnaFileVO qnaFileVO) throws Exception {
+		
+		return qnaFileRepository.fileDown(qnaFileVO);
+	}
 }

@@ -5,8 +5,13 @@
   
 <configuration>
 	<typeAliases>
+		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.util.List" alias="List"/>
 	
+		<typeAlias type="com.song.mysql.util.Pager" alias="Pager"/>
 		<typeAlias type="com.song.mysql.board.notice.NoticeVO" alias="NoticeVO"/>
+		<typeAlias type="com.song.mysql.board.notice.noticeFile.NoticeFileVO" alias="NoticeFileVO"/>
+		<typeAlias type="com.song.mysql.board.qna.QnaVO" alias="QnaVO"/>
+		<typeAlias type="com.song.mysql.board.qna.qnaFile.QnaFileVO" alias="QnaFileVO"/>
 	</typeAliases>	
 </configuration>

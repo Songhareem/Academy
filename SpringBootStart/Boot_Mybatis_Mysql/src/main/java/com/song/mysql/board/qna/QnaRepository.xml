@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.song.mysql.board.qna.QnaRepository">
+	
+	<insert id="setInsert" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="num">
+		INSERT INTO qna VALUES
+		(#{num}, #{title}, #{writer}, #{contents}, now(), 0, #{num}, 0, 0)
+	</insert>
+	
+	<update id="setRef" parameterType="QnaVO">
+		UPDATE qna SET ref=#{ref} WHERE num=#{num}
+	</update>
+	
+	<update id="setUpdate" parameterType="QnaVO">
+		UPDATE qna SET title=#{title}, writer=#{writer}, contents=#{contents} WHERE num=#{num}
+	</update>
+	
+	<delete id="setDelete" parameterType="QnaVO">
+		DELETE FROM qna WHERE num = #{num}
+	</delete>
+	
+	<select id="getSelectCount" parameterType="Pager" resultType="Long">
+		SELECT COUNT(num) FROM qna
+		<!-- 
+		<where>
+			<if test="kind == 'bt'">
+				title <include refid="search"></include>
+			</if>
+			<if test="kind == 'bw'">
+				writer <include refid="search"></include>
+			</if>
+			<if test="kind == 'bc'">
+				contents <include refid="search"></include>
+			</if>
+		</where>
+		 -->
+	</select>
+	
+	<select id="getSelectOne" parameterType="QnaVO" resultType="QnaVO">
+		SELECT * FROM qna WHERE num=#{num}
+	</select>
+	
+	<select id="getSelectList" parameterType="Pager" resultType="QnaVO">
+		SELECT * FROM qna ORDER BY num DESC LIMIT #{startRow}, #{perPage};
+	</select>
+</mapper>

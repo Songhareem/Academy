@@ -1,21 +1,18 @@
 package com.song.mysql.util;
 
-import org.springframework.stereotype.Component;
+// 저장용
+public class PagerOracle {
 
-//=========================
-// 사용
-//
-// pager.setPerPage(16);
-// pager.makeRow();
-// int totalNum = marketDAO.marketTotalNum(pager);
-// pager.makePage(totalNum);
-// return marketDAO.marketList(pager);
-//
-//=========================
-
-@Component
-public class Pager {
-
+	//=========================
+	// 사용
+	//
+	// pager.setPerPage(16);
+	// pager.makeRow();
+	// int totalNum = marketDAO.marketTotalNum(pager);
+	// pager.makePage(totalNum);
+	// return marketDAO.marketList(pager);
+	//
+	//=========================
 	private Long curPage;
 	private Integer perPage = 10;
 	
@@ -30,9 +27,6 @@ public class Pager {
 	
 	private long startNum;
 	private long lastNum;
-	
-	private String kind;
-	private String search;
 
 	public void setStartRow(long startRow) {
 		this.startRow = startRow;
@@ -45,8 +39,8 @@ public class Pager {
 	// 현재 페이지에서 보여줘야하는 데이터 시작 Row / 끝 Row
 	// 예) 1p = 1 ~ 10 / 2p = 11 ~ 20 
 	public void makeRow() {
-		this.startRow = (this.getCurPage() - 1) * this.getPerPage();
-		//this.lastRow = this.getCurPage() * this.getPerPage();		// mysql에서는 사용할 필요 X
+		this.startRow = (this.getCurPage() - 1) * this.getPerPage() + 1;
+		this.lastRow = this.getCurPage() * this.getPerPage();
 	}
 
 	// 페이지 갯수 만들기
@@ -80,7 +74,7 @@ public class Pager {
 		// lastNum = 5 * 2 = 10;
 		// 현재 노출되는 페이지 : 6 7 8 9 10
 		// block에서 보여줄 pageNum : 6 ~ 10
-		this.startNum = this.perBlock*(this.curBlock-1) + 1;
+		this.startNum = this.perBlock*(this.curBlock-1);
 		this.lastNum = this.perBlock*this.curBlock;
 		if(curBlock == this.totalBlock) {
 			this.lastNum = this.totalPage;
@@ -95,6 +89,7 @@ public class Pager {
 	public long getLastRow() {
 		return lastRow;
 	}
+
 
 	public Long getCurPage() {
 		if(this.curPage == null || this.curPage == 0)
@@ -134,20 +129,7 @@ public class Pager {
 	public long getLastNum() {
 		return lastNum;
 	}
-	public String getKind() {
-		return kind;
-	}
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
-	public String getSearch() {
-		
-		if(this.search == null)
-			this.search = "";
-		
-		return search;
-	}
-	public void setSearch(String search) {
-		this.search = search;
-	}
+
+
+	
 }

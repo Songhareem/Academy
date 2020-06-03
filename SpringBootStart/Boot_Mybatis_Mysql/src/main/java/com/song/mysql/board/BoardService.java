@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.song.mysql.util.Pager;
+
 public interface BoardService {
 
 	// insert
@@ -19,5 +21,5 @@ public interface BoardService {
 	public BoardVO getSelectOne(BoardVO boardVO) throws Exception;
 
 	// selectList
-	public List<BoardVO> getSelectList() throws Exception;
+	public List<BoardVO> getSelectList(Pager pager) throws Exception;
 }

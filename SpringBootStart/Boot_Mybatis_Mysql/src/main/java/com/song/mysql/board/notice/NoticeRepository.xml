@@ -5,23 +5,40 @@
   
 <mapper namespace="com.song.mysql.board.notice.NoticeRepository">
 	
-	<insert id="setInsert" parameterType="com.song.mysql.board.notice.NoticeVO">
-		INSERT INTO notice VALUES(null, #{title}, #{writer}, #{contents}, now(), 0)
+	<insert id="setInsert" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="num">
+		INSERT INTO notice VALUES(#{num}, #{title}, #{writer}, #{contents}, now(), 0)
 	</insert>
 	
-	<update id="setUpdate" parameterType="com.song.mysql.board.notice.NoticeVO">
+	<update id="setUpdate" parameterType="NoticeVO">
 		UPDATE notice SET title=#{title}, writer=#{writer}, contents=#{contents} WHERE num=#{num}
 	</update>
 	
-	<delete id="setDelete" parameterType="com.song.mysql.board.notice.NoticeVO">
+	<delete id="setDelete" parameterType="NoticeVO">
 		DELETE FROM notice WHERE num = #{num}
 	</delete>
 	
-	<select id="getSelectOne" parameterType="com.song.mysql.board.notice.NoticeVO" resultType="com.song.mysql.board.notice.NoticeVO">
+	<select id="getSelectCount" parameterType="Pager" resultType="Long">
+		SELECT COUNT(num) FROM notice
+		<!-- 
+		<where>
+			<if test="kind == 'bt'">
+				title <include refid="search"></include>
+			</if>
+			<if test="kind == 'bw'">
+				writer <include refid="search"></include>
+			</if>
+			<if test="kind == 'bc'">
+				contents <include refid="search"></include>
+			</if>
+		</where>
+		 -->
+	</select>
+	
+	<select id="getSelectOne" parameterType="NoticeVO" resultType="NoticeVO">
 		SELECT * FROM notice WHERE num=#{num}
 	</select>
 	
-	<select id="getSelectList" resultType="com.song.mysql.board.notice.NoticeVO">
-		SELECT * FROM notice
+	<select id="getSelectList" parameterType="Pager" resultType="NoticeVO">
+		SELECT * FROM notice ORDER BY num DESC LIMIT #{startRow}, #{perPage};
 	</select>
 </mapper>

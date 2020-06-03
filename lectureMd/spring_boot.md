@@ -128,6 +128,11 @@
             - application.properties에 위치 등록 필요
         - 2 ) DAO(Mapper.java)와 같은 패키지에 생성
             - application.properties에 위치 등록 필요 X
+    - pager 달라진 점
+        - Pager limit 시작번호, 갯수 (startNum , perPage)
+        - SELECT * FROM notice ORDER BY num DESC LIMIT 20, 10;
+    - 검색 달라진 점
+        - 검색 like concat('%',#{search}, '%')
 
 # Docker
 
@@ -223,3 +228,21 @@
 
 - 테스트 클래스에서 값이 넣어지길 원지않고 테스트만 원한다면, 선언부에
     - @Transactional(value=true)
+
+# AOP
+
+- API 다운
+    - https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop/2.3.0.RELEASE
+- 설정
+    - Main Class (main메서드를 포함한 클래스) 선언부에 @EnableAspectJAutoProxy 추가 (생략해도 되나, 동작하지 않으면 필히 선언)
+    - advice class 생성
+        - @Component
+        - @Aspect
+- @Before
+- @After
+- @AfterThrowing
+    - 예외발생시
+- after-returnning
+- around
+
+

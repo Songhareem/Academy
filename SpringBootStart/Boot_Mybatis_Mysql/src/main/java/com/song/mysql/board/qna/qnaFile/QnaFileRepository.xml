@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.song.mysql.board.qna.qnaFile.QnaFileRepository">
+	
+	<insert id="setInsert" parameterType="QnaFileVO">
+		INSERT INTO qnaFile (num, fileName, oriName)
+		VALUES(#{num}, #{fileName}, #{oriName})
+	</insert>
+	
+	<select id="fileDown" parameterType="QnaFileVO" resultType="QnaFileVO">
+		SELECT * FROM qnaFile WHERE fileNum=#{fileNum}	
+	</select>
+
+</mapper>

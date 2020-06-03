@@ -19,13 +19,15 @@ class NoticeRepositoryTest {
 	
 //	@Test
 //	void setInsertTest() throws Exception {
-//		NoticeVO noticeVO = new NoticeVO();
-//		noticeVO.setTitle("title1");
-//		noticeVO.setWriter("writer1");
-//		noticeVO.setContents("contents1");
-//		
-//		int result = noticeRepository.setInsert(noticeVO);
-//		assertEquals(1, result);
+//		for(int i=0; i<100; i++) {
+//			NoticeVO noticeVO = new NoticeVO();
+//			noticeVO.setTitle("title"+i);
+//			noticeVO.setWriter("writer"+i);
+//			noticeVO.setContents("contents"+i);
+//			
+//			int result = noticeRepository.setInsert(noticeVO);
+//		}
+//		//assertEquals(1, result);
 //	}
 //	
 //	@Test
