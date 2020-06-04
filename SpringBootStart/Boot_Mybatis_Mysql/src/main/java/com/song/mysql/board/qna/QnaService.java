@@ -65,6 +65,13 @@ public class QnaService implements BoardService {
 		return result;
 	}
 
+	public int setInsertReply(BoardVO boardVO) throws Exception {
+		
+		int result = qnaRepository.setUpdateReply(boardVO);
+		result = qnaRepository.setInsertReply(boardVO);
+		return result;
+	}
+	
 	@Override
 	public int setUpdate(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub

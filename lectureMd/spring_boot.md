@@ -245,4 +245,39 @@
 - after-returnning
 - around
 
+# Interceptor
+
+- Interceptor 실행되는 때
+    - Controller 진입전
+    - Controller 진입후
+    - JSP 랜더링 후
+
+- 인터셉터는 위에서 아래로 순차로 실행
+
+# Message 다국어
+
+- 한글 KO / 영어 EN
+    - 영어 / 한글 버전 메시지 파일 생성
+
+- 생성위치 
+    - /src/main/resources
+    - message 폴더 생성
+    - message_ko.properties
+    - message_en.properties
+    - message.properties
+
+- application.properties에 적용
+    - ```
+        # message properties 설정
+        # 위치 / encoding / key값이 없는 경우 처리 / properties 파일의 변경을 감지할 시간 간격(sec)
+        spring.messages.basename=message/message
+        spring.messages.encoding=UTF-8
+        # true : 키 자체 출력 / false : 예외 발생
+        spring.messages.use-code-as-default-message=true
+        spring.messages.cache-duration=60
+      ```
+- jsp 에서 사용
+    - 선언부 : <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+    - 사용 : <spring:message code="hello"></spring:message>
+
 

@@ -26,7 +26,14 @@
 			<c:forEach items="${list}" var="vo">
 				<tr>
 					<td>${vo.num}</td>
-					<td><a href="${board}Select?num=${vo.num}">${vo.title}</a></td>
+					<td>
+						<c:catch>
+							<c:forEach begin="1" end="${vo.dept}" var="i">
+								ㄴ	
+							</c:forEach>
+						</c:catch>
+						<a href="${board}Select?num=${vo.num}">${vo.title}</a>
+					</td>
 					<td>${vo.writer}</td>
 					<td>${vo.contents}</td>
 					<td>${vo.regDate}</td>

@@ -10,6 +10,22 @@
 		(#{num}, #{title}, #{writer}, #{contents}, now(), 0, #{num}, 0, 0)
 	</insert>
 	
+	<insert id="setInsertReply" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="num">
+		INSERT INTO qna VALUES(
+		0, #{title}, #{writer}, #{contents}, now(), 0,
+		(SELECT ref FROM (SELECT ref FROM qna WHERE num=#{num}) q),
+		(SELECT step FROM (SELECT step FROM qna WHERE num=#{num}) q)+ 1,
+		(SELECT dept FROM (SELECT dept FROM qna WHERE num=#{num}) q)+ 1 
+		)
+	</insert>
+	
+	<update id="setUpdateReply" parameterType="QnaVO">
+		UPDATE qna SET step = 1 + step WHERE
+		ref = (SELECT ref FROM (SELECT ref FROM qna WHERE num = #{num}) q)
+		AND
+		step > (SELECT step FROM (SELECT step FROM qna WHERE num = #{num}) q)
+	</update>
+	
 	<update id="setRef" parameterType="QnaVO">
 		UPDATE qna SET ref=#{ref} WHERE num=#{num}
 	</update>
@@ -44,6 +60,14 @@
 	</select>
 	
 	<select id="getSelectList" parameterType="Pager" resultType="QnaVO">
-		SELECT * FROM qna ORDER BY num DESC LIMIT #{startRow}, #{perPage};
+		SELECT * FROM qna 
+		ORDER BY ref DESC, step ASC LIMIT #{startRow}, #{perPage}
+		
+		<!-- SELECT * FROM
+		(SELECT Q.*, rownum R FROM
+		(SELECT * FROM qna 
+		 <include refid="search2"></include>
+		 ORDER BY ref DESC, step ASC) Q)
+		WHERE R BETWEEN #{startRow} AND #{lastRow} -->
 	</select>
 </mapper>

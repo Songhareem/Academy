@@ -3,7 +3,7 @@
  */
 
 function main() {
-	alert("main");
+	console.log("main");
 }
 
 main();

@@ -13,7 +13,7 @@
 
 	
 	function main() {
-		console.log("asdasdasd");
+		console.log('${url}');
 		alert('${result}');
 		location.href='${url}';
 	}

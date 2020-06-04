@@ -25,6 +25,9 @@
 		</table>
 		<a class="btn btn-info" href="${board}Update?num=${vo.num}">Update</a>
 		<a class="btn btn-danger" href="${board}Delete?num=${vo.num}">delete</a>
+		<c:if test="${board ne 'notice'}">
+			<a class="btn btn-success" href="${board}Reply?num=${vo.num}">Reply</a>
+		</c:if>
 	</div>
 </body>
 </html>

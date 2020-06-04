@@ -13,5 +13,6 @@
 		<typeAlias type="com.song.mysql.board.notice.noticeFile.NoticeFileVO" alias="NoticeFileVO"/>
 		<typeAlias type="com.song.mysql.board.qna.QnaVO" alias="QnaVO"/>
 		<typeAlias type="com.song.mysql.board.qna.qnaFile.QnaFileVO" alias="QnaFileVO"/>
+		<typeAlias type="com.song.mysql.member.MemberVO" alias="MemberVO"/>
 	</typeAliases>	
 </configuration>

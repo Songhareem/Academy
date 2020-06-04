@@ -132,4 +132,35 @@ public class QnaController {
 		mv.setViewName("fileDown");
 		return mv;
 	}
+	
+	// boardReply addObj path
+	@GetMapping("qnaReply")
+	public ModelAndView qnaReply(long num) throws Exception {
+	
+		ModelAndView mv = new ModelAndView();
+		
+		BoardVO boardVO = new BoardVO();
+		boardVO.setNum((int)num);
+		mv.addObject("vo", boardVO);
+		mv.addObject("path","Reply");
+		mv.setViewName("board/boardReply");
+
+		return mv;
+	}
+	
+	@PostMapping("qnaReply")
+	public ModelAndView qnaReply(BoardVO boardVO) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		System.out.println("num = "+boardVO.getNum());
+		int result = qnaService.setInsertReply(boardVO);
+		if(result > 0) {
+			mv.setViewName("redirect:./qnaList");
+		} else {
+			mv.addObject("result", "삭제 실패");
+			mv.addObject("url", "./qnaList");
+			mv.setViewName("common/result");
+		}
+		return mv;
+	}
 }

@@ -15,6 +15,12 @@
 	<div class="container">
 		<h2>${board}${path}</h2>
 		<c:import url="../template/boardForm.jsp"></c:import>
+		<c:if test="${not empty sessionScope.member}">
+			<div id="memberId" style="display:none;" data-id="${member.id}"></div>
+		</c:if>	
+		<c:if test="${empty sessionScope.member}">
+			<div id="memberId" style="display:none;" data-id="none"></div>
+		</c:if>
 	</div>
 	<script type="text/javascript">
 		$('#contents').summernote({
@@ -37,6 +43,21 @@
 			console.log("click");
 			$("#f").append('<input type="file" name="files">');
 		});
+
+		// 글쓰기 자동 삽입
+		$(function() {
+
+			var memberId = $('#memberId').data("id");
+			console.log(memberId);
+			
+			if(memberId != 'none') {
+
+				$('#writer').val(memberId);
+			}
+
+			$('#title').focus();
+		});		
 	</script>
+
 </body>
 </html>
