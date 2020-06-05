@@ -3,9 +3,13 @@ package com.song.mysql.member;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +21,36 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@GetMapping("memberJoin")
+	public ModelAndView memberJoin() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/memberJoin");
+		return mv;
+	}
+	
+	@PostMapping("memberJoin")
+	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+
+		// 데이터 검증
+		if(memberService.memberError(memberVO, bindingResult)) {
+			mv.setViewName("member/memberJoin");
+			return mv;
+		}
+
+		int result = 1;//memberService.memberJoin(memberVO);
+		if(result>0) {
+			mv.setViewName("redirect:../");
+		} else {
+			mv.setViewName("member/memberJoin");
+		}
+		return mv;
+	}
 	
 	@GetMapping("memberLogin")
 	public ModelAndView memberLogin() throws Exception {
@@ -65,6 +99,17 @@ public class MemberController {
 		session.invalidate();
 		
 		mv.setViewName("redirect:../");
+		return mv;
+	}
+	
+	// error 처리
+	@ExceptionHandler(Exception.class)
+	public ModelAndView nullPtrException() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("error/exception");
+		
 		return mv;
 	}
 }

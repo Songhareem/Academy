@@ -9,12 +9,18 @@
 <c:import url="../template/boot.jsp"></c:import>
 <c:import url="../template/summernote.jsp"></c:import>
 <!-- include summernote css/js -->
+<style type="text/css">
+	.r{
+		color:red;
+	}
+</style>
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
 	<div class="container">
 		<h2>${board}${path}</h2>
-		<c:import url="../template/boardForm.jsp"></c:import>
+		<%-- <c:import url="../template/boardForm.jsp"></c:import> --%>
+		<c:import url="../template/springForm.jsp"></c:import>
 		<c:if test="${not empty sessionScope.member}">
 			<div id="memberId" style="display:none;" data-id="${member.id}"></div>
 		</c:if>	
@@ -56,7 +62,7 @@
 			}
 
 			$('#title').focus();
-		});		
+		});
 	</script>
 
 </body>

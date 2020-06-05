@@ -1,8 +1,15 @@
 package com.song.mysql.board;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class BoardVO {
 
 	private int num;
+	
+	//@NotEmpty(message = "제목을 입력하세요")
+	@NotEmpty
+	@Size(min=3, max=20)
 	private String title;
 	private String writer;
 	private String contents;

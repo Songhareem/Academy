@@ -2,8 +2,12 @@ package com.song.mysql.board.qna;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,16 +39,38 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("path","Write");
+		mv.addObject("boardVO", new BoardVO());
 		mv.setViewName("board/boardWrite");
 		return mv;
 	}
 	
+	// boardForm
+//	@PostMapping("qnaWrite")
+//	public String setInsert(QnaVO qnaVO, RedirectAttributes rd, MultipartFile[] files) throws Exception {
+//		
+//		int result = qnaService.setInsert(qnaVO, files);
+//		rd.addFlashAttribute("result", result);
+//		return "redirect:./qnaList";
+//	}
+
+	// springForm
 	@PostMapping("qnaWrite")
-	public String setInsert(QnaVO qnaVO, RedirectAttributes rd, MultipartFile[] files) throws Exception {
+	public ModelAndView setInsert(@Valid BoardVO boardVO, BindingResult bindingResult, RedirectAttributes rd, MultipartFile[] files) throws Exception {
 		
-		int result = qnaService.setInsert(qnaVO, files);
-		rd.addFlashAttribute("result", result);
-		return "redirect:./qnaList";
+		ModelAndView mv = new ModelAndView();
+		
+		// 데이터 검증
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("board/boardWrite");
+			mv.addObject("path","Write");
+		} else {
+		
+			int result = qnaService.setInsert(boardVO, files);
+			rd.addFlashAttribute("result", result);
+			mv.setViewName("redirect:./qnaList");
+		}
+		
+		return mv;
 	}
 	
 	@GetMapping("qnaList")
@@ -67,7 +93,7 @@ public class QnaController {
 		
 		boardVO = qnaService.getSelectOne(boardVO);
 		
-		mv.addObject("vo", boardVO);
+		mv.addObject("boardVO", boardVO);
 		mv.setViewName("board/boardSelect");
 		return mv;
 	}
@@ -77,16 +103,23 @@ public class QnaController {
 		
 		boardVO = qnaService.getSelectOne(boardVO);
 		
-		mv.addObject("vo", boardVO);
+		mv.addObject("boardVO", boardVO);
 		mv.addObject("path", "Update");
 		mv.setViewName("board/boardWrite");
 		return mv;
 	}
 	
 	@PostMapping("qnaUpdate")
-	public ModelAndView setUpdate(BoardVO boardVO) throws Exception {
+	public ModelAndView setUpdate(@Valid BoardVO boardVO, BindingResult bindingResult) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
+		
+		// 데이터 검증
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("board/boardUpdate");
+			mv.addObject("path","Update");
+			return mv;
+		}
 		
 		int result = qnaService.setUpdate(boardVO);
 		
@@ -141,7 +174,7 @@ public class QnaController {
 		
 		BoardVO boardVO = new BoardVO();
 		boardVO.setNum((int)num);
-		mv.addObject("vo", boardVO);
+		mv.addObject("boardVO", boardVO);
 		mv.addObject("path","Reply");
 		mv.setViewName("board/boardReply");
 

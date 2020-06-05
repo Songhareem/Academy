@@ -5,8 +5,15 @@
   
 <mapper namespace="com.song.mysql.member.MemberRepository">
 	
+	<insert id="memberJoin" parameterType="MemberVO">
+		INSERT INTO member VALUES(id=#{id}, pw=#{pw})
+	</insert>
+	
 	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
 		SELECT * FROM member WHERE id=#{id} AND pw=#{pw}
 	</select>
 	
+	<select id="memberSelectOne" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM member WHERE id=#{id}
+	</select>
 </mapper>

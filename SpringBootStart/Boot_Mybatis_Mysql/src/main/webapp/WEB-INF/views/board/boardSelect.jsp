@@ -15,18 +15,18 @@
 		<table class="table talbe-hover">
 			<!-- 모바일 웹같은 곳에서는 ul / li 를 테이블 대신 씀 -->
 			<tr>
-				<td>${vo.num}</td>
-				<td>${vo.title}</td>
-				<td>${vo.writer}</td>
-				<td>${vo.contents}</td>
-				<td>${vo.regDate}</td>
-				<td>${vo.hit}</td>
+				<td>${boardVO.num}</td>
+				<td>${boardVO.title}</td>
+				<td>${boardVO.writer}</td>
+				<td>${boardVO.contents}</td>
+				<td>${boardVO.regDate}</td>
+				<td>${boardVO.hit}</td>
 			</tr>
 		</table>
-		<a class="btn btn-info" href="${board}Update?num=${vo.num}">Update</a>
-		<a class="btn btn-danger" href="${board}Delete?num=${vo.num}">delete</a>
+		<a class="btn btn-info" href="${board}Update?num=${boardVO.num}">Update</a>
+		<a class="btn btn-danger" href="${board}Delete?num=${boardVO.num}">delete</a>
 		<c:if test="${board ne 'notice'}">
-			<a class="btn btn-success" href="${board}Reply?num=${vo.num}">Reply</a>
+			<a class="btn btn-success" href="${board}Reply?num=${boardVO.num}">Reply</a>
 		</c:if>
 	</div>
 </body>

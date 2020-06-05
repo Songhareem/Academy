@@ -45,23 +45,23 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		//.excludePathPatterns("/notice/noticeList");
 		
 		// admin interceptor
-		registry.addInterceptor(adminInterceptor)
-		.addPathPatterns("/notice/*")
-		.excludePathPatterns("/notice/noticeSelect")
-		.excludePathPatterns("/notice/noticeList");
-		
-		registry.addInterceptor(memberCheckInterceptor)
-		.addPathPatterns("/qna/*")
-		.excludePathPatterns("/qna/qnaList");
-		
-		registry.addInterceptor(writerCheckInterceptor)
-		.addPathPatterns("/qna/qnaUpdate")
-		.addPathPatterns("/qna/qnaDelete");
-		
-		// notice interceptor
-		registry.addInterceptor(noticeInterceptor)
-		.addPathPatterns("/notice/*")
-		.excludePathPatterns("/notice/noticeSelect")
-		.excludePathPatterns("/notice/noticeList");
+//		registry.addInterceptor(adminInterceptor)
+//		.addPathPatterns("/notice/*")
+//		.excludePathPatterns("/notice/noticeSelect")
+//		.excludePathPatterns("/notice/noticeList");
+//		
+//		registry.addInterceptor(memberCheckInterceptor)
+//		.addPathPatterns("/qna/*")
+//		.excludePathPatterns("/qna/qnaList");
+//		
+//		registry.addInterceptor(writerCheckInterceptor)
+//		.addPathPatterns("/qna/qnaUpdate")
+//		.addPathPatterns("/qna/qnaDelete");
+//		
+//		// notice interceptor
+//		registry.addInterceptor(noticeInterceptor)
+//		.addPathPatterns("/notice/*")
+//		.excludePathPatterns("/notice/noticeSelect")
+//		.excludePathPatterns("/notice/noticeList");
 	}
 }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,6 +34,26 @@ public class CustomErrorController implements ErrorController {
 	@Override
 	public String getErrorPath() {
 		return "/error";
+	}
+	
+	// 자세한 처리
+	@ExceptionHandler(NullPointerException.class)
+	public ModelAndView nullPointerException() {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("error/nullPointerException");
+		return mv;
+	}
+	
+	// 나머지 일괄 처리
+	@ExceptionHandler(Exception.class)
+	public ModelAndView exception() {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("error/exception");
+		return mv;
 	}
 }
 

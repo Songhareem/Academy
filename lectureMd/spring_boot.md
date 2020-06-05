@@ -100,6 +100,7 @@
         - docker exec mysql -it bin/bash
     - mysql shell
         - mysql -u root -p 엔터 후 비번으로 root 치고 엔터
+        - create database user;
         - select user(); : 현재 접속 유저 확인
         - 유저 생성 및 접속 가능 주소 설정
             - create user 'user01'@'%' identified with mysql_native_password by 'user01'
@@ -133,6 +134,9 @@
         - SELECT * FROM notice ORDER BY num DESC LIMIT 20, 10;
     - 검색 달라진 점
         - 검색 like concat('%',#{search}, '%')
+
+- Hybernate용 유저 생성
+    - 
 
 # Docker
 
@@ -280,4 +284,124 @@
     - 선언부 : <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
     - 사용 : <spring:message code="hello"></spring:message>
 
+- 언어 구분 방법 (2가지 방법)
+    - session 이용
+    - cookie 사용
 
+- 구현
+    - Interceptor 사용해서 언어 구분
+
+# Form 검증
+
+- API : https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator/6.1.5.Final
+
+- jsp 페이지에서 form:form으로 교체
+    - jsp 페이지로 이동할 때, model에 VO를 첨부해야함 (필수, 빈 VO라도 넣어줘야함)
+
+- Controller에 post 처리
+    - 매개변수 변경
+    - @Vaild VO, BindingResult ... (BindingResult위치는 검증하는 데이터 바로 뒤)
+
+- VO 처리
+    - 검증 필요 멤버변수에 @NotEmpty(javax.validation.constraints.NotEmpty) 선언
+
+- 검증 메시지
+    - Annotation뒤에 선언
+        - @NotEmpty(message = "제목을 입력하세요")
+    - message properties 파일에 작성
+        - 검증Annotation명=메세지 (해당 Annotation 일괄)
+        - 검증Annotation명.멤버변수명=메세지 (해당 변수명에만 줄 메세지)
+        - 검증Annotation명.VO명.멤버변수명 (VO명의 첫글자는 소문자)
+
+- 검증 Annotation
+    - javax.validation.constraints.NotEmpty 제공
+        - @NotNull  : null 여부
+        - @NotEmpty : 데이터 존재여부
+        - @Max      : Max 설정값 보다 데이터 넘으면 X
+        - @Min      : Min 설정값 보다 데이터 작으면 X
+        - @Size(max=, min=)
+        - @AssertFalse  : false면 ok
+        - @AssertTrue   : true 면 ok
+        - @DecimalMax   : MAX 이상의 실수면 X
+        - @DecimalMin   : MIN 이하의 실수면 X
+        - @Future       : 기존 날짜보다 미래의 날짜면 ok
+        - @Past         : 기존 날짜보다 과거의 날짜면 ok
+        - @Pattern(regex="정규표현식")
+    - org.hibernate.validator.constraints 제공
+        - @Email                : 이메일 형식 검증
+        - @Length(min=, max=)   : 문자열 길이 검증
+        - @Range(min=, max=)    : 숫자 범위 검증
+        - @URL                  : URL 형식 검증
+
+- 검증이 필요한데 어노테이션으로는 못하는 것들
+    - id 중복확인
+    - pw , pw confirm 같은지 확인
+    - 해결 : 커스텀 어노테이션
+
+- 커스텀 어노테이션
+    - 사용자 정의 에러 메시지 작성
+    - 검증할 클래스 생성 및 검증 메서드 생성 or Service 클래스내에 검증 메서드를 생성
+
+# 예외처리
+
+- 각 Controller 별로 처리
+
+- Error 전용 Controller에서 처리
+
+# schedule
+
+- 특정 시간이나 주기적으로 반복적인 작업을 해야할 때 사용
+
+- 사용 
+    - main 메서드 클래스 선언부에 @EnableScheduling 선언
+    - Schedule 구현하는 클래스 생성
+        - 반복작업을 할 메서드 선언, 선언부에 @Schedule() 선언
+        - @Schedule(fixedRate=1000)          : 숫자로 컨트롤 (ms 단위)
+        - @Schedule(fixedRateString="1000")  : 문자로 컨트롤 (ms 단위)
+        - @Schedule(fixedDelay=1000)         : 숫자로 컨트롤 (ms 단위)
+        - @Schedule(fixedDelayString="1000") : 문자로 컨트롤 (ms 단위)
+
+- 부록
+    - fixedRate : app 실행 후, 고정간격으로 실행
+    - fixedDelay : app 종료 후, 고정간격으로 실행
+    - 둘의 차이?
+        - Rate : 호출된 작업이 종료 상관없이, 시간간격마다 호출
+        - Delay : 호출된 작업이 종료 되어야, 시간간격 뒤 실행
+
+- 활용
+    - 디버그 로그?
+    - 실시간 서버 만들 때?
+    - 일정 기간 지난 후, 백업/불필요 파일 삭제 등
+
+- Cron = *(초) *(분) *(시) *(일) *(월) *(요일)
+    - Linux에서 온 개념
+    - 초 : 0 ~ 59
+    - 분 : 0 ~ 59
+    - 시 : 0 ~ 23
+    - 일 : 1 ~ 31
+    - 월 : 1 ~ 12
+    - 요일 : 0(일) ~ 6(토) + 7(일) : 0 , 7 일요일
+    - ****** : 1초마다 반복
+    - 10***** : 매분 10초에 반복
+    - 0 10 **** : 매시 10분 0초에 반복
+    - 0 0 0 *** : 매일 자정에 반복
+    - 0 0 0 1 ** : 매월 1일 자정에 반복
+    - 0 0 0 25 12 * : 년에 한번 12월 24일 자정에 반복
+    - 0 0 0 * * 1 : 월요일 자정마다 반복
+    - */10 * * * * * : 10초 간격 반복
+    - 0 20 */3 * * * : 3시간 간격 매 20분에 반복
+    - 0 0 0 * * 6-7 : 매 토요일 일요일 자정에 반복
+    - 0 0 0 * * 1,3 : 매 월,수요일 자정에 반복
+    - 10,30 0 0 * * * : 매 10,30초 마다 반복
+    - 0 0 9-18/2 * * 1-5 : 매 평일 9~18시 안에서 2시간 간격으로 반복 
+
+- Cron 적용
+    - @Scheduled(cron = "* * * * * *")
+
+- 멀티쓰레드 설정
+    - application.properties
+    - ``` 
+        # Schedule
+        spring.task.scheduling.pool.size=8
+        spring.task.scheduling.thread-name-prefix=custom_
+      ```
