@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestSchedule {
 
-	@Scheduled(fixedRate = 1000)
+	//@Scheduled(fixedRate = 1000)
 	public void rateSchedule() throws Exception {
 		
 		System.out.println(Thread.currentThread().getName());
@@ -19,7 +19,7 @@ public class TestSchedule {
 		Thread.sleep(d);
 	}
 	
-	@Scheduled(fixedDelay=1000)
+	//@Scheduled(fixedDelay=1000)
 	public void delay() throws Exception{
 		System.out.println(Thread.currentThread().getName());
 		System.out.println("delay : "+Calendar.getInstance().getTime());
@@ -28,7 +28,7 @@ public class TestSchedule {
 		Thread.sleep(d);
 	}
 
-	@Scheduled(cron = "10 * * * * *")
+	//@Scheduled(cron = "10 * * * * *")
 	public void cronSchedule() throws Exception {
 		
 		System.out.println("cron : "+Calendar.getInstance().getTime());

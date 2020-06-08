@@ -405,3 +405,114 @@
         spring.task.scheduling.pool.size=8
         spring.task.scheduling.thread-name-prefix=custom_
       ```
+# Rest API
+
+- ```
+        @Controller
+        public class RestTestController {
+
+            // Rest는 자원의 역할을 하는 인자에 의해, 동적 url로 변함
+        //	@GetMapping("/test/select/{num}")
+        //	public void test(@PathVariable(value="num", required = true) int num) {
+        //		System.out.println("num : "+num);
+        //	}
+            @GetMapping("/test/select/{num}/{name}")
+            public void test(@PathVariable(value="num", required = true) int num, String namefw1fw) {
+                System.out.println("num : "+num);
+            }
+            
+        //	@GetMapping("/test/list/{curPage}/{kind}/{search}")
+        //	public void listTest(
+        //			@PathVariable int curPage, 
+        //			@PathVariable String kind,
+        //			@PathVariable String search) {
+        //		System.out.println("curPage : "+curPage);
+        //		System.out.println("kind : "+kind);
+        //		System.out.println("search : "+search);
+        //	}
+            
+            @GetMapping("/test/list/{curPage}/{kind}/{search}")
+            public void listTest(Pager pager) {
+                System.out.println("curPage : "+pager.getCurPage());
+                System.out.println("kind : "+pager.getKind());
+                System.out.println("search : "+pager.getSearch());
+            }
+        }
+  ```
+
+# Lombock
+
+- API 다운
+    - https://projectlombok.org/download
+
+- 적용
+    - 다운받은 jar file 더블클릭해서 이클립스 경로잡고 설치
+
+# JPA (Java Persistent Api)
+
+- Java 표준 ORM API
+
+- interface 묶음
+
+- Java언어 ORM 기준 스펙 
+
+- ORM?
+    - Object relational mapping
+
+- Hibernate
+    - JPA를 사용할 수 있도록 Overriding 된 구현체
+
+- Spring Data JPA
+    - Hibernate를 이용하여 스프링에서 처리할 수 있도록 지원하는 라이브러리
+
+- JPA 장점
+    - 데이터베이스에 종속적이지 않고 개발 가능
+    - 데이터베이스에 관련된 코드가 유연함
+
+- JAP 단점
+    - 러닝커브 큼
+    - 객체개념 필수
+    - 데이터베이스의 고유기능 사용에 제한적
+
+# JPA Project 생성
+
+- 설정 : 
+    - Spring Web, Spring data jpa, Jdbc driver(mysql), DevTools
+    - application.properties
+    - vo 생성
+        - @Entity : 엔티티 매니저가 관리함을 의미
+            - name : Entity의 이름을 지정, 다른 패키지나 클래스에 같은 이름이 있으면 Error, 이름을 쓰지 않으면 클래스 이름을 기본값으로 지정(단, 이름이 첫글자가 소문자 아님)
+        - @Table : 엔티티와 매핑할 테이블 연결, 이름을 생략하면 엔티티와 같은 이름의 테이블 매핑
+            - name : 맵핑할 테이블 명 지정
+            - catalog : catalog 기능이 있는 DB에 catalog 매핑 (catalog?)
+            - schema : schema 기능이 있는 DB에 schema 매핑 (schema?)
+            - UniqueConstraints : DDL 생성시, Unique 제약조건 생성, 2개 이상의 복합키 쓸 때 사용
+    - vo 멤버변수에 Annotation 적용
+        - @Id : 기본키 매핑(PK)
+        - @Column : 멤버변수명과 테이블의 컬럼명과 매핑, 멤버변수명과 컬럼명이 일치한다면 생략 가능
+            - name : DB의 컬럼명과 멤버변수명 매핑
+            - insertalbe : true (insert허용) / false (읽기 전용)
+            - updatealbe : true (update허용) / false (읽기 전용)
+            - table : 하나의 엔티티를 두개 이상의 테이블에 매핑할 때 사용(거의 사용 안함)
+            - nullable : null값 허용 여부, true (null 허용 -Default-) / false(not null 제약조건 생성)
+            - unique : unique 제약조건 생성시 사용, 두 컬럼 이상이면 UniqueConstraints
+            - length : 문자 길이에 제한, String에서만 가능
+            - precision : BigDecimal / BigInt 타입에 사용, 소수점 포함 전체 자리수
+            - scale : BigDecimal / BigInt 타입에 사용, 소수점 자리수
+                - @Column(precision=10, scale=2)
+        - @Enumerated : java enum 타입을 매핑 할때 사용
+            - EnumType.ORDINAL : enum 순서번호를 데이터베이스에 저장
+            - EnumType.STRING : enum 이름을 데이터베이스에 저장
+        - @Temporal : 날짜 타입(java.util.Date, java.uti.Calendar)을 매핑 할 때 사용
+            - TemporalType.DATE : 날짜, 데이터베이스 Date타입과 매핑 (2020-01-01)
+            - TemporalType.TIME : 시간, 데이터베이스 Time타입과 매핑 (17:50:50)
+            - TemporalType.TIMESTAMP : 날짜와 시간, 데이터베이스 Timestamp 타입과 매핑 (2020-01-01 17:50:50)
+        - @Lob : 데이터베이스 BLOB, CLOB 타입과 매핑
+            - CLOB : 멤버변수가 문자면(char [], String)
+            - BLOB : 멤버변수가 문자 이외(byte [] ...)
+        - @Transient : 테이블에서 제외할 멤버변수명
+
+
+
+
+    
