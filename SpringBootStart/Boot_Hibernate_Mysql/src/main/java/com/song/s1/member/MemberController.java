@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -32,19 +33,17 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberJoin")
-	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult bindingResult, MultipartFile files) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 
-		System.out.println("done");
-		
 		// 데이터 검증
 		if(memberService.memberError(memberVO, bindingResult)) {
 			mv.setViewName("member/memberJoin");
 			return mv;
 		}
 
-		memberVO = memberService.memberJoin(memberVO);
+		memberVO = memberService.memberJoin(memberVO, files);
 		if(memberVO != null) {
 			mv.setViewName("redirect:../");
 		} else {
@@ -103,14 +102,51 @@ public class MemberController {
 		return mv;
 	}
 	
-	// error 처리
-	@ExceptionHandler(Exception.class)
-	public ModelAndView nullPtrException() throws Exception {
+	@GetMapping("memberUpdate")
+	public ModelAndView memberUpdate() throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("error/exception");
-		
+		mv.setViewName("member/memberUpdate");
 		return mv;
 	}
+	
+	@PostMapping("memberUpdate")
+	public ModelAndView memberUpdate(MemberVO memberVO, BindingResult bindingResult) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		// 1. Annotation으로 가능한 검증
+		if(bindingResult.hasErrors()) {
+			System.out.println("type err");
+		}
+		
+		// 조회 후, 빈칸 덮어씌우기?
+		
+		memberVO = memberService.memberUpdate(memberVO);
+		mv.setViewName("redirect:../");
+		return mv;
+	}
+	
+	@GetMapping("memberDelete")
+	public ModelAndView memberDelete(MemberVO memberVO, HttpSession session) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		boolean result = memberService.memberDelete(memberVO);
+		session.invalidate();
+		mv.setViewName("redirect:../");
+		return mv;
+	}
+	
+//	// error 처리
+//	@ExceptionHandler(Exception.class)
+//	public ModelAndView nullPtrException() throws Exception {
+//		
+//		ModelAndView mv = new ModelAndView();
+//		
+//		mv.setViewName("error/exception");
+//		
+//		return mv;
+//	}
 }

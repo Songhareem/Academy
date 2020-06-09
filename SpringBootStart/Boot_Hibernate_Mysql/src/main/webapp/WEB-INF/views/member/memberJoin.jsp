@@ -13,7 +13,7 @@
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
 	<div class="container">
-		<form action="memberJoin" method="post">
+		<form action="memberJoin" method="post" enctype="multipart/form-data">
 		  <div class="form-group">
 		    <label for="id">id</label>
 		    <input name="id" type="text" class="form-control" id="id"/>
@@ -38,8 +38,24 @@
 		    <label for="phone">phone</label>
 		    <input name="phone" type="text" class="form-control" id="phone"/>
 		  </div>
+		  
+		  <input type="button" id="add" class="btn btn-info" value="fileAdd">
+	  	  <div id="f" class="form-group"></div>
+		  
 		  <button type="submit" class="btn btn-default">Submit</button>
 		</form>
 	</div>
+	<script type="text/javascript">
+	var count = 0;
+	
+	// file input
+	$("#add").click(function() {
+
+		if(count < 1) {
+			$("#f").append('<input type="file" name="files">');
+			count++;
+		}
+	});
+	</script>
 </body>
 </html>

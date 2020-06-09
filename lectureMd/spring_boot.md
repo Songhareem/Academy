@@ -512,6 +512,26 @@
             - BLOB : 멤버변수가 문자 이외(byte [] ...)
         - @Transient : 테이블에서 제외할 멤버변수명
 
+- 명령어
+    - T : 엔티티
+    - S save(T)                           : insert, update
+    - <S extends T> S save(<S extends T>) : 다중 Insert, update
+    - void delete(T)                      : delete
+    - void deleteById(ID)                 : PK로 삭제
+    - void deleteAll(<S extends T>)       : 다중 delete
+    - void deleteAll                      : 전부 삭제
+    - List<T> findAll()                   : 모든 엔티티 조회
+    - Optional<T> findById(ID)            : PK로 단일 엔티티 조회
+    - long count()                        : 엔티티의 개수
+
+- 쿼리 메서드
+    - 사용자가 생성하는 메서드
+    - public returnType ~()
+
+- 연관관계
+    - FK를 가진 테이블 : Owner
+        - Owner의 FK는 뺄 것
+
 
 
 

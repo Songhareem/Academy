@@ -23,7 +23,7 @@
       	<li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
    	  </c:if>
    	  <c:if test="${not empty sessionScope.member}">
-      	<%-- <li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> --%>
+      	<li><a href="${pageContext.request.contextPath}/member/memberUpdate"><span class="glyphicon glyphicon-user"></span>my page</a></li>
       	<li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
    	  </c:if>
     </ul>

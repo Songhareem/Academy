@@ -20,21 +20,61 @@ class memberRepoTest {
 	private MemberRepository memberRepository;
 	
 	//@Test
+	void loginTest() {
+		
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("test");
+		memberVO.setPw("test");
+		memberVO = memberRepository.findByIdAndPw("test", "test");
+	}
+	
+	//@Test
 	void idCheckTest() {
 		
 		boolean check = memberRepository.existsById("testID");
 		assertEquals(check, true);
 	}
 	
-	@Test
-	void saveTest() {
+	//@Test
+	void saveOneToOneTest() {
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId("테스트");
-		memberVO.setPw("테스트");
-		memberVO.setPwCheck("test");
-		memberVO.setName("테스트");
+		memberVO.setId("idid");
+		memberVO.setPw("pwpw");
+		memberVO.setPwCheck("pwcheck");
+		memberVO.setName("name");
 		memberVO.setEmail("test@naver.com");
 		memberVO.setPhone("01011111111");
+		
+		MemberFileVO memberFileVO = new MemberFileVO();
+		memberFileVO.setFileName("fileName");
+		memberFileVO.setOriName("oriName");
+		
+		// 서로 주입
+		memberVO.setMemberFileVO(memberFileVO);
+		memberFileVO.setMemberVO(memberVO);
+		
+		memberVO = memberRepository.save(memberVO);
+		assertNotNull(memberVO);
+	}
+	
+	//@Test
+	void saveTest() {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("idid");
+		memberVO.setPw("pwpw");
+		memberVO.setPwCheck("pwcheck");
+		memberVO.setName("name");
+		memberVO.setEmail("test@naver.com");
+		memberVO.setPhone("01011111111");
+		
+		MemberFileVO memberFileVO = new MemberFileVO();
+		memberFileVO.setFileName("fileName");
+		memberFileVO.setOriName("oriName");
+		
+		// 서로 주입
+		memberVO.setMemberFileVO(memberFileVO);
+		memberFileVO.setMemberVO(memberVO);
+		
 		memberVO = memberRepository.save(memberVO);
 		assertNotNull(memberVO);
 	}
@@ -42,25 +82,40 @@ class memberRepoTest {
 	//@Test
 	void updateTest() {
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId("testID");
+		memberVO.setId("idid");
+		memberVO.setPw("pwpw2");
+		memberVO.setPwCheck("pwcheck");
+		memberVO.setName("name2");
 		memberVO.setEmail("test2@naver.com");
+		memberVO.setPhone("01011111111");
+		
+		MemberFileVO memberFileVO = new MemberFileVO();
+		memberFileVO.setFileNum(1L);
+		memberFileVO.setFileName("change fileName");
+		memberFileVO.setOriName("change oriName");
+		
+		memberVO.setMemberFileVO(memberFileVO);
+		memberFileVO.setMemberVO(memberVO);
+		
 		memberVO = memberRepository.save(memberVO);
 		assertNotNull(memberVO);
 	}
 	
-	//@Test
+	@Test
 	void deleteTest() {
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId("testID3");
-		MemberVO memberVO2 = new MemberVO();
-		memberVO2.setId("testID4");
+		memberVO.setId("idid");
+
+		//MemberVO memberVO2 = new MemberVO();
+		//memberVO2.setId("testID4");
 		
-		List<MemberVO> list = new ArrayList<MemberVO>();
+		//List<MemberVO> list = new ArrayList<MemberVO>();
 		
-		list.add(memberVO);
-		list.add(memberVO2);
+		//list.add(memberVO);
+		//list.add(memberVO2);
 		
-		memberRepository.deleteInBatch(list);
+		//memberRepository.deleteInBatch(list);
+		memberRepository.deleteById(memberVO.getId());
 	}
 
 }

@@ -10,5 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface MemberRepository extends JpaRepository<MemberVO, String> {
 
 	@Query(value = "SELECT * FROM member WHERE id = :id AND pw = :pw", nativeQuery = true)
-	MemberVO findLoginMember(MemberVO memberVO);
+	MemberVO findLoginMember(@Param("id") String id, @Param("pw") String pw);
+	
+	MemberVO findByIdAndPw(@Param("id") String id, @Param("pw") String pw);
 }
