@@ -11,11 +11,14 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "member")
+@DynamicUpdate	// 데이터가 null인건 안바꾸고 null아닌 필드만 Update
 public class MemberVO {
 	
 	@Id // PK

@@ -476,6 +476,8 @@
 
 # JPA Project 생성
 
+- https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.entity-persistence
+
 - 설정 : 
     - Spring Web, Spring data jpa, Jdbc driver(mysql), DevTools
     - application.properties

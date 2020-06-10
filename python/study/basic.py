@@ -33,8 +33,7 @@ check = False
 ## 논리 연산자 추가 사항
 ## a and b , a or b , not a
 
-nums = [1,2,3,4]
-num = 3
+nums = [1,2,3,4];
 
-result = num in nums
-print(result)
+result = num in nums;
+print(result);
