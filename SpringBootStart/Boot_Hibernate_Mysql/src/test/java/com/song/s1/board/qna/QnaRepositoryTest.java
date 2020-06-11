@@ -16,12 +16,15 @@ public class QnaRepositoryTest {
 	@Test
 	public void insertTest() {
 		
-		QnaVO qnaVO = new QnaVO();
-		qnaVO.setTitle("title");
-		qnaVO.setWriter("writer");
-		qnaVO.setContents("contents");
+		for(int i = 1; i<123; i++) {
+			QnaVO qnaVO = new QnaVO();
+			qnaVO.setTitle("title"+i);
+			qnaVO.setWriter("writer");
+			qnaVO.setContents("contents");
+			
+			qnaVO = qnaRepository.save(qnaVO);
+		}
 		
-		qnaVO = qnaRepository.save(qnaVO);
-		assertNotNull(qnaVO);
+		//assertNotNull(qnaVO);
 	}
 }
