@@ -24,11 +24,11 @@ import lombok.EqualsAndHashCode;
 public class NoticeVO extends BoardVO{
 	
 	@Column
-	private int ref;
+	private Long ref;
 	@Column
-	private int step;
+	private Long step;
 	@Column
-	private int dept;
+	private Long dept;
 	
 	// fetch.Eager : 조회시, NoticeVO와 NoticeFileVO를 같이 조회해옴
 	// fetch.Lazy : 조회시, NoticeVO만 가져오고, NoticeFileVO를 사용하려 할때 조회함

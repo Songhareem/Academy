@@ -18,7 +18,7 @@ public class QnaFileVO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long fileNum;
+	private Long fileNum;
 	@Column
 	private String fileName;
 	@Column

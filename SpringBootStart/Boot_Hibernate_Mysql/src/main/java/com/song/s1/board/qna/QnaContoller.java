@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -31,10 +32,13 @@ public class QnaContoller {
 	
 	@GetMapping("qnaList")
 	public ModelAndView boardList(
-			@PageableDefault(size = 10, page = 0, direction = Direction.DESC, sort = {"num"}) Pageable pageable) throws Exception {
+			@PageableDefault(size = 10, page = 0, direction = Direction.DESC, sort = {"num"}) Pageable pageable,
+			@RequestParam(defaultValue = "") String search,
+			@RequestParam(defaultValue = "title") String kind) throws Exception {
+		
 		ModelAndView mv = new ModelAndView();
 		
-		Page<QnaVO> pages = qnaService.boardList(pageable);
+		Page<QnaVO> pages = qnaService.boardList(pageable, search, kind);
 		
 		System.out.println(pages.getContent().size());
 		System.out.println(pages.getSize());

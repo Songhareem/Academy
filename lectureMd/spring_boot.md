@@ -534,6 +534,45 @@
     - FK를 가진 테이블 : Owner
         - Owner의 FK는 뺄 것
 
+# Pageable interface를 이용한 Pager 기능 구현
+
+- Controller
+    - list(Pageable pageable, String kind, String search)
+
+- Service
+    - list(Pageable pageable, String kind, String search)
+    - ```
+        if(kind == null || kind.equals("title")) {
+            repository.findByTitleContaining(search,pageable);
+        } else if(kind.equals("contents")) {
+            repository.findByContentsContaining(search,pageable);
+        } else {
+            repository.findByWriterContaining(search,pageable);
+        }
+      ```
+
+- Repository
+    - ```
+        Page<QnaVO> findByTitleContaining(String search, Pageable pageable)
+        Page<QnaVO> findByWriterContaining(String search, Pageable pageable)
+        Page<QnaVO> findByContentsContaining(String search, Pageable pageable)
+      ```
+- 문제점
+    - 정렬 두번 필요
+         - order by ref desc, step asc
+    - 해결
+        - URL에 param으로 정렬 정보를 추가해서 요청
+            - qnaList?page=*&kind=*&search=*&sort=ref,desc&sort=step,asc
+        - Repository에 Jpql 사용
+            - 
+        - 사용자가 만든 Pager로 받아서 Pageable생성하는 방식
+            - ```
+                service or controller에서 한번
+                pager.makeRow();
+                Pageable pageable = PageRequest.of((int)pager.getStartRow(), pager.getPerPage(), 
+                                            Sort.by("ref").descending().and(Sort.by("step").ascending()));
+              ```
+        
 
 
 

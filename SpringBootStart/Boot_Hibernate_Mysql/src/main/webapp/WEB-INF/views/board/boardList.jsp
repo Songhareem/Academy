@@ -12,13 +12,15 @@
 	<c:import url="../template/nav.jsp"></c:import>
 	<div class="container">
 		<h2>${board}List</h2>
-		<form class="col-sm-4" action="./${board}List">
+		<form id="frm" class="col-sm-4" action="./${board}List">
+			<input type="hidden" name="page" id="p">
 			<div class="input-group">
 				<select class="form-control" id="sel1" name="kind">
-					<option selected="selected" value="title">title</option>
-					<option value="writer">writer</option>
-					<option value="contents">contents</option>
-				</select> <input type="text" class="form-control" placeholder="Search" name="search">
+					<option id="title" value="title">title</option>
+					<option id="writer" value="writer">writer</option>
+					<option id="contents" value="contents">contents</option>
+				</select> 
+				<input type="text" class="form-control" placeholder="Search" name="search" value="${param.search}">
 				<div class="input-group-btn">
 					<button class="btn btn-default" type="submit">
 						<i class="glyphicon glyphicon-search"></i>
@@ -56,44 +58,36 @@
 		</table>
 
 		<div>
-			<c:if test="${not page.isFirst()}">
-				<a href="./${board}List?page=0">&lt;&lt;</a>
-				<a href="./${board}List?page=${page.number-1}">&lt;</a>
-			</c:if>
-			<c:forEach begin="${page.number}" end="${page.number + 4}" var="i">
-				<c:if test="${page.totalPages gt i}">
-					<a href="./${board}List?page=${i}">${i+1}</a>
+			<span><a href="#" class="custompager" title="0">&lt;&lt;</a></span>
+			<span><a href="#" class="custompager" title="${page.number-1}"> &lt;</a></span>
+			<c:forEach begin="${page.number}" end="${page.number+4}" var="i">
+				
+				<c:if test="${i lt page.totalPages}">
+					<a href="#" class="custompager" title="${i}">${i+1}</a>
 				</c:if>
 			</c:forEach>
-			<c:if test="${not page.isLast()}">
-				<a href="./${board}List?page=${page.number+1}">&gt;</a>
-				<a href="./${board}List?page=${page.totalPages-1}">&gt;&gt;</a>
-			</c:if>
-			<hr>
-			<c:if test="${not page.isFirst()}">
-				<a class="btn btn-info" href="./${board}List?page=${page.number-1}">이전</a>
-			</c:if>
-			<c:if test="${not page.isLast()}">
-				<a class="btn btn-info" href="./${board}List?page=${page.number+1}">다음</a>
-			</c:if>
+			<span><a href="#" class="custompager" title="${page.number+1}">&gt;</a></span>
+			<span><a href="#" class="custompager" title="${page.totalPages-1}">&gt;&gt;</a></span>
 			
-			<%-- <ul class="pagination">
-			<c:if test="${pager.curBlock gt 1}">
-				<li><a href="./${board}List?curPage=${pager.startNum - 1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
-			</c:if>
-			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<li><a href="./${board}List?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
-			</c:forEach>
-			<c:if test="${pager.curBlock lt pager.totalBlock}">
-				<li><a href="./${board}List?curPage=${pager.lastNum + 1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
-			</c:if>
-			</ul> --%>
 		</div>
 
-		<a href="./${board}Write" class="btn btn=danger">write</a>
+		<a class="btn btn-info" href="./${board}Write" class="btn btn=danger">write</a>
 	</div>
 	<script type="text/javascript">
-		var result = ${result};
+		$(".custompager").click(function(){
+			var page=$(this).attr("title");
+			$("#p").val(page);
+			$("#frm").submit();
+		});
+
+		var kind = '${param.kind}';
+		if(kind == ''){
+			$("#title").prop("selected", true);
+		}else {
+			$("#"+kind).prop("selected", true);
+		}
+
+		var result = '${result}';
 		if(result != '') {
 			if(result == 1) {
 				alert("게시글 쓰기 성공");

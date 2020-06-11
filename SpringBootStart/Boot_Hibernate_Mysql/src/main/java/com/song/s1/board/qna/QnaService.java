@@ -1,9 +1,5 @@
 package com.song.s1.board.qna;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-@Transactional
+@Transactional(rollbackOn = Exception.class)
 public class QnaService {
 	
 	@Autowired
 	private  QnaRepository qnaRepository;
-
-	public Page<QnaVO> boardList(Pageable pageable) throws Exception {
-		return qnaRepository.findAll(pageable);
-	}
 	
 	public QnaVO setInsert(QnaVO qnaVO, MultipartFile[] files) throws Exception {
 		
@@ -46,10 +38,34 @@ public class QnaService {
 //		
 //		qnaVO.setQnaFileVOs(qnaFileVOs);
 
+		qnaVO.setHit(0L);
+		qnaVO.setStep(0L);
+		qnaVO.setDepth(0L);
 		qnaVO = qnaRepository.save(qnaVO);
 		qnaVO.setRef(qnaVO.getNum());
 		
 		return qnaRepository.save(qnaVO);
+	}
+	
+	public Page<QnaVO> boardList(Pageable pageable, String search, String kind) throws Exception {
+		
+		Page<QnaVO> page = null;
+		switch(kind) {
+		case "title" : 
+			page = qnaRepository.findByTitleContaining(search, pageable);
+			break;
+		case "writer" :
+			page = qnaRepository.findByWriterContaining(search, pageable);
+			break;
+		case "contents" :
+			page = qnaRepository.findByContentsContaining(search, pageable);
+			break;
+		default:
+			System.out.println("qnaService_qnaList : something worng");
+			break;
+		}
+
+		return page;
 	}
 }
 

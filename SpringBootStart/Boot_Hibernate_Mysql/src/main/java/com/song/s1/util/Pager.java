@@ -135,8 +135,8 @@ public class Pager {
 		return lastNum;
 	}
 	public String getKind() {
-		if(this.kind == null)
-			this.kind = "";
+		if(this.kind == null || this.kind.equals(""))
+			this.kind = "title";
 		
 		return kind;
 	}

@@ -83,7 +83,7 @@ public class NoticeService {
 		
 		pager.makeRow();
 		Pageable pageable = PageRequest.of((int)pager.getStartRow(), pager.getPerPage(), Sort.Direction.DESC, "num");
-	
+		
 		List<NoticeVO> list = null;
 		switch(pager.getKind()) {
 		case "writer" :
