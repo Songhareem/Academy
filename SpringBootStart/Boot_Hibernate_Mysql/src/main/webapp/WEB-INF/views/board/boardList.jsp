@@ -43,11 +43,12 @@
 				<tr>
 					<td>${vo.num}</td>
 					<td>
-						<%-- <c:catch>
-							<c:forEach begin="1" end="${vo.dept}" var="i">
+						<c:catch>
+							<c:forEach begin="1" end="${vo.depth}" var="i">
 								ㄴ	
 							</c:forEach>
-						</c:catch> --%> <a href="${board}Select?num=${vo.num}">${vo.title}</a>
+						</c:catch> 
+						<a href="${board}Select?num=${vo.num}">${vo.title}</a>
 					</td>
 					<td>${vo.writer}</td>
 					<td>${vo.contents}</td>
@@ -58,7 +59,23 @@
 		</table>
 
 		<div>
-			<span><a href="#" class="custompager" title="0">&lt;&lt;</a></span>
+			<!-- pager 이용 -->
+			<ul class="pagination">
+				<c:if test="${pager.curBlock>1}">
+					<li><a href="#" class="custompager" title="${pager.startNum-1}">이전</a></li>
+				</c:if>
+				
+				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
+					<li><a href="#" class="custompager" title="${p}">${p}</a></li>
+				</c:forEach>
+				
+				<c:if test="${pager.curBlock<pager.totalBlock}">
+					<li><a href="#" class="custompager" title="${pager.lastNum+1}">다음</a></li>
+				</c:if>
+			</ul>
+			
+			<!-- pageable 이용 -->
+			<%-- <span><a href="#" class="custompager" title="0">&lt;&lt;</a></span>
 			<span><a href="#" class="custompager" title="${page.number-1}"> &lt;</a></span>
 			<c:forEach begin="${page.number}" end="${page.number+4}" var="i">
 				
@@ -67,19 +84,19 @@
 				</c:if>
 			</c:forEach>
 			<span><a href="#" class="custompager" title="${page.number+1}">&gt;</a></span>
-			<span><a href="#" class="custompager" title="${page.totalPages-1}">&gt;&gt;</a></span>
-			
+			<span><a href="#" class="custompager" title="${page.totalPages-1}">&gt;&gt;</a></span> --%>
 		</div>
 
-		<a class="btn btn-info" href="./${board}Write" class="btn btn=danger">write</a>
+		<a href="./${board}Write" class="btn btn=danger">write</a>
 	</div>
 	<script type="text/javascript">
 		$(".custompager").click(function(){
+			
 			var page=$(this).attr("title");
 			$("#p").val(page);
 			$("#frm").submit();
 		});
-
+		
 		var kind = '${param.kind}';
 		if(kind == ''){
 			$("#title").prop("selected", true);
@@ -96,5 +113,7 @@
 			}
 		}
 	</script>
+	
+	
 </body>
 </html>

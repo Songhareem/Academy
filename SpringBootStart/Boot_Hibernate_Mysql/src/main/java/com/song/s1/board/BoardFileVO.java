@@ -6,10 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.song.s1.board.notice.NoticeVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,28 +20,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor		// 디폴트 생성자
 @AllArgsConstructor     // 인자 있는 생성자
 @MappedSuperclass		// 부모 클래스라는것은 명시
-public class BoardVO {
+public class BoardFileVO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long num;
+	private Long fileNum;
 	@Column
-	private String title;
+	private String fileName;
 	@Column
-	private String writer;
-	@Column
-	private String contents;
-	@Column
-	@CreationTimestamp // 생성시간 저장
-	// @UpdateTimestamp update시 시간저장
-	private Date regDate;
-	@Column
-	private long hit;
-	
-//	public Long getHit() {
-//		if(this.hit == null) {
-//			this.hit = 0L;
-//		}
-//		return this.hit;
-//	}
+	private String oriName;
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -51,8 +52,8 @@ public class NoticeService {
 			noticeFileVOs.add(noticeFileVO);
 		}
 		
-		noticeVO.setNoticeFileVOs(noticeFileVOs);
-
+		noticeVO.setBoardFileVOs(noticeFileVOs);
+		
 		return noticeRepository.save(noticeVO);
 	}
 	
@@ -79,31 +80,33 @@ public class NoticeService {
 //		return list;
 //	}
 	
-	public List<NoticeVO> noticeList(Pager pager) throws Exception {
+	public Page<NoticeVO> noticeList(Pager pager) throws Exception {
 		
 		pager.makeRow();
-		Pageable pageable = PageRequest.of((int)pager.getStartRow(), pager.getPerPage(), Sort.Direction.DESC, "num");
+		Pageable pageable = PageRequest.of((int)pager.getStartRow(), pager.getSize(), Sort.Direction.DESC, "num");
 		
-		List<NoticeVO> list = null;
+		Page<NoticeVO> page = null;
 		switch(pager.getKind()) {
 		case "writer" :
 			System.out.println("writer");
-			list = noticeRepository.findByWriterContaining(pager.getSearch(), pageable);
-			pager.makePage(noticeRepository.countByWriterContaining(pager.getSearch()));
+			page = noticeRepository.findByWriterContaining(pager.getSearch(), pageable);
+			//pager.makePage(noticeRepository.countByWriterContaining(pager.getSearch()));
 			break;
 		case "contents" :
 			System.out.println("contents");
-			list = noticeRepository.findByContentsContaining(pager.getSearch(), pageable);
-			pager.makePage(noticeRepository.countByContentsContaining(pager.getSearch()));
+			page = noticeRepository.findByContentsContaining(pager.getSearch(), pageable);
+			//pager.makePage(noticeRepository.countByContentsContaining(pager.getSearch()));
 			break;
 		default:
 			System.out.println("title");
-			list = noticeRepository.findByTitleContaining(pager.getSearch(), pageable);
-			pager.makePage(noticeRepository.countByTitleContaining(pager.getSearch()));
+			page = noticeRepository.findByTitleContaining(pager.getSearch(), pageable);
+			//pager.makePage(noticeRepository.countByTitleContaining(pager.getSearch()));
 			break;
 		} 
 
-		return list;
+		pager.makePage(page.getTotalPages());
+		
+		return page;
 	}
 	
 	public NoticeVO noticeSelectOne(BoardVO boardVO) throws Exception {

@@ -572,8 +572,16 @@
                 Pageable pageable = PageRequest.of((int)pager.getStartRow(), pager.getPerPage(), 
                                             Sort.by("ref").descending().and(Sort.by("step").ascending()));
               ```
-        
+# JPQL(JPA Query Languege)
 
+- select : * 사용 X
+- table 명은 꼭 별칭이 들어감
+- from VO명 
+    - SELECT qna FROM QnaVO q
+- Repository의 메서드 선언부에 작성
+- @Query(value="쿼리문")
+- SELECT, UPDATE, DELETE 사용
+- 단, update, delete : 선언부에 @Modify @Transactianal 필요
 
 
     

@@ -21,12 +21,33 @@ import lombok.EqualsAndHashCode;
 public class QnaVO extends BoardVO {
 
 	@Column
-	private Long ref;
+	private long ref;
 	@Column
-	private Long step;
+	private long step;
 	@Column
-	private Long depth;
+	private long depth;
 	
 	@OneToMany(mappedBy = "qnaVO", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<QnaFileVO> qnaFileVOs;
+	private List<QnaFileVO> boardFileVOs;
+
+//	public Long getRef() {
+//		if(this.ref == null) {
+//			this.ref = 0L;
+//		}
+//		return this.ref;
+//	}
+//	
+//	public Long getStep() {
+//		if(this.step == null) {
+//			this.step = 0L;
+//		}
+//		return this.step;
+//	}
+//	
+//	public Long getDepth() {
+//		if(this.depth == null) {
+//			this.depth = 0L;
+//		}
+//		return this.depth;
+//	}
 }

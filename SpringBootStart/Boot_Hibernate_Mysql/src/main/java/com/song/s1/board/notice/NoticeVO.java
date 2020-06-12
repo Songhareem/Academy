@@ -23,16 +23,9 @@ import lombok.EqualsAndHashCode;
 //@DynamicUpdate(value = true)
 public class NoticeVO extends BoardVO{
 	
-	@Column
-	private Long ref;
-	@Column
-	private Long step;
-	@Column
-	private Long dept;
-	
 	// fetch.Eager : 조회시, NoticeVO와 NoticeFileVO를 같이 조회해옴
 	// fetch.Lazy : 조회시, NoticeVO만 가져오고, NoticeFileVO를 사용하려 할때 조회함
 	// One To Many : 앞은 자기 자신, 뒤는 연결되는 테이블
 	@OneToMany(mappedBy = "noticeVO", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<NoticeFileVO> noticeFileVOs;
+	private List<NoticeFileVO> boardFileVOs;
 }

@@ -3,6 +3,7 @@ package com.song.s1.board.notice;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -73,9 +74,9 @@ public class NoticeController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<NoticeVO> list = noticeService.noticeList(pager);	
+		Page<NoticeVO> page = noticeService.noticeList(pager);	
 		
-		mv.addObject("list", list);
+		mv.addObject("page", page);
 		mv.addObject("Pager", pager);
 		mv.setViewName("board/boardList");
 		return mv;
