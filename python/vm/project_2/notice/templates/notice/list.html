@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'notice/css/sample.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sample.css' %}">
+{% endblock css %}
+
+{% block content%}
+    <h1>{{board}}List</h1>
+    <h2>outer css</h2>
+    <h3>inner css</h3>
+    <h4>age : {{age}}</h4>
+    <img src="{% static 'notice/images/icon.png' %}">
+    <img src="{% static 'images/back.jpg' %}">
+{% endblock content %}
+
+{% block customjs %}
+    <script src="{% static 'notice/js/sample.js' %}"></script>
+    <script src="{% static 'js/sample.js' %}"></script>
+{% endblock customjs %}
