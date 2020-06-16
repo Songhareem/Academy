@@ -67,3 +67,85 @@
         - settings.py 설정
             - STATICFILES_DIR = {os.path.join(BASE_DIR, 'static')} 추가
     - media ()
+
+# DB 연동
+
+- API
+    - mysqlclient 설치
+        - 가상환경 실행
+        - pip install mysqlclient
+        - Error 나면, 아래 사이트 참고
+            - 해결 설명 : https://lemontia.tistory.com/756
+            - mysqlclient 수동 다운페이지 : https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient.Then
+
+- 연결설정
+    - 프로젝트의 settings.py
+        - ```
+            DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.mysql',
+                    'NAME': 'user03', # DB명
+                    'USER': 'user03', # user id
+                    'PASSWORD': 'user03', # user pw
+                    'HOST': 'localhost', # DB ip
+                    'PORT': '3306' # PORT
+                }
+            }
+          ```
+
+- Model 생성 (VO, Repository 역할), migration
+    - migration? 
+        - 생성한 모델을 이용하여 DB에 연동하는 작업
+        - django에서 기본 제공되는 Model들로 전체 migration 실행
+            - 전체 migration : DB에 실제 추가하는것이 아니고 스크립트로 저장
+            - cmd
+                - python manage.py makemigrations 실행(DB와 연결)
+                - No changes detected 뜨면 성공
+                - python manage.py migrate 실행(기본 테이블 생성)
+                - initial ... ok 뜨면 성공
+        - 개별 app들을 mitration 실행
+    - JPA와 비슷
+    - CRUD Model의 메서드 사용
+    - 하나의 모델은 하나의 테이블과 같음
+    - 멤버변수(속성)은 테이블의 컬럼과 같음
+    - 개발자가 생성하는 모델은 django.db.models.Model 상속받아서 생성
+        - config/setting.py
+            - ```
+                INSTALLED_APPS = [
+                    'django.contrib.admin',
+                    'django.contrib.auth',
+                    'django.contrib.contenttypes',
+                    'django.contrib.sessions',
+                    'django.contrib.messages',
+                    'django.contrib.staticfiles',
+                    'notice.apps.NoticeConfig',
+                ]
+              ```
+        - app name/models.py
+            - ```
+                class Notice(models.Model): 
+                    # 클래스 변수
+                    num = models.AutoField(primary_key=True)
+                    title = models.CharField(max_length=200)
+                    writer = models.CharField(max_length=200)
+                    contents = models.TextField()
+                    createDate = models.DateTimeField(auto_now_add=True)
+                    hit = models.IntegerField(default=0)
+              ```
+        - cmd
+            - python manage.py makemigrations notice
+            - python manage.py migrate notice
+            - CRUD 작업 test
+                - python manage.py shell
+                    - from notice.models import Notice
+                    - n = Notice(title='t1', writer='w1', contents='c1')
+                    - n.save()
+                    - Notice.objects.all()
+                    - n = Notice.objects.get(pk=1)
+                    - n.title
+                    - n.title='change'
+                    - n.save()
+                    - n.delete()
+                    - n.delete(pk=2)
+
+
