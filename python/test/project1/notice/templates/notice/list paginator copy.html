@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+<div class="container">
+    <h1>{{board}}</h1>
+    <table class="table table-hover">
+        <tr>
+            <td>num</td>
+            <td>title</td>
+            <td>writer</td>
+            <td>contents</td>
+            <td>date</td>
+            <td>hit</td>
+        </tr>
+        {% for board in list %}
+            <tr>
+                <td>{{board.num}}</td>
+                <td>{{board.title}}</td>
+                <td>{{board.writer}}</td>
+                <td>{{board.contents}}</td>
+                <td>{{board.createDate}}</td>
+                <td>{{board.hit}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <ul class="pagination">
+        {% if list.has_previous %}
+            <li><a href="../{{list.previous_page_number}}">prev</a></li>
+        {% endif %}
+        {% if list.has_next %}
+            <li><a href="../{{list.next_page_number}}">next</a></li>
+        {% endif %}
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+      </ul>
+
+</div>
+
+{% endblock contents %}
+

@@ -50,12 +50,13 @@
     - HTML
     - config/setting.py 설정
         - templates
-            - 'DIRS' : 
+            - 'DIRS' : [os.path.join(BASE_DIR, 'templates'), ...]
             - 'APP_DIRS' : True(project폴더의 templates 경로 찾기)
     - 각 App별 templates 파일의 위치
         - AppName밑에 templates 폴더 생성
         - setting.py 에 App의 templates 폴더의 위치를 등록
         - templates 밑에 AppName 폴더 생성
+    - 공용파일은 base dir/templates에 저장
 
 
 - View : Controller 역할
@@ -67,7 +68,9 @@
         - settings.py 설정
             - STATICFILES_DIR = {os.path.join(BASE_DIR, 'static')} 추가
     - media ()
-
+    - field ref : https://docs.djangoproject.com/ko/3.0/ref/models/fields/
+    - queryset ref : https://docs.djangoproject.com/ko/3.0/ref/models/querysets/
+    - page
 # DB 연동
 
 - API
@@ -103,6 +106,12 @@
                 - No changes detected 뜨면 성공
                 - python manage.py migrate 실행(기본 테이블 생성)
                 - initial ... ok 뜨면 성공
+            - 부분 migration : DB에 실제 추가하는것이 아니고 스크립트로 저장
+            - cmd
+                - python manage.py makemigrations app명 실행(DB와 연결)
+                - No changes detected 뜨면 성공
+                - python manage.py migrate app명 실행(기본 테이블 생성)
+                - initial ... ok 뜨면 성공
         - 개별 app들을 mitration 실행
     - JPA와 비슷
     - CRUD Model의 메서드 사용
@@ -122,6 +131,9 @@
                 ]
               ```
         - app name/models.py
+            - 변수는 컬럼의 정보(Meta data)를 저장
+            - 변수는 컬럼의 DataType에 맞는 Field class 객체를 사용
+            - Field Type 지정시 () 들어가는 옵션이 필수인 것도 있음
             - ```
                 class Notice(models.Model): 
                     # 클래스 변수
