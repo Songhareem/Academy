@@ -1,9 +1,53 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from .models import Notice
 from .customPager import CustomPager
 
 # Create your views here.
+def delete(request, num):
+    notice = Notice(num = num)
+    notice.delete()
+    return redirect('notice:listPage', 1)
+
+def update(request, num):
+    if request.method == 'POST':
+        notice = Notice.objects.get(pk=num)
+        notice.title = request.POST['title'],
+        notice.contents = request.POST['contents']
+        notice.save()
+        return redirect('notice:listPage', 1)
+    else :
+        notice = Notice.objects.get(pk=num)
+        return render(request, 'notice/write.html', {
+            "board":"NoticeUpdate",
+            "vo":notice,
+        })
+
+def select(request, num = 1):
+    notice = Notice.objects.get(pk=num)
+    context = {
+        "board":"noticeSelect",
+        "vo":notice,
+    }
+    return render(request, 'notice/select.html', context)
+
+def write(request):
+    if request.method == 'POST':
+        print("Post")
+        notice = Notice(
+            title=request.POST['title'], 
+            writer=request.POST['writer'], 
+            contents=request.POST['contents'],
+        )
+        notice.save()
+        return redirect('notice:listPage', 1)
+    else :
+        print("write Form")
+        return render(request, 'notice/write.html', {
+            "board":"NoticeWrite"
+        })
+
+
 def list(request, page=1, kind="title", search=""):
     #querySet
     #noticeList = Notice.objects.all() #select * from notice

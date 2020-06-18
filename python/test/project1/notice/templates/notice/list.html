@@ -16,7 +16,7 @@
         {% for board in list %}
             <tr>
                 <td>{{board.num}}</td>
-                <td>{{board.title}}</td>
+                <td><a href="{% url 'notice:select' board.num %}">{{board.title}}</a></td>
                 <td>{{board.writer}}</td>
                 <td>{{board.contents}}</td>
                 <td>{{board.createDate}}</td>
@@ -27,16 +27,17 @@
 
     <ul class="pagination">
         {% if pager.pre %}
-            <li><a href="../{{pager.startNum}}">prev</a></li>
+            <li><a href="{% url 'notice:listPage' pager.startNum %}">prev</a></li>
         {% endif %}
         {% for i in pager.range %}
-        <li><a href="../{{i}}">{{i}}</a></li>
+        <li><a href="{% url 'notice:listPage' i %}">{{i}}</a></li>
         {% endfor %}
         {% if pager.next %}
-            <li><a href="../{{pager.lastNum}}">next</a></li>
+            <li><a href="{% url 'notice:listPage' pager.lastNum %}">next</a></li>
         {% endif %}
       </ul>
 
+      <a class="btn btn-info" href="{% url 'notice:write' %}">write</a>
 </div>
 
 {% endblock contents %}

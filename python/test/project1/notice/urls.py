@@ -18,8 +18,12 @@ from django.urls import path
 from . import views
 
 # notice url
-
+app_name='notice'
 urlpatterns = [
     path('noticeList/', views.list, name="list"),
     path('noticeList/<int:page>/', views.list, name="listPage"),
+    path('noticeWrite/', views.write, name="write"),
+    path('noticeSelect/<int:num>', views.select, name="select"),
+    path('noticeUpdate/<int:num>', views.update, name="update"),
+    path('noticeDelete/<int:num>', views.delete, name="delete"),   
 ]
