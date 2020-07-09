@@ -89,6 +89,10 @@
 - @AfterEach(junit4 - @After)
     - Test Method 실행후에 호출
 
+# Port 뚫을 때, 인바운드 아웃바운드 해도 안되면,
+
+- 검색 - 방화벽 및 네트워크 보호 - 방화벽에서 앱 허용 - 설정변경 - McAfree 등 막는거 지우기 
+
 # Mysql
 
 - 다운로드 : docker로 mysql 다운되므로, workbench만 다운
@@ -96,14 +100,18 @@
 
 - 설치 및 실행
     - docker
-        - docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root 30f937e841c8
-        - docker exec mysql -it bin/bash
+        - docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root 이미지번호
+        - docker exec -it mysql bin/bash
     - mysql shell
         - mysql -u root -p 엔터 후 비번으로 root 치고 엔터
-        - create database user;
+        - Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2) 에러시,
+            - mysql -h localhost -P 3306 -u root -p 으로 로그인
+        - create database user
+        - CREATE DATABASE `utf8db` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci (charset 기본값 변경을 위해)
         - select user(); : 현재 접속 유저 확인
         - 유저 생성 및 접속 가능 주소 설정
-            - create user 'user01'@'%' identified with mysql_native_password by 'user01'
+            - create user 'user01'@'%' identified with mysql_native_password by 'user01' (5.8버전 이상)
+            - create user 'user01'@'%' identified by 'user01' (5.8버전 이하)
         - 유저 권한 설정
             - create database DB명;
             - grant all privileges on DB명.* to '유저명'@'접속 경로';
@@ -157,6 +165,7 @@
         - image : 원본
         - container : 원본을 복사해서 사용하는 것
     - cmd에서 docker run --name 이미지명 -d -p HostPort:GeustPost 이미지id
+        - 안되면 docker run -d --name db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
         - --name : docker는 이름으로 image 구분, 이름 지정
         - -d : 백그라운드로 돌게함
         - -p : 포트 설정
@@ -534,7 +543,27 @@
     - FK를 가진 테이블 : Owner
         - Owner의 FK는 뺄 것
 
+# Security
 
-
-
-    
+- 기본 적용
+    - Boot project 생성시, spring security 체크
+    - 또는 pom.xml에 추가
+        - ```
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+          ```
+    - 추가 적용 for jsp
+        - pom.xml
+            - ```
+                <dependency> 
+                    <groupId>org.springframework.security</groupId> 
+                    <artifactId>spring-security-taglibs</artifactId>  
+                </dependency>
+              ```
+        
