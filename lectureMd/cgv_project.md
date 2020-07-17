@@ -1,4 +1,9 @@
 
+# MYSQL 시간대(timezone) setting
+
+- cmd docker 컨테이너 내에서 mysql root 계정 접속, 해당 DB 선택 후, 아래 명령어 실행
+    - set global time_zone='Asia/Seoul';
+
 # twillo (sms API)
 
 - ref : https://jybaek.tistory.com/859, https://2bmw3.tistory.com/4
@@ -81,7 +86,130 @@
 		String fileName = fileManager.saveTransfer(multipartFile, file); //이미지 파일 저장
       ```
 
+# builder 패턴
+
+- lombok의 @Builder를 사용하여 builder패턴형 클래스 생성 가능
+    - MemberCouponVO에 적용함 
+
+- ref : https://johngrib.github.io/wiki/builder-pattern/
+
+# 대용량 DB에서의 랜덤 필드값 가져오는 것에 대한 SQL
+
+- ref : http://blog.naver.com/PostView.nhn?blogId=sinjoker&logNo=221524576602&parentCategoryNo=&categoryNo=93&viewDate=&isShowPopularPosts=true&from=search
+
+- 자세한 설명은 ref를 통해,
+    - ```
+        // table에 rand로 값을 가져올때 빠르게 가져올수 있도록 randId 필드 생성
+        ALTER TABLE banner ADD randId INT NOT NULL;
+        ALTER TABLE banner ADD INDEX BANNER_RANDID_INDEX (randId);
+
+        // 각 randId 필드 업데이트
+        UPDATE banner SET randId = FLOOR(RAND(28) * 100000000) WHERE num = 28;
+
+        // 필드값 n개 랜덤으로 가져오기 (Limit n)
+        select * from banner where randId >= FLOOR((RAND()*100000000)) and type=1 and `index`=0 order by randId limit 1;
+      ```
+
+# MYSQL procedule 사용
+
+- MYSQL 내부에서 procedule 선언 및 실행
+    - ```
+        delimiter //
+        DROP PROCEDURE IF EXISTS sideBannerRandSelect; 
+        CREATE PROCEDURE sideBannerRandSelect( 
+        -- 매개변수 선언
+        IN selectedIndex INT
+        )
+        BEGIN
+        -- 지역변수 선언
+            DECLARE count INT;
+            
+            SET count = (SELECT COUNT(num) FROM banner WHERE type=1 AND `index`=selectedIndex);
+            SET count = (SELECT FLOOR(0 + RAND() * count - 0));
+            
+            SELECT * FROM banner WHERE type=1 and `index`=selectedIndex limit count, 1;
+            
+        END //
+
+        CALL sideBannerRandSelect(0);
+      ```
+
+- mybatis로 불러오기
+    - CALL 'mysql에서 선언한 프로시저명'
+    - ```
+        <select id="~" paramType="~VO" returnType="~VO">
+            CALL sideBannerRandSelect(#{index})
+        </select>
+      ```
+
 # aws로 배포
 
 - ref : https://jojoldu.tistory.com/259?category=635883
+
+
+# 내가 한 작업 정리 (다른 사람 도와준건 뺐음)
+
+- com.tm.cgv.admin
+    - AdminController
+        - member part
+        - movieTime part
+
+- com.tm.cgv.auth
+    - AuthRepository
+    - AuthVO
+    - RoleEnum
+
+- com.tm.cgv.config
+    - RedisConfig
+    - SecurityConfig
+
+- com.tm.cgv.couponInfo
+    - CouponInfoRepository
+        - couponInfoSelectRecentBirth
+        - couponInfoDeleteExpired
+
+- com.tm.cgv.member
+    - MembeController
+    - MemberBasicVO
+    - MemberRepository
+    - MemberService
+    - MemberVO
+
+- com.tm.cgv.memberCoupon
+    - MemberCouponRepository
+    - MemberCouponService
+        - memberCouponCount
+
+- com.tm.cgv.movieTime
+    - MovieTimeRepository
+    - MovieTimeService
+    - MovieTimeVO
+
+- com.tm.cgv.rememberMe
+    - RememberMeRepository
+    - RememberMeTokenRepository
+    - RememberMeVO
+
+- com.tm.cgv.schedule
+    - Schedule
+        - hr part
+
+- com.tm.cgv.security
+    - CustomAccessDeniedHandler
+    - CustomLoginFailureHandler
+    - CustomLoginSuccessHandler
+    - CustomLogoutHandler
+    - CustomRememberMeLoginSuccessHandler
+    - SecurityInitializer
+
+- com.tm.cgv.util
+    - bit
+    - BitFuction
+    - FileManager
+        - 이미지 리사이징 기능 및 이미지파일인지 체크
+    - FilePathGenerator
+        - 년/월/일 폴더 생성 가능하도록 경로 생성하는 부분
+    - GenerateRandomNumber
+    - MemberInfoMaker
+    - SmsSender
 
