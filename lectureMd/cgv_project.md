@@ -142,7 +142,19 @@
         </select>
       ```
 
-# aws로 배포
+# 로컬PC로 배포(jar 버전)
+
+- ref : 
+    - 배포를 위한 세팅 1 (pom setting 및 test 환경 조성) : https://www.leafcats.com/178
+    - 배포를 위한 세팅 2 (jre -> jdk 변경) : https://mainia.tistory.com/5629
+    - 배포를 위한 세팅 3 (mvn build를 위한 plugin 추가, [dump 뭐시기 에러 뜰때 사용하면 됨]) : https://www.it-swarm-ko.tech/ko/java/maven-%eb%b9%8c%eb%93%9c-%eb%b0%8f-mavenfailsafeplugin%ea%b0%88%eb%9e%98-vm-%ec%9e%91%eb%b3%84-%ec%9d%b8%ec%82%ac%ec%97%86%ec%9d%b4-%ec%a2%85%eb%a3%8c-%eb%90%a8/835668378/
+
+# 로컬 PC로 배포 (war 버전)
+
+- ref : 
+    - tomcat 서버 8버전 설치 : https://tomcat.apache.org/download-80.cgi
+
+# aws로 배포(심화)
 
 - ref : https://jojoldu.tistory.com/259?category=635883
 
